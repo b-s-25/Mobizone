@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer
 {
-    class Address
+  public class Address
     {
         public int id { get; set; }
         public string name { get; set; }

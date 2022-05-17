@@ -12,7 +12,7 @@ namespace BussinessLogic
         Task MasterDataAdd(MasterData data);
 
         Task MasterDataDelete(MasterData entity);
-        Task<IEnumerable<MasterData>> GetAllMasterData();
+        IEnumerable<MasterData> GetAllMasterData();
         Task MasterDataEdit(MasterData entity);
         MasterData MasterDataGetById(int Id);
     }

@@ -47,10 +47,7 @@ namespace BussinessLogic
             return _repo.GetById(Id);
         }
 
-        Task<IEnumerable<MasterData>> IMasterDataOperations.GetAllMasterData()
-        {
-            throw new NotImplementedException();
-        }
+     
     }
 
 

@@ -21,6 +21,8 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using BussinessLogic;
+using RepositoryLayer.Interface;
+using NPOI.SS.Formula.Functions;
 
 namespace MobizoneApi
 {
@@ -43,11 +45,14 @@ namespace MobizoneApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MobizoneApi", Version = "v1" });
             });
             services.AddDbContext<ProductDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddTransient(typeof(IGenericRepositoryOperation<T>), typeof(GenericRepositoryOperation<T>));
+            //services.AddTransient<IGenericRepositoryOperation<T>, GenericRepositoryOperation<T>>();
             //services.AddScoped(typeof(IProductCatalog), typeof(ProductCatalog));
             //services.AddScoped(typeof(IUserOperations), typeof(UserOperations));
             services.AddTransient<IUserOperations, UserOperations>();
             //services.AddTransient<IAdminoperations, Adminoperations>();
             services.AddTransient<IMasterDataOperations, MasterDataOperations>();
+            services.AddTransient<IUserDataoperation, UserDataoperation>();
             //for identity
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ProductDbContext>().AddDefaultTokenProviders();
 
