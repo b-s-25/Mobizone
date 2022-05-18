@@ -2,13 +2,18 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using UILayer.ApiServices;
 
 namespace UILayer.Controllers
 {
     [Authorize]
     public class AdminController : Controller
     {
-
+        private readonly AdminApi _adminApi;
+        public AdminController(AdminApi adminApi)
+        {
+            _adminApi = adminApi;
+        }
         public IActionResult Index()
         {
             return View();
@@ -23,6 +28,12 @@ namespace UILayer.Controllers
         public IActionResult Login()
         {
             return View();
+        }
+        public IActionResult Userdata()
+        {
+            var _userlist = _adminApi.GetUserData();
+
+            return View(_userlist);
         }
     }
 

@@ -24,7 +24,7 @@ namespace MobizoneApi.Controllers
             _userDataoperation = userDataoperation;
         }
         [HttpGet]
-        public IEnumerable<Registration> GetMasterData()
+        public IEnumerable<Registration> GetUserData()
         {
             var userData = _userDataoperation.GetUserData();
 

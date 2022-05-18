@@ -46,14 +46,16 @@ namespace MobizoneApi
             });
             services.AddDbContext<ProductDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             //services.AddTransient(typeof(IGenericRepositoryOperation<T>), typeof(GenericRepositoryOperation<T>));
+            services.AddScoped(typeof(IGenericRepositoryOperation<>), typeof(GenericRepositoryOperation<>));
+
             //services.AddTransient<IGenericRepositoryOperation<T>, GenericRepositoryOperation<T>>();
             //services.AddScoped(typeof(IProductCatalog), typeof(ProductCatalog));
             //services.AddScoped(typeof(IUserOperations), typeof(UserOperations));
             services.AddTransient<IUserOperations, UserOperations>();
-            //services.AddTransient<IAdminoperations, Adminoperations>();
+          
             services.AddTransient<IMasterDataOperations, MasterDataOperations>();
-            services.AddTransient<IUserDataoperation, UserDataoperation>();
-            //for identity
+            services.AddScoped(typeof(IUserDataoperation), typeof(UserDataoperation));
+
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ProductDbContext>().AddDefaultTokenProviders();
 
             //adding authentication

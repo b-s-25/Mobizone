@@ -9,19 +9,22 @@ using DomainLayer;
 
 namespace BussinessLogic
 {
-   public  class UserDataoperation: IUserDataoperation
+   public  class UserDataoperation:GenericRepositoryOperation<Registration>,IUserDataoperation
     {
         private readonly IGenericRepositoryOperation<Registration> _repo;
         private readonly ProductDbContext _dbContext;
-        public UserDataoperation( ProductDbContext dbContext)
+        public UserDataoperation( ProductDbContext dbContext, IGenericRepositoryOperation<Registration> repo):base(dbContext)
         {
             _dbContext = dbContext;
-            _repo = new GenericRepositoryOperation<Registration>(_dbContext);
+            _repo = repo;
 
         }
+
         public IEnumerable<Registration> GetUserData()
         {
             return _repo.GetAll();
         }
+
+        
     }
 }

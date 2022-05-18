@@ -13,9 +13,9 @@ namespace RepositoryLayer
 
         private readonly DbContext _Context;
         private readonly DbSet<T> _dbset;
-        public GenericRepositoryOperation(DbContext product)
+        public GenericRepositoryOperation(DbContext context)
         {
-            _Context = product;
+            _Context = context;
             _dbset = _Context.Set<T>();
         }
 

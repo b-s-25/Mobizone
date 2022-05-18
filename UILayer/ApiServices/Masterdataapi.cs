@@ -1,5 +1,6 @@
 ﻿using APILayer.Models;
 using DomainLayer;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,11 @@ namespace UILayer.ApiServices
 {
     public class Masterdataapi
     {
+        string _url;
+        public Masterdataapi(IConfiguration configuration)
+        {
+            _url = configuration["BaseApi"];
+        }
         public IEnumerable<MasterData> MasterDatas()
         {
 
@@ -18,7 +24,7 @@ namespace UILayer.ApiServices
             using (HttpClient httpclient = new HttpClient())
             {
 
-                string url = "https://localhost:44380/api/Masterdata/GetMasterData";
+                string url = _url + "/api/Masterdata/GetMasterData";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
@@ -55,7 +61,7 @@ namespace UILayer.ApiServices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(MasterData);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44380/api/Masterdata/MasterDataPut";
+                string url = _url + "/ api/Masterdata/MasterDataPut";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PutAsync(uri, content);
                 if (result.Result.IsSuccessStatusCode)
