@@ -10,9 +10,9 @@ namespace UILayer.Controllers
     public class AdminController : Controller
     {
         private readonly AdminApi _adminApi;
-        public AdminController(AdminApi adminApi)
+        public AdminController()
         {
-            _adminApi = adminApi;
+            _adminApi = new AdminApi();
         }
         public IActionResult Index()
         {
