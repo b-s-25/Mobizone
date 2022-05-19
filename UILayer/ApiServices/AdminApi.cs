@@ -1,9 +1,11 @@
 ﻿using APILayer.Models;
 using DomainLayer;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace UILayer.ApiServices
 {
@@ -26,24 +28,40 @@ namespace UILayer.ApiServices
                 return false;
             }
         }
-        public IEnumerable<Registration> GetUserData()
+        //public IEnumerable<Registration> GetUserData()
+        //{
+
+        //    UserResponse<IEnumerable<Registration>> _responseModel = new UserResponse<IEnumerable<Registration>>();
+        //    using (HttpClient httpclient = new HttpClient())
+        //    {
+
+        //        string url = "https://localhost:44380/api/UserData/GetUserData";
+        //        Uri uri = new Uri(url);
+        //        System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
+        //        if (result.Result.IsSuccessStatusCode)
+        //        {
+        //            System.Threading.Tasks.Task<string> response = result.Result.Content.ReadAsStringAsync();
+        //            _responseModel.result = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<Registration>>(response.Result);
+        //        }
+
+        //        return _responseModel.result;
+        //    }
+        //}
+        public  IEnumerable<Registration> GetUserData()
         {
-
-            UserResponse<IEnumerable<Registration>> _responseModel = new UserResponse<IEnumerable<Registration>>();
-            using (HttpClient httpclient = new HttpClient())
+            IEnumerable<Registration> userdata = new List<Registration>();
+            using (HttpClient httpClient = new HttpClient())
             {
-
                 string url = "https://localhost:44380/api/UserData/GetUserData";
                 Uri uri = new Uri(url);
-                System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
+                Task<HttpResponseMessage> result = httpClient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
                 {
-                    System.Threading.Tasks.Task<string> response = result.Result.Content.ReadAsStringAsync();
-                    _responseModel.result = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<Registration>>(response.Result);
+                    Task<string> serilizedResult = result.Result.Content.ReadAsStringAsync();
+                    userdata = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<Registration>>(serilizedResult.Result);
                 }
-
-                return _responseModel.result;
             }
+            return userdata;
         }
     }
 }

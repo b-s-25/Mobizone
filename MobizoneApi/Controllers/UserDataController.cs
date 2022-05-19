@@ -23,7 +23,7 @@ namespace MobizoneApi.Controllers
             _Context = Context;
             _userDataoperation = userDataoperation;
         }
-        [HttpGet]
+        [HttpGet("GetUserData")]
         public IEnumerable<Registration> GetUserData()
         {
             var userData = _userDataoperation.GetUserData();
