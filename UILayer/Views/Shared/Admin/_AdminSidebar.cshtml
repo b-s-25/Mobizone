@@ -1,0 +1,97 @@
+﻿@*
+<link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+<link rel="stylesheet" href="/css/adminsidebar.css" />
+
+<div class="btn">
+    <span class="fas fa-bars"></span>
+</div>
+<nav class="sidebar">
+    <div class="text">
+        Admin
+    </div>
+    <ul class="main_side">
+        <li class="active"><a href="#">Dashboard</a></li>
+        <li>
+            <a href="#" id="1">
+                Product
+                <span class="fas fa-caret-down"></span>
+            </a>
+            <ul class="item-show-1">
+                <li><a href="#">Add Product</a></li>
+                <li><a href="#">Product List </a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" id="2">
+                Settings
+                <span class="fas fa-caret-down"></span>
+            </a>
+            <ul class="item-show-2">
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Privacy And Policy</a></li>
+
+            </ul>
+        </li>
+        <li><a href="#">Users</a></li>
+        <li><a href="#">Orders</a></li>
+    </ul>
+</nav>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="~/js/site.js"></script>*@
+<div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+    <ul class="nav flex-column text-white w-100">
+        <div style="font-size: 18px">Dashboard</div>
+        <li href="#" class="nav-link">
+            <span class="mx-2">Products</span>
+        </li>
+        <li href="#" class="nav-link">
+            <span class="mx-2">Users</span>
+        </li>
+        <li href="#" class="nav-link">
+            <span class="mx-2">Orders</span>
+        </li>
+        <li href="#" class="nav-link">
+            <span class="mx-2">Settings</span>
+        </li>
+        <li href="Lookup/LookUp" class="nav-link">
+            <span class="mx-2">Master</span>
+        </li>
+
+    </ul>
+</div>
+<style>
+    .side-navbar {
+        width: 180px;
+        height: 78%;
+        position: fixed;
+        margin-left: -300px;
+        /background-color: #776BCC;
+        / background-color: #000000;
+        transition: 0.5s;
+    }
+
+    .nav-link:active,
+    .nav-link:focus,
+    .nav-link:hover {
+        background-color: #ffffff26;
+    }
+
+    /*.my-container {
+            transition: 0.4s;
+        }*/
+
+    .active-nav {
+        margin-left: 0;
+    }
+    /* for main section */
+    .active-cont {
+        margin-left: 180px;
+    }
+
+    #menu-btn {
+        background-color: #100901;
+        color: #fff;
+        margin-left: -62px;
+    }
+</style>

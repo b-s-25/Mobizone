@@ -35,7 +35,7 @@ namespace MobizoneApi.Controllers
                 return masterdata;
         
         }
-        [HttpPost]
+        [HttpPost("MasterDataPost")]
         public HttpResponseMessage MasterDataPost([FromBody] MasterData masterData)
         {
             try
@@ -51,7 +51,7 @@ namespace MobizoneApi.Controllers
             }
 
         }
-        [HttpPut]
+        [HttpPut("MasterDataPut")]
         public HttpResponseMessage MasterDataPut([FromBody] MasterData masterData)
         {
             try
@@ -68,7 +68,7 @@ namespace MobizoneApi.Controllers
             }
 
         }
-        [HttpDelete]
+        [HttpDelete("MasterDataDelete")]
         public HttpResponseMessage MasterDataDelete(int Id)
         {
             try

@@ -1,5 +1,6 @@
 ﻿using APILayer.Models;
 using DomainLayer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace UILayer.ApiServices
         {
             _url = configuration["BaseApi"];
         }
+        [HttpGet("MasterDatas")]
         public IEnumerable<MasterData> MasterDatas()
         {
 
@@ -25,7 +27,7 @@ namespace UILayer.ApiServices
             {
 
                 string url = _url + "/api/Masterdata/GetMasterData";
-                Uri uri = new Uri(url);
+                Uri uri = new Uri(_url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
                 {
@@ -78,7 +80,8 @@ namespace UILayer.ApiServices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(masterdata);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44380/api/MasterData/MasterDataPost";
+                string url = _url + "/api/Masterdata/MasterDataPost";
+                
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PostAsync(uri, content);
                 if (result.Result.StatusCode == System.Net.HttpStatusCode.OK)

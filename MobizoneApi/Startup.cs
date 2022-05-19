@@ -52,8 +52,8 @@ namespace MobizoneApi
             //services.AddScoped(typeof(IProductCatalog), typeof(ProductCatalog));
             //services.AddScoped(typeof(IUserOperations), typeof(UserOperations));
             services.AddTransient<IUserOperations, UserOperations>();
-          
-            services.AddTransient<IMasterDataOperations, MasterDataOperations>();
+            services.AddScoped(typeof(IMasterDataOperations), typeof(MasterDataOperations));
+            //services.AddTransient<IMasterDataOperations, MasterDataOperations>();
             services.AddScoped(typeof(IUserDataoperation), typeof(UserDataoperation));
 
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ProductDbContext>().AddDefaultTokenProviders();

@@ -1,4 +1,5 @@
 ﻿using DomainLayer;
+using Microsoft.EntityFrameworkCore;
 using RepositoryLayer;
 using RepositoryLayer.Interface;
 using System;
@@ -9,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace BussinessLogic
 {
-  public  class MasterDataOperations: IMasterDataOperations
+  public  class MasterDataOperations: GenericRepositoryOperation<MasterData>, IMasterDataOperations
     {
         private readonly IGenericRepositoryOperation<MasterData> _repo;
         private readonly ProductDbContext _dbContext;
 
-        public MasterDataOperations(ProductDbContext dbContext)
+        public MasterDataOperations(ProductDbContext dbContext,IGenericRepositoryOperation<MasterData> repo) : base(dbContext)
         {
             _dbContext = dbContext;
-            _repo = new GenericRepositoryOperation<MasterData>(_dbContext);
+            _repo = repo;
         }
         public async Task MasterDataAdd(MasterData data)
         {
