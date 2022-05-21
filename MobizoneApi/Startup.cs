@@ -23,6 +23,9 @@ using Microsoft.EntityFrameworkCore;
 using BussinessLogic;
 using RepositoryLayer.Interface;
 using NPOI.SS.Formula.Functions;
+using DomainLayer.EmailService;
+using MobizoneApi.Models;
+using BussinessLogic.Orders;
 
 namespace MobizoneApi
 {
@@ -38,23 +41,20 @@ namespace MobizoneApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MobizoneApi", Version = "v1" });
             });
             services.AddDbContext<ProductDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddTransient(typeof(IGenericRepositoryOperation<T>), typeof(GenericRepositoryOperation<T>));
             services.AddScoped(typeof(IGenericRepositoryOperation<>), typeof(GenericRepositoryOperation<>));
-
-            //services.AddTransient<IGenericRepositoryOperation<T>, GenericRepositoryOperation<T>>();
-            //services.AddScoped(typeof(IProductCatalog), typeof(ProductCatalog));
-            //services.AddScoped(typeof(IUserOperations), typeof(UserOperations));
             services.AddTransient<IUserOperations, UserOperations>();
             services.AddScoped(typeof(IMasterDataOperations), typeof(MasterDataOperations));
-            //services.AddTransient<IMasterDataOperations, MasterDataOperations>();
             services.AddScoped(typeof(IUserDataoperation), typeof(UserDataoperation));
+            services.AddScoped(typeof(IPasswordEncryptDecrypt), typeof(PasswordEncryptDecrypt));
+            services.AddScoped(typeof(IAddressOperations), typeof(AddressOperations));
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+            services.AddTransient<IMailService, MailService>();
 
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ProductDbContext>().AddDefaultTokenProviders();
 

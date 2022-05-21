@@ -5,11 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0" />
+    <Compile Remove="Order\**" />
+    <EmbeddedResource Remove="Order\**" />
+    <None Remove="Order\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Order\" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0" />
   </ItemGroup>
 
 </Project>

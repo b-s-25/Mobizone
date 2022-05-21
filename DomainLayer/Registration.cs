@@ -46,7 +46,7 @@ namespace DomainLayer
         [MaxLength(150)]
         public string modifiedBy { get; set; }
         public int roleId { get; set; }
-        //public ICollection<Address>? address { get; set; }
+        public ICollection<Address>? address { get; set; }
     }
 }
 

@@ -12,6 +12,7 @@ using RepositoryLayer;
 using Microsoft.Extensions.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
+using MobizoneApi.Models;
 
 namespace BusinesLogic
 {
@@ -23,7 +24,8 @@ namespace BusinesLogic
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
-        public UserOperations(ProductDbContext dbContext, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration, RoleManager<IdentityRole> roleManager)
+        private readonly IPasswordEncryptDecrypt _passwordEncryptDecrypt;
+        public UserOperations(ProductDbContext dbContext, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration, RoleManager<IdentityRole> roleManager, IPasswordEncryptDecrypt passwordEncryptDecrypt)
         {
             _dbContext = dbContext;
             _repositoryOperation = new GenericRepositoryOperation<Registration>(_dbContext);
@@ -31,29 +33,22 @@ namespace BusinesLogic
             _signInManager = signInManager;
             _configuration = configuration;
             _roleManager = roleManager;
+            _passwordEncryptDecrypt = passwordEncryptDecrypt;
         }
         public async Task<bool> Register(Registration register)
-        //public async Task<bool> Register(Registration register)
         {
-            /*try
-            {
-                var user = new ApplicationUser()
-                {
-                    firstName = register.firstName,
-                    lastName = register.lastName,
-                    Email = register.email,
-                    UserName = register.email
-                };
-                var result = _userManager.CreateAsync(user, register.password);
-                return await _userManager.AddToRoleAsync(user, UserRoles.User);
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }*/
             try
             {
                 register.roleId = 1;
+                register.firstName = register.firstName;
+                register.lastName = register.lastName;
+                register.email = register.email;
+                register.password = _passwordEncryptDecrypt.Encrypt("encrypt", register.password);
+                register.isActive = register.isActive;
+                register.createdOn = DateTime.UtcNow;
+                register.createdBy = register.firstName + " " + register.lastName;
+                register.modifiedOn = DateTime.UtcNow;
+                register.modifiedBy = register.firstName + " " + register.lastName;
                 _repositoryOperation.Add(register);
                 return true;
             }
@@ -104,10 +99,9 @@ namespace BusinesLogic
            
         }
 
-        public async Task<List<ApplicationUser>> GetUser()
+        public async Task<IEnumerable<Registration>> GetUser()
         {
-            //return _repositoryOperation.GetAll();
-            var users = _userManager.Users.ToList();
+            var users = _repositoryOperation.GetAll();
             return users;
         }
 

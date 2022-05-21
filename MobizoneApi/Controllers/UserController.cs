@@ -79,7 +79,7 @@ namespace APILayer.Controllers
             }
         }
         [HttpGet("GetUser")]
-        public  IEnumerable<ApplicationUser> GetUser()
+        public  IEnumerable<Registration> GetUser()
         {
             return _userOperations.GetUser().Result;
         }
@@ -122,6 +122,22 @@ namespace APILayer.Controllers
                 _logger.LogInformation("error");
                 _logger.LogError("error");
                 return StatusCode(StatusCodes.Status400BadRequest, ex);
+            }
+        }
+        [HttpPost("EditUser")]
+        public async Task<IActionResult> EditUser(ResetPassworCredential register)
+        {
+            try
+            {
+                var data = _userOperations.GetUser().Result.Where(c => c.email.Equals(register.email)).FirstOrDefault();
+                data.password = register.password;
+                await _userOperations.Edit(data);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("error", ex);
+                return BadRequest();
             }
         }
     }

@@ -11,6 +11,8 @@ using UILayer.Datas.Apiservices;
 using Microsoft.AspNetCore.Authorization;
 using DomainLayer;
 using UILayer.ApiServices;
+using Microsoft.AspNetCore.Http;
+using DomainLayer.EmailService;
 
 namespace UILayer.Controllers
 {
@@ -76,7 +78,7 @@ namespace UILayer.Controllers
             _registration = _userApi.GetUserInfo().Where(register => register.email == loginView.username).FirstOrDefault();
             userLogin = loginView;
             bool check = _userApi.UserLogin(loginView);
-            if (check)
+            if (_registration !=null)
             {
                 var claims = new List<Claim>();
 
@@ -86,10 +88,10 @@ namespace UILayer.Controllers
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                 await HttpContext.SignInAsync(claimsPrincipal);
-                return RedirectToAction("/user/Index");
+                return RedirectToAction("Index");
             }
             TempData["Error"] = "*Invalid Email or Password";
-            return View("/user/Login");
+            return View("Login");
         }
 
         [Authorize]
@@ -100,10 +102,65 @@ namespace UILayer.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
-        public IActionResult ForgetPassword()
+        public IActionResult ForgotPassword()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult ForgotPassword(ForgotPassword forgotPassword)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Email email = new Email();
+                    email.body = @"<a href="">click here</a>";
+                    email.toEmail = forgotPassword.email;
+                    email.subject = "reset password";
+                    HttpContext.Session.SetString("key", "value");
+                    var data = HttpContext.Session.Id;
+                    ModelState.Clear();
+                    var userDetails = _userApi.GetUserInfo().Where(check => check.email.Equals(forgotPassword.email)).FirstOrDefault();
+                    if (userDetails != null)
+                    {
+                        _userApi.Email(email);
+                        forgotPassword.emailSent = true;
+                        return Redirect("/user/ResetPassword?email=" + forgotPassword.email);
+                    }
+                }
+                return View(forgotPassword);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ResetPassword(string email)
+        {
+            var userDetails = _userApi.GetUserInfo().Where(check => check.email.Equals(email)).FirstOrDefault();
+            ResetPassword reset = new ResetPassword();
+            reset.user = userDetails;
+            return View(reset);
+        }
+
+        [HttpPost]
+        public ActionResult ResetPassword(ResetPassword resetPassword)
+        {
+            try
+            {
+                Registration register = new Registration();
+                register = _userApi.GetUserInfo().Where(c => c.email.Equals(resetPassword.user.email)).FirstOrDefault();
+                register.password = resetPassword.newPassword;
+                var result = _userApi.ForgotPassword(register);
+                return View(resetPassword);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
     }
 }

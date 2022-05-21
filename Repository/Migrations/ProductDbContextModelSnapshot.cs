@@ -19,6 +19,47 @@ namespace Repository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
 
+            modelBuilder.Entity("DomainLayer.Address", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("additionalInfo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("district")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("phoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("pincode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("registrationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("state")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("registrationId");
+
+                    b.ToTable("Address");
+                });
+
             modelBuilder.Entity("DomainLayer.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -139,13 +180,64 @@ namespace Repository.Migrations
                         .HasColumnType("nvarchar(150)")
                         .HasColumnName("MasterData");
 
-                    b.Property<int?>("parentId")
+                    b.Property<int>("parentId")
                         .HasColumnType("int")
                         .HasColumnName("PerentId");
 
                     b.HasKey("id");
 
                     b.ToTable("masterDatas");
+                });
+
+            modelBuilder.Entity("DomainLayer.Products", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("createdBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("createdOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("deletedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("modifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("modifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("productModel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("productName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("productPrice")
+                        .HasColumnType("int");
+
+                    b.Property<int>("specificationId")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("DomainLayer.Registration", b =>
@@ -198,6 +290,88 @@ namespace Repository.Migrations
                     b.HasKey("registrationId");
 
                     b.ToTable("Register");
+                });
+
+            modelBuilder.Entity("DomainLayer.UserCheckOut", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("addressId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("cancelRequested")
+                        .HasColumnType("int");
+
+                    b.Property<int>("orderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("paymentModeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("price")
+                        .HasColumnType("int");
+
+                    b.Property<int>("productId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("userId")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("addressId");
+
+                    b.HasIndex("productId");
+
+                    b.HasIndex("userId");
+
+                    b.ToTable("userCheckOut");
+                });
+
+            modelBuilder.Entity("DomainLayer.UserOrders", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("orderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("paymentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("price")
+                        .HasColumnType("int");
+
+                    b.Property<int>("productId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("registrationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("status")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("productId");
+
+                    b.HasIndex("registrationId");
+
+                    b.ToTable("UserOrders");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -331,6 +505,59 @@ namespace Repository.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("DomainLayer.Address", b =>
+                {
+                    b.HasOne("DomainLayer.Registration", null)
+                        .WithMany("address")
+                        .HasForeignKey("registrationId");
+                });
+
+            modelBuilder.Entity("DomainLayer.UserCheckOut", b =>
+                {
+                    b.HasOne("DomainLayer.Address", "address")
+                        .WithMany()
+                        .HasForeignKey("addressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DomainLayer.Products", "product")
+                        .WithMany()
+                        .HasForeignKey("productId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DomainLayer.Registration", "user")
+                        .WithMany()
+                        .HasForeignKey("userId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("address");
+
+                    b.Navigation("product");
+
+                    b.Navigation("user");
+                });
+
+            modelBuilder.Entity("DomainLayer.UserOrders", b =>
+                {
+                    b.HasOne("DomainLayer.Products", "product")
+                        .WithMany()
+                        .HasForeignKey("productId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DomainLayer.Registration", "users")
+                        .WithMany()
+                        .HasForeignKey("registrationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("product");
+
+                    b.Navigation("users");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -380,6 +607,11 @@ namespace Repository.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DomainLayer.Registration", b =>
+                {
+                    b.Navigation("address");
                 });
 #pragma warning restore 612, 618
         }
