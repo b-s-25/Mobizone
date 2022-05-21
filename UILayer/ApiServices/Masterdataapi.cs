@@ -26,8 +26,8 @@ namespace UILayer.ApiServices
                 using (HttpClient httpclient = new HttpClient())
                 {
 
-                    string url = _url + "/api/Masterdata/GetMasterData";
-                    Uri uri = new Uri(_url);
+                    string url = "https://localhost:44380/api/Masterdata/GetMasterData";
+                    Uri uri = new Uri(url);
                     System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                     if (result.Result.IsSuccessStatusCode)
                     {
