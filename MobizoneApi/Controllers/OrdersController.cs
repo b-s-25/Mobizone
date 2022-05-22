@@ -16,10 +16,12 @@ namespace MobizoneApi.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly IAddressOperations _addressOperations;
+        private readonly ICheckOutOperations _checkOutOperations;
         private readonly ILogger<UserController> _logger;
-        public OrdersController(IAddressOperations addressOperations, ILogger<UserController> logger)
+        public OrdersController(IAddressOperations addressOperations, ICheckOutOperations checkOutOperations, ILogger<UserController> logger)
         {
             _addressOperations = addressOperations;
+            _checkOutOperations = checkOutOperations;
             _logger = logger;
         }
 
@@ -75,13 +77,10 @@ namespace MobizoneApi.Controllers
         {
             try
             {
-                var data = _addressOperations.GetAddressById(address.id);
-                if (data != null)
-                {
+                
                     _addressOperations.UpdateAddress(address);
                     return StatusCode(StatusCodes.Status200OK);
-                }
-                return StatusCode(StatusCodes.Status400BadRequest);
+                
             }
             catch (Exception ex)
             {
@@ -96,8 +95,77 @@ namespace MobizoneApi.Controllers
         {
             try
             {
-                var data = _addressOperations.GetAddressById(id);
-                //_addressOperations.DeleteAddress(data);
+                var data = _addressOperations.GetAddressById(id).Result;
+                _addressOperations.DeleteAddress(data);
+                return StatusCode(StatusCodes.Status200OK);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error");
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetUserCheckOutList")]
+        public async Task<IEnumerable<UserCheckOut>> GetUserCheckOutList()
+        {
+            try
+            {
+                return await _checkOutOperations.GetOrderList();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error", ex);
+                return null;
+            }
+        }
+
+        [HttpPost("AddUserCheckOutList")]
+        public IActionResult AddUserCheckOutList(UserCheckOut userCheckOut)
+        {
+            try
+            {
+                var data = _checkOutOperations.AddOrderList(userCheckOut);
+                if (data != null)
+                {
+                    return StatusCode(StatusCodes.Status200OK);
+                }
+                return StatusCode(StatusCodes.Status400BadRequest);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error", ex);
+                return null;
+            }
+        }
+
+        [HttpPut("UpdateUserCheckOutList")]
+        public IActionResult UpdateUserCheckOutList(UserCheckOut userCheckOut)
+        {
+            try
+            {
+                var data = _addressOperations.GetAddressById(userCheckOut.id);
+                if (data != null)
+                {
+                    _checkOutOperations.UpdateOrderList(userCheckOut);
+                    return StatusCode(StatusCodes.Status200OK);
+                }
+                return StatusCode(StatusCodes.Status400BadRequest);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error", ex);
+                return null;
+            }
+        }
+
+        [HttpDelete("DeleteUserCheckOutList")]
+        public IActionResult DeleteUserCheckOutList(int id)
+        {
+            try
+            {
+                var data = _checkOutOperations.GetOrderListById(id).Result;
+                _checkOutOperations.DeleteOrderList(data);
                 return StatusCode(StatusCodes.Status200OK);
             }
             catch (Exception ex)

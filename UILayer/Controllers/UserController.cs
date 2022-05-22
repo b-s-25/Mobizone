@@ -40,7 +40,6 @@ namespace UILayer.Controllers
 
         [HttpPost]
         public IActionResult UserRegister(Registration registrationView)
-        //public IActionResult UserRegister(Registration registration)
         {
             _userApi.UserRegister(registrationView);
             return RedirectToAction("Index");
@@ -55,7 +54,6 @@ namespace UILayer.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Login(Login loginView , string ReturnUrl)
-        //public async Task<IActionResult> Login(Login loginView)
         {
             AdminApi admin = new AdminApi();
             if (ReturnUrl == "/admin")
@@ -84,7 +82,7 @@ namespace UILayer.Controllers
 
                 claims.Add(new Claim("password", loginView.password));
                 claims.Add(new Claim(ClaimTypes.NameIdentifier, loginView.username));
-                claims.Add(new Claim(ClaimTypes.Name, loginView.username));
+                claims.Add(new Claim(ClaimTypes.Name, _registration.firstName +" " + _registration.lastName));
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                 await HttpContext.SignInAsync(claimsPrincipal);
@@ -114,19 +112,20 @@ namespace UILayer.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    Email email = new Email();
-                    email.body = @"<a href="">click here</a>";
-                    email.toEmail = forgotPassword.email;
-                    email.subject = "reset password";
                     HttpContext.Session.SetString("key", "value");
                     var data = HttpContext.Session.Id;
+
                     ModelState.Clear();
                     var userDetails = _userApi.GetUserInfo().Where(check => check.email.Equals(forgotPassword.email)).FirstOrDefault();
                     if (userDetails != null)
                     {
+                        forgotPassword.emailSent = true;                       
+                        Email email = new Email();
+                        email.body = "<a href='https://localhost:44328/user/ResetPassword/" + forgotPassword.email + "/" + data + "'>Click here to reset your password</a>";
+                        email.toEmail = forgotPassword.email;
+                        email.subject = "reset password";                      
                         _userApi.Email(email);
-                        forgotPassword.emailSent = true;
-                        return Redirect("/user/ResetPassword?email=" + forgotPassword.email);
+                        return View("ForgotPassword", forgotPassword);
                     }
                 }
                 return View(forgotPassword);
@@ -137,13 +136,17 @@ namespace UILayer.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult ResetPassword(string email)
+        [HttpGet("/user/ResetPassword/{email}/{sessionId}")]
+        public ActionResult ResetPassword(string email, string sessionId)
         {
-            var userDetails = _userApi.GetUserInfo().Where(check => check.email.Equals(email)).FirstOrDefault();
-            ResetPassword reset = new ResetPassword();
-            reset.user = userDetails;
-            return View(reset);
+            if (sessionId == HttpContext.Session.Id)
+            {
+                var userDetails = _userApi.GetUserInfo().Where(check => check.email.Equals(email)).FirstOrDefault();
+                ResetPassword reset = new ResetPassword();
+                reset.user = userDetails;
+                return View(reset);
+            }
+            return RedirectToAction("ForgotPassword");
         }
 
         [HttpPost]
@@ -155,7 +158,7 @@ namespace UILayer.Controllers
                 register = _userApi.GetUserInfo().Where(c => c.email.Equals(resetPassword.user.email)).FirstOrDefault();
                 register.password = resetPassword.newPassword;
                 var result = _userApi.ForgotPassword(register);
-                return View(resetPassword);
+                return Redirect("/");
             }
             catch (Exception ex)
             {

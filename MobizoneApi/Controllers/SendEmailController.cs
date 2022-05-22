@@ -20,7 +20,7 @@ namespace MobizoneApi.Controllers
         }
 
         [HttpPost("send")]
-        public async Task<IActionResult> SendMail([FromForm] Email email)
+        public async Task<IActionResult> SendMail( Email email)
         {
             try
             {

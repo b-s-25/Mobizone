@@ -110,7 +110,6 @@ namespace APILayer.Controllers
                 if (result != null && result.roleId == 2)
                 {
                     return Ok(new UserResponse<string> { status = "Success", message = "Login Successfull" });
-
                 }
                 else
                 {
@@ -124,8 +123,26 @@ namespace APILayer.Controllers
                 return StatusCode(StatusCodes.Status400BadRequest, ex);
             }
         }
-        [HttpPost("EditUser")]
-        public async Task<IActionResult> EditUser(ResetPassworCredential register)
+
+        [HttpPut("UpdateUser")]
+        public IActionResult UpdateUser(Registration user)
+        {
+            try
+            {
+
+                _userOperations.Edit(user);
+                return StatusCode(StatusCodes.Status200OK);
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error", ex);
+                return null;
+            }
+        }
+
+        [HttpPost("ResetPassword")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordCredential register)
         {
             try
             {
