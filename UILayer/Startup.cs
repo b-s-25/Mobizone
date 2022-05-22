@@ -1,3 +1,4 @@
+
 using AspNetCoreHero.ToastNotification;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -36,15 +37,15 @@ namespace UILayer
                     OnValidatePrincipal = async context => { await Task.CompletedTask; }
                 };
             });
-<<<<<<< HEAD
+
             services.AddDistributedMemoryCache();
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromMinutes(2);  
             });
             services.AddMvc();
-=======
+
             services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.TopRight; });
->>>>>>> 94d0df2c70abbe632d7960fd08ff1fd703bcd39d
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

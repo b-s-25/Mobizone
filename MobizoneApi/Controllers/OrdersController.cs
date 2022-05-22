@@ -144,13 +144,8 @@ namespace MobizoneApi.Controllers
         {
             try
             {
-                var data = _addressOperations.GetAddressById(userCheckOut.id);
-                if (data != null)
-                {
                     _checkOutOperations.UpdateOrderList(userCheckOut);
                     return StatusCode(StatusCodes.Status200OK);
-                }
-                return StatusCode(StatusCodes.Status400BadRequest);
             }
             catch (Exception ex)
             {

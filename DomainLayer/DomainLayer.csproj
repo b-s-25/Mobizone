@@ -5,15 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Remove="Order\**" />
     <EmbeddedResource Remove="Order\**" />
     <None Remove="Order\**" />
-=======
-    <PackageReference Include="AspNetCoreHero.ToastNotification" Version="1.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0" />
-    <PackageReference Include="Notify" Version="1.0.2" />
->>>>>>> 94d0df2c70abbe632d7960fd08ff1fd703bcd39d
   </ItemGroup>
 
   <ItemGroup>

@@ -13,6 +13,7 @@ using DomainLayer;
 using UILayer.ApiServices;
 using Microsoft.AspNetCore.Http;
 using DomainLayer.EmailService;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace UILayer.Controllers
 {
@@ -21,10 +22,12 @@ namespace UILayer.Controllers
         private UserApi _userApi;
         private IConfiguration _configuration;
         private Registration _registration;
-        public UserController(IConfiguration configuration)
+        private readonly INotyfService _notyf;
+        public UserController(IConfiguration configuration, INotyfService notyf)
         {
             _userApi = new UserApi(_configuration);
             _configuration = configuration;
+            _notyf = notyf;
         }
         public IActionResult Index()
         {
@@ -41,7 +44,15 @@ namespace UILayer.Controllers
         [HttpPost]
         public IActionResult UserRegister(Registration registrationView)
         {
-            _userApi.UserRegister(registrationView);
+            var check = _userApi.UserRegister(registrationView);
+            if (check)
+            {
+                _notyf.Success("Registration Successfully Completed");
+            }
+            else
+            {
+                _notyf.Error("Registration Failed, You are already Registered");
+            }
             return RedirectToAction("Index");
         }
 
