@@ -5,9 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+=======
+    <PackageReference Include="AspNetCoreHero.ToastNotification" Version="1.1.0" />
+>>>>>>> 94d0df2c70abbe632d7960fd08ff1fd703bcd39d
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Notify" Version="1.0.2" />
   </ItemGroup>
 
   <ItemGroup>

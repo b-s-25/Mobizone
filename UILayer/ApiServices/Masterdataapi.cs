@@ -21,22 +21,25 @@ namespace UILayer.ApiServices
         [HttpGet("MasterDatas")]
         public IEnumerable<MasterData> MasterDatas()
         {
-
-            UserResponse<IEnumerable<MasterData>> _responseModel = new UserResponse<IEnumerable<MasterData>>();
-            using (HttpClient httpclient = new HttpClient())
-            {
-
-                string url = _url + "/api/Masterdata/GetMasterData";
-                Uri uri = new Uri(_url);
-                System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
-                if (result.Result.IsSuccessStatusCode)
+           
+                UserResponse<IEnumerable<MasterData>> _responseModel = new UserResponse<IEnumerable<MasterData>>();
+                using (HttpClient httpclient = new HttpClient())
                 {
-                    System.Threading.Tasks.Task<string> response = result.Result.Content.ReadAsStringAsync();
-                    _responseModel.result = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<MasterData>>(response.Result);
-                }
 
-                return _responseModel.result;
-            }
+                    string url = "https://localhost:44380/api/Masterdata/GetMasterData";
+                    Uri uri = new Uri(url);
+                    System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
+                    if (result.Result.IsSuccessStatusCode)
+                    {
+                        System.Threading.Tasks.Task<string> response = result.Result.Content.ReadAsStringAsync();
+                        _responseModel.result = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<MasterData>>(response.Result);
+                    }
+
+                    return _responseModel.result;
+                }
+            
+           
+            
         }
         //public static IEnumerable<MasterData> GetAll()
         //{

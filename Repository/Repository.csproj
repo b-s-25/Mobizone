@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <PackageReference Include="MailKit" Version="3.2.0" />
+=======
+    <PackageReference Include="AspNetCoreHero.ToastNotification" Version="1.1.0" />
+>>>>>>> 94d0df2c70abbe632d7960fd08ff1fd703bcd39d
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
@@ -13,7 +17,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+<<<<<<< HEAD
     <PackageReference Include="MimeKit" Version="3.2.0" />
+=======
+    <PackageReference Include="Notify" Version="1.0.2" />
+>>>>>>> 94d0df2c70abbe632d7960fd08ff1fd703bcd39d
   </ItemGroup>
 
   <ItemGroup>
