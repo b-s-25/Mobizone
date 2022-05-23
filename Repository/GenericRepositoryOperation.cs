@@ -1,18 +1,23 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace RepositoryLayer
 {
-    public class GenericRepositoryOperation<T> : IGenericRepositoryOperation<T> where T : class 
+    public class GenericRepositoryOperation<T> : IGenericRepositoryOperation<T> where T : class
     {
 
         private readonly DbContext _Context;
         private readonly DbSet<T> _dbset;
+        IQueryable<T> query;
+        T entity;
         public GenericRepositoryOperation(ProductDbContext context)
         {
             _Context = context;
@@ -27,7 +32,7 @@ namespace RepositoryLayer
         public void Add(T entity)
         {
             _dbset.Add(entity);
-            _Context.SaveChanges(); 
+            _Context.SaveChanges();
         }
 
         public void Update(T entity)
@@ -38,23 +43,53 @@ namespace RepositoryLayer
 
         public void Delete(T entity)
         {
-           _dbset.Remove(entity);
-            _Context.SaveChanges();    
+            _dbset.Remove(entity);
+            _Context.SaveChanges();
         }
 
         public T GetById(int Id)
         {
-           return _dbset.Find(Id);
+            return _dbset.Find(Id);
         }
 
         public void Save()
         {
             _Context.SaveChanges();
         }
+
+        /*public async Task<IQueryable<T>> GetAll(params Expression<Func<T, object>>[] includes)
+        {
+            try
+            {
+                IQueryable<T> result = _dbset;
+                query = includes.Aggregate(result, (current, includeProperty) => current.Include(includeProperty));
+            }
+            catch (SqlException)
+            {
+                return null;
+            }
+            return query;
+        }
+
+        public async Task<T> GetById(int id, params Expression<Func<T, object>>[] includes)
+        {
+            try
+            {
+                IQueryable<T> result = _dbset;
+                query = includes.Aggregate(result, (current, includeProperty) => current.Include(includeProperty));
+                entity = _dbset.Find();
+                return entity;
+            }
+            catch (SqlException ex)
+            {
+                return null;
+            }
+
+        }*/
     }
-    
 
 
 
-    
+
+
 }

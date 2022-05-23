@@ -1,4 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using DomainLayer;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -21,13 +22,54 @@ namespace UILayer.Controllers
             return View();
         }
 
-        /*public IActionResult OrdersList()
+        [HttpGet]
+        public IActionResult OrdersList()
         {
             try
             {
                 var data = _ordersApi.GetCheckOutList();
-                 
+                return View(data);
             }
-        }*/
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult AddOrders(UserCheckOut userCheckOut)
+        {
+            try
+            {
+                var data = _ordersApi.AddCheckOutList(userCheckOut);
+                if (data)
+                {
+                    return View();
+                }
+                return View("Index");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        public IActionResult UpdateOrders(UserCheckOut userCheckOut)
+        {
+            try
+            {
+                var data = _ordersApi.EditCheckOutList(userCheckOut);
+                if (data)
+                {
+                    return View();
+                }
+                return View("Index");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

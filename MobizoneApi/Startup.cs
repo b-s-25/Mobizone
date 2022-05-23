@@ -54,6 +54,7 @@ namespace MobizoneApi
             services.AddScoped(typeof(IPasswordEncryptDecrypt), typeof(PasswordEncryptDecrypt));
             services.AddScoped(typeof(IAddressOperations), typeof(AddressOperations));
             services.AddScoped(typeof(ICheckOutOperations), typeof(CheckOutOperations));
+            services.AddScoped(typeof(IProductOperations), typeof(ProductOperations));
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddTransient<IMailService, MailService>();
 

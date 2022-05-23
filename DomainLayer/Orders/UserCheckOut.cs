@@ -14,13 +14,15 @@ namespace DomainLayer
         [Key]
         public int id { get; set; }
         public int orderId { get; set; }
+
+        [ForeignKey("Registration")]
         public int userId { get; set; }
         public Registration user { get; set; }
         public int quantity { get; set; }
 
         [ForeignKey("Products")]
         public int productId { get; set; }
-        public Products product { get; set; }
+        public Product product { get; set; }
         public int price { get; set; }
         public int paymentModeId { get; set; }
 

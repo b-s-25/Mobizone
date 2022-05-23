@@ -19,7 +19,7 @@ namespace RepositoryLayer
         public DbSet<ApplicationUser> applicationUsers { get; set; }
         public DbSet<Login> Login { get; set; }
         public DbSet<MasterData> masterDatas { get; set; }
-        public DbSet<Products> Products{ get; set; }
+        public DbSet<Product> Products{ get; set; }
         public DbSet<UserOrders> UserOrders { get; set; }
         public DbSet<UserCheckOut> userCheckOut { get; set; }
     }

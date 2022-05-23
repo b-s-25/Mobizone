@@ -13,18 +13,20 @@ namespace DomainLayer
     {
         [Key]
         public int id { get; set; }
-        [ForeignKey("specificationId")]
-        public int specificationId { get; set; }
 
-        [Display(Name = "Product Name ")]
+        //[ForeignKey("specificationId")]
+        //public int specificationId { get; set; }
+        //public Specification specification { get; set; }
+
+        [Display(Name = "Name ")]
         [Required(ErrorMessage = "*This field is Required")]
-        public string productName { get; set; }
-        [Display(Name = "Product Model")]
+        public string Name { get; set; }
+        [Display(Name = " Model")]
         [Required(ErrorMessage = "*This field is Required")]
-        public string productModel { get; set; }
-        [Display(Name = "Product Price")]
+        public string Model { get; set; }
+        [Display(Name = " Price")]
         [Required(ErrorMessage = "*This field is Required")]
-        public int productPrice { get; set; }
+        public int Price { get; set; }
         public string image { get; set; }
         [Display(Name = "Description")]
         [Required(ErrorMessage = "*This field is Required")]
