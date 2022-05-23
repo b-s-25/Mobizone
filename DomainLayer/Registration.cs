@@ -14,14 +14,16 @@ namespace DomainLayer
         [Key]
         public int registrationId { get; set; }
         [Required(ErrorMessage = "*First Name is required")]
+        [RegularExpression("^[a-zA-Z]+$", ErrorMessage = "Please enter your name without space")]
         [Display(Name = "First Name")]
         public string firstName { get; set; }
         [Required(ErrorMessage = "*Last Name is required")]
+        [RegularExpression("^[a-zA-Z]+$", ErrorMessage = "Please enter your name without space")]
         [Display(Name = "Last Name")]
         public string lastName { get; set; }
         [Required(ErrorMessage = "*Email Id is required")]
         [Display(Name = "Email")]
-        [EmailAddress(ErrorMessage = "*Email address should be in the format adc@domain.com")]
+        [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z\s]+\.[a-zA-Z\s.]+$", ErrorMessage = "*Email address should be in the format adc@domain.com")]
         public string email { get; set; }
         [Required(ErrorMessage = "*Password is required")]
         [Display(Name = "Password")]

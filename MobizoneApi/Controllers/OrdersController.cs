@@ -125,6 +125,9 @@ namespace MobizoneApi.Controllers
         {
             try
             {
+                userCheckOut.address = _addressOperations.GetAddressById(userCheckOut.addressId).Result;
+                //userCheckOut.product = .................;
+                //userCheckOut.user = _re
                 var data = _checkOutOperations.AddOrderList(userCheckOut);
                 if (data != null)
                 {
@@ -154,20 +157,5 @@ namespace MobizoneApi.Controllers
             }
         }
 
-        [HttpDelete("DeleteUserCheckOutList")]
-        public IActionResult DeleteUserCheckOutList(int id)
-        {
-            try
-            {
-                var data = _checkOutOperations.GetOrderListById(id).Result;
-                _checkOutOperations.DeleteOrderList(data);
-                return StatusCode(StatusCodes.Status200OK);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Error");
-                return BadRequest(ex.Message);
-            }
-        }
     }
 }

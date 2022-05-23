@@ -56,8 +56,7 @@ namespace UILayer.Datas.Apiservices
 
             UserResponse<IEnumerable<Registration>> _responseModel = new UserResponse<IEnumerable<Registration>>();
             using (HttpClient httpclient = new HttpClient())
-            {
-                
+            {              
                 string url = "https://localhost:44388/api/User/GetUser";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
@@ -66,7 +65,6 @@ namespace UILayer.Datas.Apiservices
                     System.Threading.Tasks.Task<string> response = result.Result.Content.ReadAsStringAsync();
                     _responseModel.result = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<Registration>>(response.Result);
                 }
-
                 return _responseModel.result;
             }
         }
