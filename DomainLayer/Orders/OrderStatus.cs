@@ -8,7 +8,7 @@ namespace DomainLayer.Orders
 {
     public enum OrderStatus
     {
-        ordered = 1,
+        orderPlaced = 1,
         delivered,
         dispatched,
         cancelled
