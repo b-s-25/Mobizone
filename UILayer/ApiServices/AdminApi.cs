@@ -18,7 +18,7 @@ namespace UILayer.ApiServices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(userLogin);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44380/api/User/AdminLogin";
+                string url = "https://localhost:44388/api/User/AdminLogin";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PostAsync(uri, content);
                 if (result.Result.StatusCode == System.Net.HttpStatusCode.OK)
@@ -52,7 +52,7 @@ namespace UILayer.ApiServices
             IEnumerable<Registration> userdata = new List<Registration>();
             using (HttpClient httpClient = new HttpClient())
             {
-                string url = "https://localhost:44380/api/UserData/GetUserData";
+                string url = "https://localhost:44388/api/UserData/GetUserData";
                 Uri uri = new Uri(url);
                 Task<HttpResponseMessage> result = httpClient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
