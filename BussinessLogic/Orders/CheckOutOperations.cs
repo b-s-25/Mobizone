@@ -16,27 +16,27 @@ namespace BussinessLogic.Orders
             _checkOutOperations = checkOutOperations;
         }
 
-        public async Task AddOrderList(UserCheckOut userCheckOut)
+        public async Task AddCheckOut(UserCheckOut userCheckOut)
         {
             _checkOutOperations.Add(userCheckOut);
         }
 
-        public async Task DeleteOrderList(UserCheckOut userCheckOut)
+        public async Task DeleteCheckOut(UserCheckOut userCheckOut)
         {
             _checkOutOperations.Delete(userCheckOut);
         }
 
-        public async Task<IEnumerable<UserCheckOut>> GetOrderList()
+        public async Task<IEnumerable<UserCheckOut>> GetCheckOut()
         {
             return _checkOutOperations.GetAll();
         }
 
-        public async Task<UserCheckOut> GetOrderListById(int id)
+        public async Task<UserCheckOut> GetCheckOutById(int id)
         {
             return _checkOutOperations.GetById(id);
         }
 
-        public async Task UpdateOrderList(UserCheckOut userCheckOut)
+        public async Task UpdateCheckOut(UserCheckOut userCheckOut)
         {
             _checkOutOperations.Update(userCheckOut);
         }
