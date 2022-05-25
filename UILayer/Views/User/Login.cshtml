@@ -4,9 +4,10 @@
 }
 @{
     @*var loginUrl = ViewData["LoginUrl"] as string;*@
-    var error = TempData["error"] as string;
-    Microsoft.Extensions.Primitives.StringValues queryVal = "";
-    var returnUrl = ViewData["LoginUrl"] as string;
+Layout = "~/Views/User/WithoutNav.cshtml";
+var error = TempData["error"] as string;
+Microsoft.Extensions.Primitives.StringValues queryVal = "";
+var returnUrl = ViewData["LoginUrl"] as string;
 }
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
