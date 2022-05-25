@@ -111,7 +111,7 @@ namespace MobizoneApi.Controllers
         }
 
         [HttpGet("GetUserCheckOutList")]
-        public async Task<IEnumerable<UserCheckOut>> GetUserCheckOutList()
+        public async Task<IEnumerable<UserCheckOut>> GetUserCheckOutList() 
         {
             try
             {
