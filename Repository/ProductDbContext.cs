@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RepositoryLayer
+namespace Repository
 {
-    public class ProductDbContext: IdentityDbContext<ApplicationUser>
+    public class ProductDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ProductDbContext(DbContextOptions<ProductDbContext>options):base(options)
+        public ProductDbContext(DbContextOptions<ProductDbContext>options) : base(options)
         {
 
         }
@@ -19,7 +19,7 @@ namespace RepositoryLayer
         public DbSet<ApplicationUser> applicationUsers { get; set; }
         public DbSet<Login> Login { get; set; }
         public DbSet<MasterData> masterDatas { get; set; }
-        public DbSet<Product> Products{ get; set; }
+        public DbSet<Products> Products { get; set; }
         public DbSet<UserOrders> UserOrders { get; set; }
         public DbSet<UserCheckOut> userCheckOut { get; set; }
     }

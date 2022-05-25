@@ -14,7 +14,7 @@ namespace DomainLayer
 
         [ForeignKey("Products")]
         public int productId { get; set; }
-        public Product product { get; set; }
+       // public Product product { get; set; }
 
         [ForeignKey("Registration")]
         public int registrationId { get; set; }

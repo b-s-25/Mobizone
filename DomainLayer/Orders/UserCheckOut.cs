@@ -22,7 +22,7 @@ namespace DomainLayer
 
         [ForeignKey("Products")]
         public int productId { get; set; }
-        public Product product { get; set; }
+       // public Product product { get; set; }
         public int price { get; set; }
         public int paymentModeId { get; set; }
 

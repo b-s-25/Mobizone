@@ -1,0 +1,76 @@
+﻿@model DomainLayer.ProductView
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<head>
+    <style>
+        .tab-content {
+            background-color: lightcyan;
+            padding: 10px;
+        }
+        h1 {
+            background-color: lightskyblue;
+            height: 60px;
+            text-align-last: center;
+            margin-bottom: 0px;
+        }
+    </style>
+</head>
+
+<h1>Create</h1>
+<div class="tab-content">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+
+                <input type="hidden" asp-for="id" />
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+               @* <div class="form-group">
+                    <label asp-for="productType" class="control-label"></label>
+                    <input asp-for="productType" class="form-control" />
+                    <span asp-validation-for="productType" class="text-danger"></span>
+                </div>*@
+                <div class="form-group">
+                    <label asp-for="productName" class="control-label"></label>
+                    <input asp-for="productName" class="form-control" />
+                    <span asp-validation-for="productName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="productModel" class="control-label"></label>
+                    <input asp-for="productModel" class="form-control" />
+                    <span asp-validation-for="productModel" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="productPrice" class="control-label"></label>
+                    <input asp-for="productPrice" class="form-control" />
+                    <span asp-validation-for="productPrice" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="description" class="control-label"></label>
+                    <input asp-for="description" class="form-control" />
+                    <span asp-validation-for="description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+
+                    <div class="col-md-10">
+                        <a><input type="file" id="image" asp-for="image" accept=".png ,.jpg" /></a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

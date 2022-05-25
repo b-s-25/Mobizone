@@ -20,14 +20,12 @@ namespace MobizoneApi.Controllers
         private readonly IAddressOperations _addressOperations;
         private readonly ICheckOutOperations _checkOutOperations;
         private readonly IUserOperations _userOperations;
-        private readonly IProductOperations _productOperations;
         private readonly ILogger<UserController> _logger;
-        public OrdersController(IAddressOperations addressOperations, ICheckOutOperations checkOutOperations, IUserOperations userOperations, IProductOperations productOperations, ILogger<UserController> logger)
+        public OrdersController(IAddressOperations addressOperations, ICheckOutOperations checkOutOperations, IUserOperations userOperations, ILogger<UserController> logger)
         {
             _addressOperations = addressOperations;
             _checkOutOperations = checkOutOperations;
             _userOperations = userOperations;
-            _productOperations = productOperations;
             _logger = logger;
         }
 
@@ -123,7 +121,7 @@ namespace MobizoneApi.Controllers
                 {
                     data.user = _userOperations.GetUser().Result.Where(x => x.registrationId.Equals(data.userId)).FirstOrDefault();
                     data.address = _addressOperations.GetAddress().Result.Where(x => x.id.Equals(data.addressId)).FirstOrDefault();
-                    data.product = _productOperations.GetProduct().Result.Where(x => x.id.Equals(data.productId)).FirstOrDefault();
+                  //  data.product = _productOperations.GetProduct().Result.Where(x => x.id.Equals(data.productId)).FirstOrDefault();
                     checkouList.Add(data);
                 }
                 return checkouList;
@@ -141,7 +139,7 @@ namespace MobizoneApi.Controllers
             try
             {
                 userCheckOut.address = _addressOperations.GetAddressById(userCheckOut.addressId).Result;
-                userCheckOut.product = _productOperations.GetProduct().Result.Where(x => x.id.Equals(userCheckOut.productId)).FirstOrDefault();
+               // userCheckOut.product = _productOperations.GetProduct().Result.Where(x => x.id.Equals(userCheckOut.productId)).FirstOrDefault();
                 userCheckOut.user = _userOperations.GetUser().Result.Where(val => val.registrationId.Equals(userCheckOut.userId)).FirstOrDefault();
                 var data = _checkOutOperations.AddOrderList(userCheckOut);
                 if (data != null)
