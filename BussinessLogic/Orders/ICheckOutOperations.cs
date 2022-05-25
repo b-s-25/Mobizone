@@ -6,10 +6,10 @@ namespace BussinessLogic.Orders
 {
     public interface ICheckOutOperations
     {
-        Task<IEnumerable<UserCheckOut>> GetOrderList();
-        Task<UserCheckOut> GetOrderListById(int id);
-        Task AddOrderList(UserCheckOut userCheckOut);
-        Task UpdateOrderList(UserCheckOut userCheckOut);
-        Task DeleteOrderList(UserCheckOut userCheckOut);
+        Task<IEnumerable<UserCheckOut>> GetCheckOut();
+        Task<UserCheckOut> GetCheckOutById(int id);
+        Task AddCheckOut(UserCheckOut userCheckOut);
+        Task UpdateCheckOut(UserCheckOut userCheckOut);
+        Task DeleteCheckOut(UserCheckOut userCheckOut);
     }
 }

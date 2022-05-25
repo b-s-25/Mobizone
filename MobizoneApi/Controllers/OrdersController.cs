@@ -116,7 +116,7 @@ namespace MobizoneApi.Controllers
             try
             {
                 List<UserCheckOut> checkouList = new List<UserCheckOut>();
-                var result = _checkOutOperations.GetOrderList().Result;
+                var result = _checkOutOperations.GetCheckOut().Result;
                 foreach(var data in result)
                 {
                     data.user = _userOperations.GetUser().Result.Where(x => x.registrationId.Equals(data.userId)).FirstOrDefault();
@@ -141,7 +141,7 @@ namespace MobizoneApi.Controllers
                 userCheckOut.address = _addressOperations.GetAddressById(userCheckOut.addressId).Result;
                // userCheckOut.product = _productOperations.GetProduct().Result.Where(x => x.id.Equals(userCheckOut.productId)).FirstOrDefault();
                 userCheckOut.user = _userOperations.GetUser().Result.Where(val => val.registrationId.Equals(userCheckOut.userId)).FirstOrDefault();
-                var data = _checkOutOperations.AddOrderList(userCheckOut);
+                var data = _checkOutOperations.AddCheckOut(userCheckOut);
                 if (data != null)
                 {
                     return StatusCode(StatusCodes.Status200OK);
@@ -160,7 +160,7 @@ namespace MobizoneApi.Controllers
         {
             try
             {
-                    _checkOutOperations.UpdateOrderList(userCheckOut);
+                    _checkOutOperations.UpdateCheckOut(userCheckOut);
                     return StatusCode(StatusCodes.Status200OK);
             }
             catch (Exception ex)
