@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RepositoryLayer;
+using Repository;
 
 namespace Repository.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20220521101611_initial5")]
-    partial class initial5
+    [Migration("20220525072714_initial10008")]
+    partial class initial10008
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -191,6 +191,230 @@ namespace Repository.Migrations
                     b.ToTable("masterDatas");
                 });
 
+            modelBuilder.Entity("DomainLayer.ProductBrand", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int?>("Specificationid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("brandName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("createdBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("createdOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("modifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("modifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Specificationid");
+
+                    b.ToTable("ProductBrand");
+                });
+
+            modelBuilder.Entity("DomainLayer.ProductColor", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int?>("Specificationid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("createdBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("createdOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("modifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("modifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("productColor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Specificationid");
+
+                    b.ToTable("ProductColor");
+                });
+
+            modelBuilder.Entity("DomainLayer.ProductImage", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int?>("Specificationid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("createdBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("createdOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("modifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("modifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("productImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Specificationid");
+
+                    b.ToTable("ProductImage");
+                });
+
+            modelBuilder.Entity("DomainLayer.ProductModel", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int?>("Specificationid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("createdBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("createdOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("modifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("modifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("productModel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Specificationid");
+
+                    b.ToTable("ProductModel");
+                });
+
+            modelBuilder.Entity("DomainLayer.ProductRam", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int?>("Specificationid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("createdBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("createdOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("modifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("modifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("productRam")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Specificationid");
+
+                    b.ToTable("ProductRam");
+                });
+
+            modelBuilder.Entity("DomainLayer.ProductSim", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int?>("Specificationid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("createdBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("createdOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("modifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("modifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("productSim")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Specificationid");
+
+                    b.ToTable("ProductSim");
+                });
+
+            modelBuilder.Entity("DomainLayer.ProductStorage", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int?>("Specificationid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("createdBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("createdOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("modifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("modifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("storageCapacity")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Specificationid");
+
+                    b.ToTable("ProductStorage");
+                });
+
             modelBuilder.Entity("DomainLayer.Products", b =>
                 {
                     b.Property<int>("id")
@@ -294,6 +518,70 @@ namespace Repository.Migrations
                     b.ToTable("Register");
                 });
 
+            modelBuilder.Entity("DomainLayer.Specification", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int?>("Productsid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("created_by")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("created_on")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("modified_by")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("modified_on")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("productBrandId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("productColorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("productImageId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("productModelId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("productRamId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("productSimId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("productStorageId")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Productsid");
+
+                    b.HasIndex("productBrandId");
+
+                    b.HasIndex("productColorId");
+
+                    b.HasIndex("productImageId");
+
+                    b.HasIndex("productModelId");
+
+                    b.HasIndex("productRamId");
+
+                    b.HasIndex("productSimId");
+
+                    b.HasIndex("productStorageId");
+
+                    b.ToTable("Specification");
+                });
+
             modelBuilder.Entity("DomainLayer.UserCheckOut", b =>
                 {
                     b.Property<int>("id")
@@ -332,8 +620,6 @@ namespace Repository.Migrations
 
                     b.HasIndex("addressId");
 
-                    b.HasIndex("productId");
-
                     b.HasIndex("userId");
 
                     b.ToTable("userCheckOut");
@@ -368,8 +654,6 @@ namespace Repository.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("id");
-
-                    b.HasIndex("productId");
 
                     b.HasIndex("registrationId");
 
@@ -514,17 +798,123 @@ namespace Repository.Migrations
                         .HasForeignKey("registrationId");
                 });
 
+            modelBuilder.Entity("DomainLayer.ProductBrand", b =>
+                {
+                    b.HasOne("DomainLayer.Specification", null)
+                        .WithMany("productBrands")
+                        .HasForeignKey("Specificationid");
+                });
+
+            modelBuilder.Entity("DomainLayer.ProductColor", b =>
+                {
+                    b.HasOne("DomainLayer.Specification", null)
+                        .WithMany("productColors")
+                        .HasForeignKey("Specificationid");
+                });
+
+            modelBuilder.Entity("DomainLayer.ProductImage", b =>
+                {
+                    b.HasOne("DomainLayer.Specification", null)
+                        .WithMany("productImages")
+                        .HasForeignKey("Specificationid");
+                });
+
+            modelBuilder.Entity("DomainLayer.ProductModel", b =>
+                {
+                    b.HasOne("DomainLayer.Specification", null)
+                        .WithMany("productModels")
+                        .HasForeignKey("Specificationid");
+                });
+
+            modelBuilder.Entity("DomainLayer.ProductRam", b =>
+                {
+                    b.HasOne("DomainLayer.Specification", null)
+                        .WithMany("productRams")
+                        .HasForeignKey("Specificationid");
+                });
+
+            modelBuilder.Entity("DomainLayer.ProductSim", b =>
+                {
+                    b.HasOne("DomainLayer.Specification", null)
+                        .WithMany("productSims")
+                        .HasForeignKey("Specificationid");
+                });
+
+            modelBuilder.Entity("DomainLayer.ProductStorage", b =>
+                {
+                    b.HasOne("DomainLayer.Specification", null)
+                        .WithMany("productStorages")
+                        .HasForeignKey("Specificationid");
+                });
+
+            modelBuilder.Entity("DomainLayer.Specification", b =>
+                {
+                    b.HasOne("DomainLayer.Products", null)
+                        .WithMany("Specifications")
+                        .HasForeignKey("Productsid");
+
+                    b.HasOne("DomainLayer.ProductBrand", "productBrand")
+                        .WithMany()
+                        .HasForeignKey("productBrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DomainLayer.ProductColor", "productColor")
+                        .WithMany()
+                        .HasForeignKey("productColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DomainLayer.ProductImage", "productImage")
+                        .WithMany()
+                        .HasForeignKey("productImageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DomainLayer.ProductModel", "productModel")
+                        .WithMany()
+                        .HasForeignKey("productModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DomainLayer.ProductRam", "productRam")
+                        .WithMany()
+                        .HasForeignKey("productRamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DomainLayer.ProductSim", "productSim")
+                        .WithMany()
+                        .HasForeignKey("productSimId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DomainLayer.ProductStorage", "productStorage")
+                        .WithMany()
+                        .HasForeignKey("productStorageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("productBrand");
+
+                    b.Navigation("productColor");
+
+                    b.Navigation("productImage");
+
+                    b.Navigation("productModel");
+
+                    b.Navigation("productRam");
+
+                    b.Navigation("productSim");
+
+                    b.Navigation("productStorage");
+                });
+
             modelBuilder.Entity("DomainLayer.UserCheckOut", b =>
                 {
                     b.HasOne("DomainLayer.Address", "address")
                         .WithMany()
                         .HasForeignKey("addressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DomainLayer.Products", "product")
-                        .WithMany()
-                        .HasForeignKey("productId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -536,26 +926,16 @@ namespace Repository.Migrations
 
                     b.Navigation("address");
 
-                    b.Navigation("product");
-
                     b.Navigation("user");
                 });
 
             modelBuilder.Entity("DomainLayer.UserOrders", b =>
                 {
-                    b.HasOne("DomainLayer.Products", "product")
-                        .WithMany()
-                        .HasForeignKey("productId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DomainLayer.Registration", "users")
                         .WithMany()
                         .HasForeignKey("registrationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("product");
 
                     b.Navigation("users");
                 });
@@ -611,9 +991,31 @@ namespace Repository.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("DomainLayer.Products", b =>
+                {
+                    b.Navigation("Specifications");
+                });
+
             modelBuilder.Entity("DomainLayer.Registration", b =>
                 {
                     b.Navigation("address");
+                });
+
+            modelBuilder.Entity("DomainLayer.Specification", b =>
+                {
+                    b.Navigation("productBrands");
+
+                    b.Navigation("productColors");
+
+                    b.Navigation("productImages");
+
+                    b.Navigation("productModels");
+
+                    b.Navigation("productRams");
+
+                    b.Navigation("productSims");
+
+                    b.Navigation("productStorages");
                 });
 #pragma warning restore 612, 618
         }

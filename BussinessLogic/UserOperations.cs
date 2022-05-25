@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using MobizoneApi.Models;
+using Repository;
 
 namespace BusinesLogic
 {

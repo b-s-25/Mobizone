@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Repository;
 using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;

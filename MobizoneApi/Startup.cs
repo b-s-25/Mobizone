@@ -26,6 +26,7 @@ using NPOI.SS.Formula.Functions;
 using DomainLayer.EmailService;
 using MobizoneApi.Models;
 using BussinessLogic.Orders;
+using Repository;
 
 namespace MobizoneApi
 {
@@ -47,6 +48,7 @@ namespace MobizoneApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MobizoneApi", Version = "v1" });
             });
             services.AddDbContext<ProductDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped(typeof(IProductCatagory), typeof(ProductCatagory));
             services.AddScoped(typeof(IGenericRepositoryOperation<>), typeof(GenericRepositoryOperation<>));
             services.AddTransient<IUserOperations, UserOperations>();
             services.AddScoped(typeof(IMasterDataOperations), typeof(MasterDataOperations));
@@ -54,7 +56,6 @@ namespace MobizoneApi
             services.AddScoped(typeof(IPasswordEncryptDecrypt), typeof(PasswordEncryptDecrypt));
             services.AddScoped(typeof(IAddressOperations), typeof(AddressOperations));
             services.AddScoped(typeof(ICheckOutOperations), typeof(CheckOutOperations));
-            services.AddScoped(typeof(IProductOperations), typeof(ProductOperations));
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddTransient<IMailService, MailService>();
 
