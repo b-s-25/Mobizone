@@ -5,7 +5,7 @@
 }
 @model DomainLayer.UserCheckOut
 @{
-    var product = ViewData["ProductData"] as DomainLayer.Product;
+   // var product = ViewData["ProductData"] as DomainLayer.Products;
     var user = ViewData["UserData"] as DomainLayer.Registration;
     var values = Enum.GetValues(typeof(DomainLayer.Orders.PaymentStatus));
 }

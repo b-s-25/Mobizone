@@ -32,7 +32,7 @@ namespace UILayer.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Products> products = PoductApi.index();
+            IEnumerable<Products> products = ProductApi.index();
             return View(products);
         }
 
@@ -40,7 +40,7 @@ namespace UILayer.Controllers
 
         public IActionResult Details(int id)
         {
-            Products products = PoductApi.GetById(id);
+            Products products = ProductApi.GetById(id);
             return View(products);
         }
 
@@ -49,17 +49,18 @@ namespace UILayer.Controllers
         public IActionResult Edit(int id)
         {
             Storage = new ProductView();
-            Products product = PoductApi.GetById(id);
+            Products product = ProductApi.GetById(id);
             Storage.productName = product.productName;
             Storage.productPrice = product.productPrice;
             Storage.productModel = product.productModel;
+            Storage.quantity = product.quantity;
             Storage.description = product.description;
             return View("Create", Storage);
         }
 
         public ActionResult Delete(int id)
         {
-            bool result = PoductApi.Delete(id);
+            bool result = ProductApi.Delete(id);
             if (result)
             {
                 return RedirectToAction("Index");
@@ -85,10 +86,11 @@ namespace UILayer.Controllers
                     productPrice = product.productPrice,
                     productModel = product.productModel,
                     image = stringFileName,
+                    quantity = product.quantity,
                     description = product.description
                 };
 
-                bool result = PoductApi.Create(Product);
+                bool result = ProductApi.Create(Product);
                 if (result)
                 {
                     return RedirectToAction("Index");
@@ -105,9 +107,10 @@ namespace UILayer.Controllers
                     productPrice = product.productPrice,
                     productModel = product.productModel,
                     image = stringFileName,
+                    quantity = product.quantity,
                     description = product.description
                 };
-                bool result = PoductApi.Edit(Product);
+                bool result = ProductApi.Edit(Product);
                 if (result)
                 {
                     return RedirectToAction("Index");
@@ -134,7 +137,7 @@ namespace UILayer.Controllers
         }
         public IEnumerable<Products> GetList()
         {
-            IEnumerable<Products> products = PoductApi.index();
+            IEnumerable<Products> products = ProductApi.index();
             return products;
         }
     } 

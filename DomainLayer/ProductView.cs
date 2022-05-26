@@ -33,5 +33,8 @@ namespace DomainLayer
         [Display(Name = "Description")]
         [Required(ErrorMessage = "*This field is Required")]
         public string description { get; set; }
+        [Display(Name = "Quantity")]
+        [Required(ErrorMessage = "*This field is Required")]
+        public int quantity { get; set; }
     }
 }

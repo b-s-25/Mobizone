@@ -46,7 +46,7 @@ namespace APILayer.Controllers
                 catch (Exception ex)
                 {
                     _logger.LogError("Error message");
-                return null;
+                    return null;
                 }
             }
 

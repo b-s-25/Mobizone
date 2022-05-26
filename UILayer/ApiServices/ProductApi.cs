@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace UILayer.Datas.Apiservices
 {
-    public class PoductApi
+    public class ProductApi
     {
         public static IEnumerable<Products> index()
         

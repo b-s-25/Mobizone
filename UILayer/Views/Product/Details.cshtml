@@ -9,13 +9,7 @@
 <div>
     <hr />
     <dl class="dl-horizontal">
-@*
-        <div>
-            <p style="font-weight:bolder; display:inline;">Type</p> :
-            @Html.DisplayFor(model => model.productType)
-        </div>
-        <br />
-*@
+
         <div>
             <p style="font-weight:bolder; display:inline;">Name</p> :
             @Html.DisplayFor(model => model.productName)
@@ -42,6 +36,11 @@
         </div>
         <br />
 
+
+        <div>
+            <p style="font-weight:bolder; display:inline;">Quantity</p> :
+            @Html.DisplayFor(model => model.quantity)
+        </div>
 
         <div>
             <p style="font-weight:bolder; display:inline;">Discription</p> :
