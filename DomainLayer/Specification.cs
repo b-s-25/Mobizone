@@ -52,13 +52,5 @@ namespace DomainLayer
         public string modified_by { get; set; }
         public string created_by { get; set; }
 
-
-        /*public ICollection<ProductStorage> productStorages { get; set; }
-        public ICollection<ProductBrand> productBrands { get; set; }
-        public ICollection<ProductSim> productSims { get; set; }
-        public ICollection<ProductColor> productColors { get; set; }
-        public ICollection<ProductModel> productModels { get; set; }
-        public ICollection<ProductRam> productRams { get; set; }
-        public ICollection<ProductImage> productImages { get; set; }*/
     }
 }

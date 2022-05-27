@@ -15,25 +15,25 @@ namespace UILayer.Datas.Apiservices
         IConfiguration _configuration;
         public ProductApi()
         {
-           
+
         }
         public static IEnumerable<Products> index()
-        
+
         {
-            
+
             IEnumerable<Products> products = new List<Products>();
-            
-            using(HttpClient httpClient = new HttpClient())
+
+            using (HttpClient httpClient = new HttpClient())
             {
                 string url = "https://localhost:44388/api/ProductCatagory/Index";
                 Uri uri = new Uri(url);
-                Task<HttpResponseMessage> result=httpClient.GetAsync(uri);
+                Task<HttpResponseMessage> result = httpClient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
                 {
-                    Task<string> serilizedResult=result.Result.Content.ReadAsStringAsync();
+                    Task<string> serilizedResult = result.Result.Content.ReadAsStringAsync();
                     products = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<Products>>(serilizedResult.Result);
                 }
-               
+
             }
             return products;
 
@@ -56,12 +56,12 @@ namespace UILayer.Datas.Apiservices
                 }
                 return null;
             }
-            
+
         }
 
-        
 
-        public static bool Edit(Products product )
+
+        public static bool Edit(Products product)
         {
             using (HttpClient httpclient = new HttpClient())
             {
@@ -69,7 +69,7 @@ namespace UILayer.Datas.Apiservices
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 string url = "https://localhost:44388/api/ProductCatagory/ProductPut";
                 Uri uri = new Uri(url);
-                HttpResponseMessage response =  httpclient.PutAsync(uri, content).Result;
+                HttpResponseMessage response = httpclient.PutAsync(uri, content).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -106,116 +106,6 @@ namespace UILayer.Datas.Apiservices
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(id);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 string url = "https://localhost:44388/api/productcatagory/ProductDelete/" + id;
-                Uri uri = new Uri(url);
-                System.Threading.Tasks.Task<HttpResponseMessage> response = httpclient.DeleteAsync(uri);
-
-                if (response.Result.IsSuccessStatusCode)
-                {
-                    return true;
-                }
-                return false;
-            }
-        }
-
-
-
-
-        public static IEnumerable<Specification> Index()
-
-        {
-
-            IEnumerable<Specification> specification = new List<Specification>();
-
-            using (HttpClient httpClient = new HttpClient())
-            {
-                string url = "https://localhost:44364/api/SpecOperation/Index";
-                Uri uri = new Uri(url);
-                Task<HttpResponseMessage> result = httpClient.GetAsync(uri);
-                if (result.Result.IsSuccessStatusCode)
-                {
-                    Task<string> serilizedResult = result.Result.Content.ReadAsStringAsync();
-                    specification = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<Specification>>(serilizedResult.Result);
-                }
-
-            }
-            return specification;
-
-        }
-
-
-
-        public static Specification ById(int id)
-        {
-            Specification specification = new Specification();
-
-            using (HttpClient httpClient = new HttpClient())
-            {
-                string url = "https://localhost:44364/api/SpecOperation/Details/{id}" + id;
-                Uri uri = new Uri(url);
-                Task<HttpResponseMessage> result = httpClient.GetAsync(uri);
-                if (result.Result.IsSuccessStatusCode)
-                {
-                    Task<string> serilizedResult = result.Result.Content.ReadAsStringAsync();
-                    specification = Newtonsoft.Json.JsonConvert.DeserializeObject<Specification>(serilizedResult.Result);
-                    return specification;
-                }
-                return null;
-            }
-
-        }
-
-
-
-        public static bool Edit(Specification specification)
-        {
-            using (HttpClient httpclient = new HttpClient())
-            {
-                string data = Newtonsoft.Json.JsonConvert.SerializeObject(specification);
-                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44364/api/SpecOperation/SpecPut";
-                Uri uri = new Uri(url);
-                HttpResponseMessage response = httpclient.PutAsync(uri, content).Result;
-
-                if (response.IsSuccessStatusCode)
-                {
-                    return true;
-                }
-                return false;
-            }
-        }
-
-
-
-        public static bool Create(Specification specification)
-        {
-
-            using (HttpClient httpclient = new HttpClient())
-            {
-                string data = Newtonsoft.Json.JsonConvert.SerializeObject(specification);
-                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44364/api/SpecOperation/SpecPost";
-                Uri uri = new Uri(url);
-                System.Threading.Tasks.Task<HttpResponseMessage> response = httpclient.PostAsync(uri, content);
-
-                if (response.Result.IsSuccessStatusCode)
-                {
-                    return true;
-                }
-                return false;
-            }
-        }
-
-
-
-        public static bool SpeDelete(int id)
-        {
-
-
-            using (HttpClient httpclient = new HttpClient())
-            {
-                string data = Newtonsoft.Json.JsonConvert.SerializeObject(id);
-                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44364/api/SpecOperation/SpecDelete/" + id;
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> response = httpclient.DeleteAsync(uri);
 

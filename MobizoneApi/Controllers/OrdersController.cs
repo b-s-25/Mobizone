@@ -124,7 +124,7 @@ namespace MobizoneApi.Controllers
                 {
                     data.user = _userOperations.GetUser().Result.Where(x => x.registrationId.Equals(data.userId)).FirstOrDefault();
                     data.address = _addressOperations.GetAddress().Result.Where(x => x.id.Equals(data.addressId)).FirstOrDefault();
-                   data.product = _productCatagory.index().Where(x => x.id.Equals(data.productId)).FirstOrDefault();
+                   data.product = _productCatagory.index().Result.Where(x => x.id.Equals(data.productId)).FirstOrDefault();
                     checkouList.Add(data);
                 }
                 return checkouList;
@@ -142,7 +142,7 @@ namespace MobizoneApi.Controllers
             try
             {
                 userCheckOut.address = _addressOperations.GetAddressById(userCheckOut.addressId).Result;
-                userCheckOut.product = _productCatagory.index().Where(x => x.id.Equals(userCheckOut.productId)).FirstOrDefault();
+                userCheckOut.product = _productCatagory.index().Result.Where(x => x.id.Equals(userCheckOut.productId)).FirstOrDefault();
                 userCheckOut.user = _userOperations.GetUser().Result.Where(val => val.registrationId.Equals(userCheckOut.userId)).FirstOrDefault();
                 var data = _checkOutOperations.AddCheckOut(userCheckOut);
                 if (data != null)

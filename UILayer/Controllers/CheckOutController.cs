@@ -157,18 +157,6 @@ namespace UILayer.Controllers
             ViewData["UserAddress"] = user.address;
             return View();
         }
-       /* [Authorize(Roles = "User")]
-        [HttpGet]
-        public IActionResult MyOrders(int id)
-        {
-            var list = ProductApi.index();
-            ViewData["ProductList"] = list;
-            Registration user = new Registration();
-            user = _userApi.GetUserInfo().Where(val => val.email.Equals(User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value)).FirstOrDefault();
-            ViewData["UserData"] = user;
-            _masterApi.MasterDatas();
-            return View();
-        }*/
 
         [HttpPost]
         public IActionResult MyOrders(UserCheckOut checkOut)

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MobizoneApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +22,14 @@ namespace APILayer.Controllers
         private readonly ILogger<UserController> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        public UserController(IUserOperations userOperations, ILogger<UserController> logger, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        private readonly IPasswordEncryptDecrypt _passwordEncryptDecrypt;
+        public UserController(IUserOperations userOperations, ILogger<UserController> logger, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IPasswordEncryptDecrypt passwordEncryptDecrypt)
         {
             _logger = logger;
             _userOperations = userOperations;
             _userManager = userManager;
             _signInManager = signInManager;
+            _passwordEncryptDecrypt = passwordEncryptDecrypt;
         }
 
         [HttpPost("SignUp")]
@@ -148,7 +151,7 @@ namespace APILayer.Controllers
             try
             {
                 var data = _userOperations.GetUser().Result.Where(c => c.email.Equals(register.email)).FirstOrDefault();
-                data.password = register.password;
+                data.password = _passwordEncryptDecrypt.Encrypt("encrypt", register.password);
                 await _userOperations.Edit(data);
                 return Ok();
             }

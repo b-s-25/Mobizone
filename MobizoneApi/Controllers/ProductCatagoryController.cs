@@ -40,7 +40,7 @@ namespace APILayer.Controllers
             {
                 try
                 {
-                    var products = _catalog.index();
+                    var products = _catalog.index().Result;
                     return products;
                 }
                 catch (Exception ex)
@@ -126,7 +126,7 @@ namespace APILayer.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError("Error message");
+                _logger.LogError("Error message",ex);
                 return null;
             }
         }
