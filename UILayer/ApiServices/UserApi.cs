@@ -50,7 +50,7 @@ namespace UILayer.Datas.Apiservices
                 return false;
             }
         }
-        //getuser data
+
         public IEnumerable<Registration> GetUserInfo()
         {
 

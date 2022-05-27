@@ -40,9 +40,9 @@ namespace BusinesLogic
             return _repo.Details(id);
         }
 
-        public IEnumerable<Products> index()
+        public async  Task<IEnumerable<Products>> index()
         {
-            return _repo.Index();
+            return await _repo.GetAll(n1=> n1.specification);
         }
 
         public void Save()

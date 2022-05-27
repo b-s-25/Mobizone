@@ -70,7 +70,7 @@ namespace RepositoryLayer
             _Context.SaveChanges();
         }
 
-        /*public async Task<IQueryable<T>> GetAll(params Expression<Func<T, object>>[] includes)
+        public async Task<IQueryable<T>> GetAll(params Expression<Func<T, object>>[] includes)
         {
             try
             {
@@ -98,7 +98,7 @@ namespace RepositoryLayer
                 return null;
             }
 
-        }*/
+        }
     }
 
 

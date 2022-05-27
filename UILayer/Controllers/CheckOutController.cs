@@ -100,6 +100,13 @@ namespace UILayer.Controllers
             }
         }
 
+        [Authorize]
+        [HttpGet("/checkout/address")]
+        public IActionResult Address()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult AddAddress(Address userAddress)
         {
@@ -108,9 +115,9 @@ namespace UILayer.Controllers
                 var data = _addressApi.AddAddress(userAddress);
                 if (data)
                 {
-                    return View();
+                    return View("checkout");
                 }
-                return View("Index");
+                return RedirectToAction("/Index");
             }
             catch (Exception ex)
             {
@@ -136,23 +143,18 @@ namespace UILayer.Controllers
             }
         }
 
-        [HttpGet]
-        public IActionResult CheckOut()
+        [HttpPost]
+        public IActionResult OrderConfirmed()
         {
             return View("OrderPlaced");
         }
-
-        //[Authorize(Roles = "User")]
         [HttpGet]
-        public IActionResult MyOrders(int id)
+        public IActionResult BuyNow(int id)
         {
-            //var data = _ordersApi.(id);
-            //var data = _productApi.GetProductList(id).Result;
-            //ViewData["ProductDetails"] = data;
-            Registration user = new Registration();
-            user = _userApi.GetUserInfo().Where(val => val.email.Equals(User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value)).FirstOrDefault();
-            ViewData["UserData"] = user;
-            _masterApi.MasterDatas();
+            var addresses = _addressApi.GetAddress();
+            string email = User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value;
+            var user = _userApi.GetUserInfo().Where(x => x.email.Equals(User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value)).FirstOrDefault();
+            ViewData["UserAddress"] = user.address;
             return View();
         }
 
@@ -167,26 +169,26 @@ namespace UILayer.Controllers
             }
             else
             {
-               // var data = _opApi.GetProduct(checkOut.productId).Result;
-                /*data.quantity = data.quantity - checkOut.quantity;
+                var data = ProductApi.GetById(checkOut.productId);
+                data.quantity = data.quantity - checkOut.quantity;
                 if (data.quantity == 0)
                 {
-                    data.status = ProductStatus.disable;
-                }*/
-               /* var mappedData = (Product)_mapper.Map<ProductViewModel>(data);
-                _opApi.EditProduct(mappedData);*/
+                    data.productStatus= Status.disable;
+                }
+                //data.
+                //ProductApi.Edit(checkOut);
                 Random random = new Random();
                 checkOut.orderId = random.Next();
                 checkOut.status = OrderStatus.orderPlaced;
-                //checkOut.price = checkOut.quantity * data.price;
+                checkOut.price = checkOut.quantity * data.productPrice;
                 bool result = _ordersApi.AddCheckOutList(checkOut);
                 ViewBag.orderId = checkOut.orderId;
-                _notyf.Success("Succesfully Ordered");
+                _notyf.Success("Successfully Ordered");
                  _masterApi.MasterDatas();
                 return View("OrderPlaced");
             }
-
         }
+
         [Authorize(Roles = "User")]
         public IActionResult Orderplaced()
         {

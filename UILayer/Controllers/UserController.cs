@@ -74,6 +74,7 @@ namespace UILayer.Controllers
                     var claims = new List<Claim>();
 
                     claims.Add(new Claim("password", loginView.password));
+                    claims.Add(new Claim("email", loginView.username));
                     claims.Add(new Claim(ClaimTypes.NameIdentifier, loginView.username));
                     claims.Add(new Claim(ClaimTypes.Name, loginView.username));
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -93,6 +94,7 @@ namespace UILayer.Controllers
 
                 claims.Add(new Claim("password", loginView.password));
                 claims.Add(new Claim(ClaimTypes.NameIdentifier, loginView.username));
+                claims.Add(new Claim("email", loginView.username));
                 claims.Add(new Claim(ClaimTypes.Name, _registration.firstName +" " + _registration.lastName));
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);

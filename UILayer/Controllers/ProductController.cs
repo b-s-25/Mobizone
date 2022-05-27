@@ -33,6 +33,7 @@ namespace UILayer.Controllers
 
 
         public IActionResult Index()
+        
         {
             IEnumerable<Products> products = ProductApi.index();
             return View(products);
@@ -78,7 +79,7 @@ namespace UILayer.Controllers
         }
         [HttpPost]
         public ActionResult Create(ProductView product)
-        {
+      {
             if (product.id == 0)
             {
                 string stringFileName = UploadFile(product);

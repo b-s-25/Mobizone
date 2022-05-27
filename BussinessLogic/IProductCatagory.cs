@@ -9,7 +9,7 @@ namespace BusinesLogic.Interface
 {
     public interface IProductCatagory
     {
-        IEnumerable<Products> index();
+        Task<IEnumerable<Products>> index();
         void Create(Products entity);
         void Update(Products entity);
         void Delete(Products entity);

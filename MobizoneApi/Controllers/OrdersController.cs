@@ -1,4 +1,5 @@
 ﻿using APILayer.Controllers;
+using BusinesLogic;
 using BusinesLogic.Interface;
 using BussinessLogic;
 using BussinessLogic.Orders;
@@ -20,12 +21,14 @@ namespace MobizoneApi.Controllers
         private readonly IAddressOperations _addressOperations;
         private readonly ICheckOutOperations _checkOutOperations;
         private readonly IUserOperations _userOperations;
+        private readonly IProductCatagory _productCatagory;
         private readonly ILogger<UserController> _logger;
-        public OrdersController(IAddressOperations addressOperations, ICheckOutOperations checkOutOperations, IUserOperations userOperations, ILogger<UserController> logger)
+        public OrdersController(IAddressOperations addressOperations, ICheckOutOperations checkOutOperations, IUserOperations userOperations, IProductCatagory productCatagory, ILogger<UserController> logger)
         {
             _addressOperations = addressOperations;
             _checkOutOperations = checkOutOperations;
             _userOperations = userOperations;
+            _productCatagory = productCatagory;
             _logger = logger;
         }
 
@@ -62,8 +65,8 @@ namespace MobizoneApi.Controllers
             }
         }
 
-        [HttpGet("UpdateUserAddress/{id}")]
-        public async Task<Address> UpdateUserAddress(int id)
+        [HttpGet("UserAddressById/{id}")]
+        public async Task<Address> UserAddressById(int id)
         {
             try
             {
@@ -121,7 +124,7 @@ namespace MobizoneApi.Controllers
                 {
                     data.user = _userOperations.GetUser().Result.Where(x => x.registrationId.Equals(data.userId)).FirstOrDefault();
                     data.address = _addressOperations.GetAddress().Result.Where(x => x.id.Equals(data.addressId)).FirstOrDefault();
-                  //  data.product = _productOperations.GetProduct().Result.Where(x => x.id.Equals(data.productId)).FirstOrDefault();
+                   data.product = _productCatagory.index().Result.Where(x => x.id.Equals(data.productId)).FirstOrDefault();
                     checkouList.Add(data);
                 }
                 return checkouList;
@@ -139,7 +142,7 @@ namespace MobizoneApi.Controllers
             try
             {
                 userCheckOut.address = _addressOperations.GetAddressById(userCheckOut.addressId).Result;
-               // userCheckOut.product = _productOperations.GetProduct().Result.Where(x => x.id.Equals(userCheckOut.productId)).FirstOrDefault();
+                userCheckOut.product = _productCatagory.index().Result.Where(x => x.id.Equals(userCheckOut.productId)).FirstOrDefault();
                 userCheckOut.user = _userOperations.GetUser().Result.Where(val => val.registrationId.Equals(userCheckOut.userId)).FirstOrDefault();
                 var data = _checkOutOperations.AddCheckOut(userCheckOut);
                 if (data != null)
@@ -155,13 +158,27 @@ namespace MobizoneApi.Controllers
             }
         }
 
-        [HttpPut("UpdateUserCheckOutList")]
-        public IActionResult UpdateUserCheckOutList(UserCheckOut userCheckOut)
+        [HttpPut("UpdateUserCheckOut")]
+        public IActionResult UpdateUserCheckOut(UserCheckOut userCheckOut)
         {
             try
             {
                     _checkOutOperations.UpdateCheckOut(userCheckOut);
                     return StatusCode(StatusCodes.Status200OK);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error", ex);
+                return null;
+            }
+        }
+
+        [HttpGet("CheckOutById/{id}")]
+        public async Task<UserCheckOut> CheckOutById(int id)
+        {
+            try
+            {
+                return await _checkOutOperations.GetCheckOutById(id);
             }
             catch (Exception ex)
             {

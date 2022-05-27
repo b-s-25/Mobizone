@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository;
 
 namespace Repository.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    partial class ProductDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220527120739_sec")]
+    partial class sec
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -608,9 +610,6 @@ namespace Repository.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("addressid")
-                        .HasColumnType("int");
-
                     b.Property<int>("orderId")
                         .HasColumnType("int");
 
@@ -633,8 +632,6 @@ namespace Repository.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("id");
-
-                    b.HasIndex("addressid");
 
                     b.HasIndex("productId");
 
@@ -880,12 +877,6 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("DomainLayer.UserOrders", b =>
                 {
-                    b.HasOne("DomainLayer.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("addressid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DomainLayer.Products", "product")
                         .WithMany()
                         .HasForeignKey("productId")
@@ -897,8 +888,6 @@ namespace Repository.Migrations
                         .HasForeignKey("registrationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Address");
 
                     b.Navigation("product");
 

@@ -13,11 +13,11 @@ namespace DomainLayer
     {
         [Key]
         public int id { get; set; }
+
         [ForeignKey("specificationId")]
         public int specificationId { get; set; }
-        /* [Display(Name = "Type")]
-         [Required(ErrorMessage = "*This field is Required")]
-         public string productType { get; set; }*/
+        public Specification specification { get; set; }
+
         [Display(Name = "Name ")]
         [Required(ErrorMessage = "*This field is Required")]
         public string productName { get; set; }
@@ -48,8 +48,5 @@ namespace DomainLayer
         [Display(Name = "Deleted By")]
         public string deletedBy { get; set; }
 
-
-
-        public ICollection<Specification> Specifications { get; set; }
     }
 }
