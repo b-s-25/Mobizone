@@ -45,7 +45,7 @@ namespace BusinesLogic
                 register.lastName = register.lastName;
                 register.email = register.email;
                 register.password = _passwordEncryptDecrypt.Encrypt("encrypt", register.password);
-                register.isActive = register.isActive;
+                register.isActive = true;
                 register.createdOn = DateTime.UtcNow;
                 register.createdBy = register.firstName + " " + register.lastName;
                 register.modifiedOn = DateTime.UtcNow;
@@ -102,7 +102,7 @@ namespace BusinesLogic
 
         public async Task<IEnumerable<Registration>> GetUser()
         {
-            var users = _repositoryOperation.GetAll();
+            var users = await _repositoryOperation.GetAll(c=> c.address);
             return users;
         }
 

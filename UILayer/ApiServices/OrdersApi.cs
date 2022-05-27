@@ -37,13 +37,31 @@ namespace UILayer.ApiServices
             }
         }
 
+        public bool CheckOutListById(int id)
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                string url = _url + "/api/Orders/CheckOutById/"+id;
+                Uri uri = new Uri(url);
+                Task<HttpResponseMessage> result = httpClient.GetAsync(uri);
+                if (result.Result.IsSuccessStatusCode)
+                {
+                    Task<string> serilizedResult = result.Result.Content.ReadAsStringAsync();
+                    var list= Newtonsoft.Json.JsonConvert.DeserializeObject<UserCheckOut>(serilizedResult.Result);
+                    return true;
+                }
+                return false;
+            }
+
+        }
+
         public bool EditCheckOutList(UserCheckOut userCheckOut)
         {
             using (HttpClient httpclient = new HttpClient())
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(userCheckOut);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = _url + "/api/Orders/UpdateUserCheckOutList";
+                string url = _url + "/api/Orders/UpdateUserCheckOut";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PutAsync(uri, content);
                 if (result.Result.IsSuccessStatusCode)

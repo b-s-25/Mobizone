@@ -32,6 +32,8 @@ namespace DomainLayer
         [Required(ErrorMessage = "*This field is Required")]
         public string description { get; set; }
         [Display(Name = "IsActive")]
+        public int quantity { get; set; }
+        public Status productStatus { get; set; }
         public bool isActive { get; set; }
         [Display(Name = "Modified By")]
         public string modifiedBy { get; set; }

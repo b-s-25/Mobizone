@@ -16,8 +16,8 @@ namespace RepositoryLayer.Interface
         void Delete(T entity);
         T GetById(int Id);
         void Save();
-        /*Task<IQueryable<T>> GetAll(params Expression<Func<T, object>>[] includes);
-        Task<T> GetById(int id, params Expression<Func<T, object>>[] includes);*/
+        Task<IQueryable<T>> GetAll(params Expression<Func<T, object>>[] includes);
+        Task<T> GetById(int id, params Expression<Func<T, object>>[] includes);
 
     }
 }

@@ -1,15 +1,22 @@
 ﻿using DomainLayer;
+using Microsoft.Extensions.Configuration;
 using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace UILayer.Datas.Apiservices
 {
-    public class PoductApi
+    public class ProductApi
     {
+        IConfiguration _configuration;
+        public ProductApi()
+        {
+           
+        }
         public static IEnumerable<Products> index()
         
         {

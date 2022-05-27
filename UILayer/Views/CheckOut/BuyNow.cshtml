@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Checkout";
+    var userAddress = ViewData["UserAddress"] as DomainLayer.Registration;
+}
+<div class="card">
+    <div class="address"><p class="card-title">Delivery Address</p></div>
+    @if (userAddress.address == null)
+    {
+        <p> Please add address</p>
+    }
+    else
+    {
+        @foreach (var address in userAddress.address)
+        {
+<div id="address">
+    <div class="address">
+        <input class="form-check-input" type="checkbox" value="@address.id" />
+        <label class="form-check-label">@address.name <br />@address.address><br />@address.district</label>
+    </div>
+    <div class="card" style="padding: 37px;">
+        <div class="" style="padding: 2px; margin-left: -37px;">
+            <div class="address"><p class="card-title">Delivery Address</p></div>
+            <div class="row">
+                <div class="col"><a href="/checkout/address" class="btn btn-primary">Add New Address</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+        }
+    }
+</div>
+
