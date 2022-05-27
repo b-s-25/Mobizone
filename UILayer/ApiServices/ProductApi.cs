@@ -11,22 +11,22 @@ namespace UILayer.Datas.Apiservices
     public class ProductApi
     {
         public static IEnumerable<Products> index()
-        
+
         {
-            
+
             IEnumerable<Products> products = new List<Products>();
-            
-            using(HttpClient httpClient = new HttpClient())
+
+            using (HttpClient httpClient = new HttpClient())
             {
                 string url = "https://localhost:44388/api/ProductCatagory/Index";
                 Uri uri = new Uri(url);
-                Task<HttpResponseMessage> result=httpClient.GetAsync(uri);
+                Task<HttpResponseMessage> result = httpClient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
                 {
-                    Task<string> serilizedResult=result.Result.Content.ReadAsStringAsync();
+                    Task<string> serilizedResult = result.Result.Content.ReadAsStringAsync();
                     products = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<Products>>(serilizedResult.Result);
                 }
-               
+
             }
             return products;
 
@@ -49,12 +49,12 @@ namespace UILayer.Datas.Apiservices
                 }
                 return null;
             }
-            
+
         }
 
-        
 
-        public static bool Edit(Products product )
+
+        public static bool Edit(Products product)
         {
             using (HttpClient httpclient = new HttpClient())
             {
@@ -62,7 +62,7 @@ namespace UILayer.Datas.Apiservices
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 string url = "https://localhost:44388/api/ProductCatagory/ProductPut";
                 Uri uri = new Uri(url);
-                HttpResponseMessage response =  httpclient.PutAsync(uri, content).Result;
+                HttpResponseMessage response = httpclient.PutAsync(uri, content).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -92,8 +92,6 @@ namespace UILayer.Datas.Apiservices
 
         public static bool Delete(int id)
         {
-
-
             using (HttpClient httpclient = new HttpClient())
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(id);
@@ -109,10 +107,6 @@ namespace UILayer.Datas.Apiservices
                 return false;
             }
         }
-
-
-
-
         public static IEnumerable<Specification> Index()
 
         {
@@ -132,11 +126,7 @@ namespace UILayer.Datas.Apiservices
 
             }
             return specification;
-
         }
-
-
-
         public static Specification ById(int id)
         {
             Specification specification = new Specification();
@@ -167,7 +157,7 @@ namespace UILayer.Datas.Apiservices
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 string url = "https://localhost:44364/api/SpecOperation/SpecPut";
                 Uri uri = new Uri(url);
-                HttpResponseMessage response = httpclient.PutAsync(uri, content).Result;
+                HttpResponseMessage response = httpclient.PutAsync(uri,content).Result;
 
                 if (response.IsSuccessStatusCode)
                 {

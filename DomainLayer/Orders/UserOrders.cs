@@ -19,6 +19,9 @@ namespace DomainLayer
         [ForeignKey("Registration")]
         public int registrationId { get; set; }
         public Registration users { get; set; }
+        [ForeignKey("Address")]
+        public int addressid { get; set; }
+        public Address Address { get; set; }
         public int status { get; set; }
         public int paymentId { get; set; }
         public int price { get; set; }

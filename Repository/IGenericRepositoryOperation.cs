@@ -11,6 +11,7 @@ namespace RepositoryLayer.Interface
     public interface IGenericRepositoryOperation<T>
     {
         IEnumerable<T> GetAll();
+        Task<IQueryable<T>> GetAll(params Expression<Func<T, object>>[] includes);
         void Add(T entity);
         void Update(T entity);
         void Delete(T entity);

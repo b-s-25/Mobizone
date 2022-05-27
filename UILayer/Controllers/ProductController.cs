@@ -17,6 +17,7 @@ namespace UILayer.Controllers
 {
     public class ProductController : Controller
     {
+       
         Products Data = null;
         ProductView Storage = null;
         /*Specification Spec = null;*/
@@ -24,6 +25,7 @@ namespace UILayer.Controllers
 
         public ProductController(IWebHostEnvironment hostEnvironment)
         {
+         
             Data = new Products();
 
             _webHostEnvironment = hostEnvironment;
@@ -94,8 +96,10 @@ namespace UILayer.Controllers
                 if (result)
                 {
                     return RedirectToAction("Index");
+                   
+                   
                 }
-                return Content("Failed");
+              return Content("Failed");
             }
             else
             {

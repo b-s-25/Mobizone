@@ -29,7 +29,19 @@ namespace RepositoryLayer
         {
             return _dbset.ToList();
         }
+        public async Task<IQueryable<T>> GetAll(params Expression<Func<T, object>>[] includes)
+        {
+            try
+            {
+                IQueryable<T> result = _dbset;
+                query = includes.Aggregate(result, (current, includeProperty) => current.Include(includeProperty));
+            }
+            catch (SqlException ex)
+            {
 
+            }
+            return query;
+        }
         public void Add(T entity)
         {
             _dbset.Add(entity);

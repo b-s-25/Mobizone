@@ -69,7 +69,7 @@ namespace APILayer.Controllers
 
 
             [HttpPost("ProductPost")]
-            public async Task<IActionResult> ProductPost([FromBody] Products product)
+            public async Task<IActionResult> ProductPost(Products product)
             {
                 try
                 {
