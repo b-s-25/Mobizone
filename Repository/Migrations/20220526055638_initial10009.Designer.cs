@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository;
 
 namespace Repository.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    partial class ProductDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220526055638_initial10009")]
+    partial class initial10009
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -659,8 +661,6 @@ namespace Repository.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("productId");
-
                     b.HasIndex("registrationId");
 
                     b.ToTable("UserOrders");
@@ -937,19 +937,11 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("DomainLayer.UserOrders", b =>
                 {
-                    b.HasOne("DomainLayer.Products", "product")
-                        .WithMany()
-                        .HasForeignKey("productId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DomainLayer.Registration", "users")
                         .WithMany()
                         .HasForeignKey("registrationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("product");
 
                     b.Navigation("users");
                 });

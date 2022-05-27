@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Repository;
 using RepositoryLayer;
+using RepositoryLayer.Interface;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,16 +26,15 @@ namespace APILayer.Controllers
             private readonly ILogger<ProductCatagoryController> _logger;
             ProductDbContext _context;
             IProductCatagory _catalog;
-            /*ISpecOperation _spec;*/
+            ISpecOperation _spec;
 
-
-            public ProductCatagoryController(ProductDbContext context/*,ISpecOperation specification*/, ILogger<ProductCatagoryController> logger)
+        public ProductCatagoryController(ProductDbContext context, ILogger<ProductCatagoryController> logger, ISpecOperation specification)
             {
                 _logger = logger;
                 _context = context;
                 _catalog = new ProductCatagory(_context);
-                /*_spec = specification;*/
-            }
+                _spec = specification;
+        }
             [HttpGet("Index")]
             public IEnumerable<Products> Index()
             {
@@ -46,7 +46,7 @@ namespace APILayer.Controllers
                 catch (Exception ex)
                 {
                     _logger.LogError("Error message");
-                return null;
+                    return null;
                 }
             }
 
@@ -58,7 +58,7 @@ namespace APILayer.Controllers
                 try
                 {
                     var data = _catalog.Details(id);
-                return Ok(data);
+                    return Ok(data);
                 }
                 catch(Exception ex)
                 {
@@ -73,7 +73,7 @@ namespace APILayer.Controllers
             {
                 try
                 {
-                _catalog.Create(product);
+                    _catalog.Create(product);
                     return Ok("success");
                 }
                 catch (Exception ex)
@@ -87,7 +87,7 @@ namespace APILayer.Controllers
             {
                 try
                 {
-                _catalog.Update(product);
+                    _catalog.Update(product);
                     return StatusCode(StatusCodes.Status200OK);
 
                 }
@@ -116,7 +116,7 @@ namespace APILayer.Controllers
             }
 
 
-       /* [HttpGet("Get")]
+        [HttpGet("Get")]
         public IEnumerable<Specification> Get()
         {
             try
@@ -195,6 +195,6 @@ namespace APILayer.Controllers
                 _logger.LogError("Error In Put", ex);
                 return StatusCode(StatusCodes.Status400BadRequest);
             }
-        }*/
+        }
     }
 }

@@ -120,7 +120,7 @@ namespace UILayer.Datas.Apiservices
 
 
 
-       /* public static IEnumerable<Specification> Index()
+        public static IEnumerable<Specification> Index()
 
         {
 
@@ -225,6 +225,6 @@ namespace UILayer.Datas.Apiservices
                 }
                 return false;
             }
-        }*/
+        }
     }
 }

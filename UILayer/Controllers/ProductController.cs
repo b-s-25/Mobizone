@@ -54,6 +54,7 @@ namespace UILayer.Controllers
             Storage.productName = product.productName;
             Storage.productPrice = product.productPrice;
             Storage.productModel = product.productModel;
+            Storage.quantity = product.quantity;
             Storage.description = product.description;
             return View("Create", Storage);
         }
@@ -86,6 +87,7 @@ namespace UILayer.Controllers
                     productPrice = product.productPrice,
                     productModel = product.productModel,
                     image = stringFileName,
+                    quantity = product.quantity,
                     description = product.description
                 };
 
@@ -106,6 +108,7 @@ namespace UILayer.Controllers
                     productPrice = product.productPrice,
                     productModel = product.productModel,
                     image = stringFileName,
+                    quantity = product.quantity,
                     description = product.description
                 };
                 bool result = ProductApi.Edit(Product);
