@@ -12,12 +12,7 @@ namespace UILayer.Datas.Apiservices
 {
     public class ProductApi
     {
-<<<<<<< HEAD
-        public static IEnumerable<Products> index()
 
-        {
-
-=======
         IConfiguration _configuration;
         public ProductApi()
         {
@@ -27,7 +22,6 @@ namespace UILayer.Datas.Apiservices
 
         {
 
->>>>>>> 31bbee6b1644d98b02bd9fabfef0eed4e4e6bcc8
             IEnumerable<Products> products = new List<Products>();
 
             using (HttpClient httpClient = new HttpClient())
@@ -121,7 +115,7 @@ namespace UILayer.Datas.Apiservices
                 return false;
             }
         }
-<<<<<<< HEAD
+
         public static IEnumerable<Specification> Index()
 
         {
@@ -224,7 +218,6 @@ namespace UILayer.Datas.Apiservices
                 return false;
             }
         }
-=======
->>>>>>> 31bbee6b1644d98b02bd9fabfef0eed4e4e6bcc8
+
     }
 }

@@ -41,7 +41,7 @@ namespace MobizoneApi.Controllers
             try
             {
                 userOrders.Address = _addressOperations.GetAddress().Result.Where(x => x.id.Equals(userOrders.addressid)).FirstOrDefault();
-                userOrders.product = _productCatagory.index().Where(x => x.id.Equals(userOrders.productId)).FirstOrDefault();
+                userOrders.product = _productCatagory.index().Result.Where(x => x.id.Equals(userOrders.productId)).FirstOrDefault();
                 userOrders.users = _userOperations.GetUser().Result.Where(x => x.registrationId.Equals(userOrders.registrationId)).FirstOrDefault();
                 _orderdetailsoperations.Add(userOrders);
                 string message = "added" + ", Response Message : " + new HttpResponseMessage(System.Net.HttpStatusCode.OK);

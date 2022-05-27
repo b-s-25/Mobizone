@@ -70,19 +70,7 @@ namespace RepositoryLayer
             _Context.SaveChanges();
         }
 
-        public async Task<IQueryable<T>> GetAll(params Expression<Func<T, object>>[] includes)
-        {
-            try
-            {
-                IQueryable<T> result = _dbset;
-                query = includes.Aggregate(result, (current, includeProperty) => current.Include(includeProperty));
-            }
-            catch (SqlException)
-            {
-                return null;
-            }
-            return query;
-        }
+       
 
         public async Task<T> GetById(int id, params Expression<Func<T, object>>[] includes)
         {

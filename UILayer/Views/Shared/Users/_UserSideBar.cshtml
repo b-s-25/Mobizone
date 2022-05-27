@@ -8,26 +8,26 @@
         <div class="text">
             Account
         </div>
-        <ul>
-            <li>
+        <ul class="unorder">
+            <li class="list">
                 <a href="#" class="feat-btns">
                     Filter By Brand
                     <span class="fas fa-caret-down first"></span>
                 </a>
                 <ul class="feat-show">
-                    <li><a href="#">Oppo</a></li>
-                    <li><a href="#">Samsung</a></li>
-                    <li><a href="#">One Plus</a></li>
+                    <li class="list"><a href="#">Oppo</a></li>
+                    <li class="list"><a href="#">Samsung</a></li>
+                    <li class="list"><a href="#">One Plus</a></li>
                 </ul>
             </li>
-            <li>
+            <li class="list">
                 <a href="#" class="serv-btns">
                     Sort By Price
                     <span class="fas fa-caret-down second"></span>
                 </a>
                 <ul class="serv-show">
-                    <li><a href="#">High to Low</a></li>
-                    <li><a href="#">Low to High</a></li>
+                    <li class="list"><a href="#">High to Low</a></li>
+                    <li class="list"><a href="#">Low to High</a></li>
                 </ul>
             </li>
         </ul>
@@ -112,14 +112,14 @@
             letter-spacing: 1px;
         }
 
-    nav ul {
-        background: #1b1b1b;
-        height: 100%;
-        width: 100%;
-        list-style: none;
-    }
+        .sidebar .unorder {
+            background: #1b1b1b;
+            height: 100%;
+            width: 100%;
+            list-style: none;
+        }
 
-        nav ul li {
+        .sidebar .unorder .list {
             line-height: 60px;
             border-top: 1px solid rgba(255,255,255,0.1);
         }
