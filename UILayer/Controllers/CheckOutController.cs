@@ -149,12 +149,12 @@ namespace UILayer.Controllers
             return View("OrderPlaced");
         }
         [HttpGet]
-        public IActionResult BuyNow()
+        public IActionResult BuyNow(int id)
         {
-
             var addresses = _addressApi.GetAddress();
+            string email = User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value;
             var user = _userApi.GetUserInfo().Where(x => x.email.Equals(User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value)).FirstOrDefault();
-            ViewData["UserAddress"] = user.address.FirstOrDefault();
+            ViewData["UserAddress"] = user.address;
             return View();
         }
        /* [Authorize(Roles = "User")]

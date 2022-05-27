@@ -31,6 +31,7 @@ namespace UILayer.Controllers
 
 
         public IActionResult Index()
+        
         {
             IEnumerable<Products> products = ProductApi.index();
             return View(products);
