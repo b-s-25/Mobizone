@@ -21,12 +21,14 @@ namespace UILayer.Controllers
         private readonly AddressApi _addressApi;
         private readonly INotyfService _notyf;
         private readonly Masterdataapi _masterApi;
+        private readonly ProductApi _productApi;
 
         public CheckOutController(INotyfService notyf,IConfiguration configuration)
         {
             _configuration = configuration;
             _ordersApi = new OrdersApi(_configuration);
             _userApi = new UserApi(_configuration);
+            _productApi = new ProductApi(_configuration);
             _addressApi = new AddressApi(_configuration);
             _notyf = notyf;
             _masterApi = new Masterdataapi(_configuration);
@@ -169,7 +171,7 @@ namespace UILayer.Controllers
             }
             else
             {
-                var data = ProductApi.GetById(checkOut.productId);
+                var data = _productApi.GetById(checkOut.productId);
                 data.quantity = data.quantity - checkOut.quantity;
                 if (data.quantity == 0)
                 {

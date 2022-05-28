@@ -67,7 +67,15 @@ namespace RepositoryLayer
 
         public void Save()
         {
-            _Context.SaveChanges();
+            try
+            {
+                _Context.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+
+            }
+            
         }
 
        

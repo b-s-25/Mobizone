@@ -1,4 +1,4 @@
-﻿using DomainLayer;
+﻿using DomainLayer.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +9,11 @@ namespace BusinesLogic.Interface
 {
     public interface IProductCatagory
     {
-        Task<IEnumerable<Products>> index();
-        void Create(Products entity);
-        void Update(Products entity);
-        void Delete(Products entity);
-        Products Details(int id);
+        Task<IEnumerable<ProductsModel>> GetProducts();
+        void Create(ProductsModel entity);
+        void Update(ProductsModel entity);
+        void Delete(ProductsModel entity);
+        ProductsModel Details(int id);
         void Save();
     }
 }
