@@ -1,5 +1,5 @@
 ﻿using BusinesLogic.Interface;
-using DomainLayer;
+using DomainLayer.Product;
 using Repository;
 using RepositoryLayer;
 using RepositoryLayer.Interface;
@@ -15,32 +15,31 @@ namespace BusinesLogic
     {
 
         ProductDbContext _Context;
-        IRepositryOperation<Products> _repo;
-        public ProductCatagory(ProductDbContext Context)
+        IGenericRepositoryOperation<ProductsModel> _repo;
+        public ProductCatagory(IGenericRepositoryOperation<ProductsModel> repo)
         {
-            _Context = Context;
-            _repo = new RepositryOperation<Products>(_Context);
+            _repo = repo;
         }
 
-        public void Create(Products entity)
+        public void Create(ProductsModel entity)
         {
-            _repo.Create(entity);
+            _repo.Add(entity);
             _repo.Save();
         }
 
 
-        public void Delete(Products entity)
+        public void Delete(ProductsModel entity)
         {
             _repo.Delete(entity);
             _repo.Save();
         }
 
-        public Products Details(int id)
+        public ProductsModel Details(int id)
         {
-            return _repo.Details(id);
+            return _repo.GetById(id);
         }
 
-        public async  Task<IEnumerable<Products>> index()
+        public async  Task<IEnumerable<ProductsModel>> GetProducts()
         {
             return await _repo.GetAll(n1=> n1.specification);
         }
@@ -50,7 +49,7 @@ namespace BusinesLogic
             _repo.Save();
         }
 
-        public void Update(Products entity)
+        public void Update(ProductsModel entity)
         {
             _repo.Update(entity);
             _repo.Save();

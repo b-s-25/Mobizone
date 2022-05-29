@@ -28,11 +28,7 @@
                 <input type="hidden" asp-for="id" />
 
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                @* <div class="form-group">
-            <label asp-for="productType" class="control-label"></label>
-            <input asp-for="productType" class="form-control" />
-            <span asp-validation-for="productType" class="text-danger"></span>
-        </div>*@
+
                 <div class="form-group">
                     <label asp-for="productName" class="control-label"></label>
                     <input asp-for="productName" class="form-control" />
@@ -63,6 +59,31 @@
                     <div class="col-md-10">
                         <a><input type="file" id="image" asp-for="image" accept=".png ,.jpg" /></a>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="specification.productBrand" class="control-label"></label>
+                    <input asp-for="specification.productBrand" class="form-control" />
+                    <span asp-validation-for="specification.productBrand" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="specification.productColor" class="control-label"></label>
+                    <input asp-for="specification.productColor" class="form-control" />
+                    <span asp-validation-for="specification.productColor" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="specification.productRam" class="control-label"></label>
+                    <input asp-for="specification.productRam" class="form-control" />
+                    <span asp-validation-for="specification.productRam" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="specification.productSim" class="control-label"></label>
+                    <input asp-for="specification.productSim" class="form-control" />
+                    <span asp-validation-for="specification.productSim" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="specification.productStorage" class="control-label"></label>
+                    <input asp-for="specification.productStorage" class="form-control" />
+                    <span asp-validation-for="specification.productStorage" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" /><br />

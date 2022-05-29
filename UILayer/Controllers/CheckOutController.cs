@@ -21,12 +21,14 @@ namespace UILayer.Controllers
         private readonly AddressApi _addressApi;
         private readonly INotyfService _notyf;
         private readonly Masterdataapi _masterApi;
+        private readonly ProductApi _productApi;
 
         public CheckOutController(INotyfService notyf,IConfiguration configuration)
         {
             _configuration = configuration;
             _ordersApi = new OrdersApi(_configuration);
             _userApi = new UserApi(_configuration);
+            _productApi = new ProductApi(_configuration);
             _addressApi = new AddressApi(_configuration);
             _notyf = notyf;
             _masterApi = new Masterdataapi(_configuration);
@@ -155,6 +157,7 @@ namespace UILayer.Controllers
             string email = User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value;
             var user = _userApi.GetUserInfo().Where(x => x.email.Equals(User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value)).FirstOrDefault();
             ViewData["UserAddress"] = user.address;
+            ViewData["Products"] = _productApi.GetProduct().Where(x=>x.id.Equals(id)).FirstOrDefault();
             return View();
         }
 
@@ -169,7 +172,7 @@ namespace UILayer.Controllers
             }
             else
             {
-                var data = ProductApi.GetById(checkOut.productId);
+                var data = _productApi.GetById(checkOut.productId);
                 data.quantity = data.quantity - checkOut.quantity;
                 if (data.quantity == 0)
                 {
