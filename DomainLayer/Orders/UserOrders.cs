@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomainLayer.Product;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace DomainLayer
 
         [ForeignKey("Products")]
         public int productId { get; set; }
-        public Products product { get; set; }
+        public ProductsModel product { get; set; }
 
         [ForeignKey("Registration")]
         public int registrationId { get; set; }

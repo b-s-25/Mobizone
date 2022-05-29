@@ -20,7 +20,6 @@ namespace Repository
         public DbSet<ApplicationUser> applicationUsers { get; set; }
         public DbSet<Login> Login { get; set; }
         public DbSet<MasterData> MasterDatas { get; set; }
-        public DbSet<Products> Products { get; set; }
         public DbSet<ProductsModel> ProductsModel { get; set; }
         public DbSet<UserOrders> UserOrders { get; set; }
         public DbSet<UserCheckOut> UserCheckOut { get; set; }

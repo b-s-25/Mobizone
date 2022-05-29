@@ -45,7 +45,6 @@ namespace RepositoryLayer
         public void Add(T entity)
         {
             _dbset.Add(entity);
-            _Context.SaveChanges();
         }
 
         public void Update(T entity)

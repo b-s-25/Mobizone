@@ -39,7 +39,13 @@ namespace UILayer.Controllers
             return View(products);
         }
 
+        [HttpGet]
+        public IActionResult GetList()
 
+        {
+            var products = _productApi.GetProduct();
+            return new JsonResult(products);
+        }
 
         public IActionResult Details(int id)
         {
@@ -90,15 +96,14 @@ namespace UILayer.Controllers
                     productModel = product.productModel,
                     image = stringFileName,
                     quantity = product.quantity,
-                    description = product.description
+                    description = product.description,
+                    specification = product.specification                   
                 };
 
                 bool result = _productApi.Create(productsModel);
                 if (result)
                 {
-                    return RedirectToAction("Index");
-                   
-                   
+                    return RedirectToAction("Index");                 
                 }
               return Content("Failed");
             }

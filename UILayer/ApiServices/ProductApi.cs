@@ -26,7 +26,7 @@ namespace UILayer.Datas.Apiservices
             using (HttpClient httpclient = new HttpClient())
             {
 
-                string url = _url + "/api/ProductCatagory/Index";
+                string url = "https://localhost:44388/api/ProductCatagory";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)

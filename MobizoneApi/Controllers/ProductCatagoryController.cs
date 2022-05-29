@@ -31,8 +31,8 @@ namespace APILayer.Controllers
                 _logger = logger;
                 _catalog = catalog;
         }
-            [HttpGet("Index")]
-            public Task<IEnumerable<ProductsModel>> Index()
+            [HttpGet]
+            public Task<IEnumerable<ProductsModel>> Get()
             {
                 try
                 {

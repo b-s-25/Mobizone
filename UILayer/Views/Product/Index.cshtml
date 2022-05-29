@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DomainLayer.Products>
+﻿@model IEnumerable<DomainLayer.Product.ProductsModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -71,57 +71,62 @@
     </tfoot>
 </table>
 <!------------DataTable----------->
+<!--<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 
-<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-
-@section scripts{
+@section scripts{-->
     @* Normal*@
-    <script src="//cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
-
+<!--<script src="//cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>-->
     @* Bootstrap*@
-    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" rel="stylesheet" />
-    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>
+<!--<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" rel="stylesheet" />
+<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>-->
 
-    <script>
-        $.ajax({
-            url: '/Product/GetList',
-            type: 'get',
-            datatype: 'json',
-            success: function (data) {
-                status = data;
-                console.log(status);
-                $('#myTable').dataTable({
-                    data: data,
-                    columns: [
-                       @* { "render": function (data, full) { return full.productType;} },*@
-                        @*{ "data": "productType" },*@
-                        { "data": "productName" },
-                        { "data": "productModel" },
-                        { "data": "productPrice" },
-                        {
-                            "data": "image"@*,
-                            "render": function (data, type, row, meta) {
-                                return '<img src="~/Images' + data + '"height="16" width="16"/>';*@
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">*@
+<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js" defer></script>
 
-                            @*"render": function (data, type, JsonResultRow, meta) {
-                                return '<img src="/Images/' + JsonResultRow.ImageAddress + '">';*@
+<script>
+    $.ajax({
+        url: 'https://localhost:44388/api/ProductCatagory',
+        type: 'get',
+        datatype: 'json',
+        success: function (data) {
+            status = data;
+            console.log(status);
+            $('#myTable').dataTable({
+                data: data,
+                columns: [
+                       @* { "render": function (data, full) { return full.productType; } },*@
+                        @* { "data": "productType" },*@
+            { "data": "productName" },
+            { "data": "productModel" },
+            { "data": "productPrice" },
+            {
+                "data": "image"@*,
+                    "render": function (data, type, row, meta) {
+                        return '<img src="~/Images' + data + '"height="16" width="16"/>';*@
+
+                            @* "render": function (data, type, JsonResultRow, meta) {
+                            return '<img src="/Images/' + JsonResultRow.ImageAddress + '">';*@
                         },
                         { "data": "description" },
                         {
                             "render": function (id, type, row, meta) {
                                 return '<a href="Product/Edit" onclick="Edit(' + id + ')" asp-action="Edit";><i class="bi bi-pencil-fill"></i></a>' +
-                                    '<a href="Product/Delete" onclick="Delete(' + id + ')" asp-action="Edit";<i class="bi bi-trash3-fill" style="margin-left: 2em"></i>';
+                                    '<a href="Product/Delete" onclick="Delete(' + id + ')" asp-action="Delete";<i class="bi bi-trash3-fill" style="margin-left: 2em"></i>';
                             }
                         }
                     ]
-                })
+                    })
             },
-            error: function () {
-                console.log("error")
-            }
+    error: function () {
+        console.log("error")
+    }
         })
-        
-    </script>
+
+</script>
 <script>
     function Edit() {
 
