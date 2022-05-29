@@ -151,6 +151,7 @@ namespace UILayer.Controllers
             return View("OrderPlaced");
         }
         [HttpGet]
+        [Authorize]
         public IActionResult BuyNow(int id)
         {
             var addresses = _addressApi.GetAddress();
@@ -158,11 +159,12 @@ namespace UILayer.Controllers
             var user = _userApi.GetUserInfo().Where(x => x.email.Equals(User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value)).FirstOrDefault();
             ViewData["UserAddress"] = user.address;
             ViewData["Products"] = _productApi.GetProduct().Where(x=>x.id.Equals(id)).FirstOrDefault();
+            ViewData["User"] = user;
             return View();
         }
 
         [HttpPost]
-        public IActionResult MyOrders(UserCheckOut checkOut)
+        public IActionResult BuyNow(UserCheckOut checkOut)
         {
             if (checkOut == null)
             {
@@ -178,10 +180,9 @@ namespace UILayer.Controllers
                 {
                     data.productStatus= Status.disable;
                 }
-                //data.
-                //ProductApi.Edit(checkOut);
                 Random random = new Random();
                 checkOut.orderId = random.Next();
+                checkOut.id = 0;
                 checkOut.status = OrderStatus.orderPlaced;
                 checkOut.price = checkOut.quantity * data.productPrice;
                 bool result = _ordersApi.AddCheckOutList(checkOut);
