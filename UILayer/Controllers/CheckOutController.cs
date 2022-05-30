@@ -150,6 +150,7 @@ namespace UILayer.Controllers
         {
             return View("OrderPlaced");
         }
+
         [HttpGet]
         [Authorize]
         public IActionResult BuyNow(int id)

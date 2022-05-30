@@ -21,7 +21,6 @@ namespace Repository
         public DbSet<Login> Login { get; set; }
         public DbSet<MasterData> MasterDatas { get; set; }
         public DbSet<ProductsModel> ProductsModel { get; set; }
-        public DbSet<UserOrders> UserOrders { get; set; }
         public DbSet<UserCheckOut> UserCheckOut { get; set; }
     }
 }

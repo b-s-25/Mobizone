@@ -46,6 +46,13 @@ namespace UILayer.Controllers
             var products = _productApi.GetProduct();
             return new JsonResult(products);
         }
+        [HttpGet]
+        public IActionResult GetSpecification()
+
+        {
+            var products = _productApi.GetProduct();
+            return View(products);
+        }
 
         public IActionResult Details(int id)
         {
@@ -134,7 +141,7 @@ namespace UILayer.Controllers
             string fileName = null;
             if (product.image != null)
             {
-                string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "Images");
+                string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "Images/ProductImages");
                 fileName = Guid.NewGuid().ToString() + "-" + product.image.FileName;
                 string filePath = Path.Combine(uploadDir, fileName);
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
