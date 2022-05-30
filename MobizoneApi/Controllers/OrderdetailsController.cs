@@ -21,29 +21,29 @@ namespace MobizoneApi.Controllers
     [ApiController]
     public class OrderdetailsController : ControllerBase
     {
-        private readonly IOrderdetailsoperations _orderdetailsoperations;
+        private readonly IOrderDetailsOperations _orderDetailsOperations;
         private readonly IProductCatagory _productCatagory;
         private readonly IUserOperations _userOperations;
         private readonly ILogger<OrderdetailsController> _logger;
         private readonly IAddressOperations _addressOperations;
         private readonly ProductDbContext _Context;
-        IEnumerable<UserOrders> _order;
-        public OrderdetailsController(ProductDbContext Context, IOrderdetailsoperations orderdetailsoperations)
+        IEnumerable<UserCheckOut> _order;
+        public OrderdetailsController(ProductDbContext Context, IOrderDetailsOperations orderdetailsoperations)
         {
             _Context = Context;
-            _orderdetailsoperations = orderdetailsoperations;
+            _orderDetailsOperations = orderdetailsoperations;
 
         }
         [HttpPost("Orderdetails")]
-        public IActionResult Orderdetails([FromBody] UserOrders userOrders)
+        public IActionResult Orderdetails([FromBody] UserCheckOut userOrders)
         {
             Response<string> _response = new Response<string>();
             try
             {
-                userOrders.Address = _addressOperations.GetAddress().Result.Where(x => x.id.Equals(userOrders.addressid)).FirstOrDefault();
+                userOrders.address = _addressOperations.GetAddress().Result.Where(x => x.id.Equals(userOrders.addressId)).FirstOrDefault();
                 //userOrders.product = _productCatagory.GetProducts().Result.Where(x => x.id.Equals(userOrders.productId)).FirstOrDefault();
-                userOrders.users = _userOperations.GetUser().Result.Where(x => x.registrationId.Equals(userOrders.registrationId)).FirstOrDefault();
-                _orderdetailsoperations.Add(userOrders);
+                userOrders.user = _userOperations.GetUser().Result.Where(x => x.registrationId.Equals(userOrders.userId)).FirstOrDefault();
+                _orderDetailsOperations.Add(userOrders);
                 string message = "added" + ", Response Message : " + new HttpResponseMessage(System.Net.HttpStatusCode.OK);
                 _response.AddResponse(true, 0, "", message);
                 var data = Newtonsoft.Json.JsonConvert.SerializeObject(_response);
@@ -61,12 +61,12 @@ namespace MobizoneApi.Controllers
 
         }
         [HttpGet("Orderdetails")]
-        public Response<IEnumerable<UserOrders>> Orderdetails(int id)
+        public Response<IEnumerable<UserCheckOut>> Orderdetails(int id)
         {
-            Response<IEnumerable<UserOrders>> _response = new Response<IEnumerable<UserOrders>>();
+            Response<IEnumerable<UserCheckOut>> _response = new Response<IEnumerable<UserCheckOut>>();
             try
             {
-                _order = _orderdetailsoperations.GetAll().Result;
+                _order = _orderDetailsOperations.GetAll().Result;
                 if (_order == null)
                 {
                     string message = " null data" + " , " + new HttpResponseMessage(System.Net.HttpStatusCode.OK);
@@ -93,12 +93,12 @@ namespace MobizoneApi.Controllers
 
         }
         [HttpPut("OrderPut")]
-        public IActionResult OrderPut([FromBody]UserOrders orderPut)
+        public IActionResult OrderPut([FromBody] UserCheckOut orderPut)
         {
             Response<string> _response = new Response<string>();
             try
             {
-                _orderdetailsoperations.Edit(orderPut);
+                _orderDetailsOperations.Edit(orderPut);
                 string message = "Updated" + new HttpResponseMessage(System.Net.HttpStatusCode.OK);
                 _response.AddResponse(true, 0, null, message);
                 return new JsonResult(_response);

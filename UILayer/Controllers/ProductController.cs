@@ -134,7 +134,7 @@ namespace UILayer.Controllers
             string fileName = null;
             if (product.image != null)
             {
-                string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "Images");
+                string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "Images/ProductImages");
                 fileName = Guid.NewGuid().ToString() + "-" + product.image.FileName;
                 string filePath = Path.Combine(uploadDir, fileName);
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
