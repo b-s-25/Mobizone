@@ -61,42 +61,46 @@ namespace UILayer.Controllers
         [Authorize]
         public IActionResult MasterDatalist(int id)
         {
-            IEnumerable<MasterData> data = _masterdataapi.MasterDatas();
-            var masterdata = data.Where(c => id.Equals(c.parentId));
             ViewBag.MasterTitle = (Master)id;
+            var parentData = (Master)id;
+            IEnumerable<MasterData> data = _masterdataapi.MasterDatas();
+            var masterdata = data.Where(c => parentData.Equals(c.parentId));
+            
+            var count=masterdata.Count();
             return View(masterdata);
+
             //var datas= new MasterData();
             //var masterdata = _masterdataapi.MasterDatas();
             //var data = masterdata.Where(c => c.id.Equals(c.parentId));
             //return View(masterdata);
         }
 
-        [HttpGet]
-        public IActionResult EditMaster(int id)
-        {
-            var datas = _masterdataapi.MasterDatas();
-            var data = datas.Where(c => c.id.Equals(id)).FirstOrDefault();
-            return PartialView("EditMaster", data);
-        }
-        [HttpPost]
-        public IActionResult MasterEdit(MasterData data)
-        {
-            bool result = _masterdataapi.EditMasterData(data);
-            return RedirectToAction("MasterList", new { id = data.parentId });
-        }
         [HttpGet("MasterData/EditMaster/{id}")]
-        public IActionResult DeleteMaster(int id)
+        public IActionResult MasterEdit(int id)
         {
             var datas = _masterdataapi.MasterDatas();
             var data = datas.Where(c => c.id.Equals(id)).FirstOrDefault();
-            return PartialView("EditMastr", data);
+            return View("EditMaster", data);
         }
         [HttpPost]
-        public IActionResult DeleteMaster(MasterData data)
+        public IActionResult EditMaster(MasterData data)
         {
             bool result = _masterdataapi.EditMasterData(data);
-            return RedirectToAction("MasterList", new { id = data.parentId });
+            return RedirectToAction("MasterDatalist", new { id = data.parentId });
         }
+        //[HttpGet("MasterData/EditMaster/{id}")]
+        //public IActionResult DeleteMaster(int id)
+        //{
+        //    var datas = _masterdataapi.MasterDatas();
+        //    var data = datas.Where(c => c.id.Equals(id)).FirstOrDefault();
+        //    return PartialView("EditMastr", data);
+        //}
+        //[HttpPost]
+        //public IActionResult DeleteMaster(MasterData data)
+        //{
+        //    bool result = _masterdataapi.EditMasterData(data);
+        //    return RedirectToAction("MasterDatalist", new { id = data.parentId });
+        //}
 
 
     }

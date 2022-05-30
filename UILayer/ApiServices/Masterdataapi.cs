@@ -83,7 +83,7 @@ namespace UILayer.ApiServices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(masterdata);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44388//api/Masterdata/MasterDataPost";
+                string url = "https://localhost:44388/api/Masterdata/MasterDataPost";
                 
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PostAsync(uri, content);
