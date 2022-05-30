@@ -45,7 +45,7 @@ namespace UILayer.Datas.Apiservices
 
             using (HttpClient httpClient = new HttpClient())
             {
-                string url = "https://localhost:44388/api/ProductCatagory/Details/{id}" + id;
+                string url = "https://localhost:44388/api/ProductCatagory/ProductCatagory/Details/" + id;
                 Uri uri = new Uri(url);
                 Task<HttpResponseMessage> result = httpClient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)

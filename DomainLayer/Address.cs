@@ -35,6 +35,7 @@ namespace DomainLayer
         [Required(ErrorMessage = "*This field is Required")]
         [Display(Name = "Land Mark")]
         public string additionalInfo { get; set; }
+
         [NotMapped]
         public bool IsChecked { get; set; }
     }

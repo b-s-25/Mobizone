@@ -61,7 +61,8 @@ namespace UILayer.ApiServices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(userCheckOut);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = _url + "/api/Orders/UpdateUserCheckOut";
+                //string url = _url + "/api/Orders/UpdateUserCheckOut";
+                string url = "https://localhost:44388/api/Orders/UpdateUserCheckOut";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PutAsync(uri, content);
                 if (result.Result.IsSuccessStatusCode)
@@ -78,7 +79,7 @@ namespace UILayer.ApiServices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(userCheckOut);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = _url + "/api/Orders/AddUserCheckOutList";
+                string url = "https://localhost:44388/api/Orders/AddUserCheckOutList";
 
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PostAsync(uri, content);
