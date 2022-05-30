@@ -1,4 +1,5 @@
 ﻿using DomainLayer;
+using DomainLayer.Product;
 using Microsoft.Extensions.Configuration;
 using NPOI.SS.Formula.Functions;
 using System;
@@ -12,46 +13,45 @@ namespace UILayer.Datas.Apiservices
 {
     public class ProductApi
     {
+
+        string _url;
         IConfiguration _configuration;
-        public ProductApi()
+        public ProductApi(IConfiguration configuration)
         {
-
+            _configuration = configuration;
+            _url = _configuration.GetSection("Development")["BaseApi"].ToString();
         }
-        public static IEnumerable<Products> index()
-
+        public IEnumerable<ProductsModel> GetProduct()
         {
-
-            IEnumerable<Products> products = new List<Products>();
-
-            using (HttpClient httpClient = new HttpClient())
+            using (HttpClient httpclient = new HttpClient())
             {
-                string url = "https://localhost:44388/api/ProductCatagory/Index";
+
+                string url = "https://localhost:44388/api/ProductCatagory";
                 Uri uri = new Uri(url);
-                Task<HttpResponseMessage> result = httpClient.GetAsync(uri);
+                System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
                 {
-                    Task<string> serilizedResult = result.Result.Content.ReadAsStringAsync();
-                    products = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<Products>>(serilizedResult.Result);
+                    System.Threading.Tasks.Task<string> response = result.Result.Content.ReadAsStringAsync();
+                    var results = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<ProductsModel>>(response.Result);
+                    return results;
                 }
-
+                return null;
             }
-            return products;
 
         }
 
-        public static Products GetById(int id)
+        public ProductsModel GetById(int id)
         {
-            Products products = new Products();
 
             using (HttpClient httpClient = new HttpClient())
             {
-                string url = "https://localhost:44388/api/ProductCatagory/ProductCatagory/Details/{id}" + id;
+                string url = "https://localhost:44388/api/ProductCatagory/ProductCatagory/Details/" + id;
                 Uri uri = new Uri(url);
                 Task<HttpResponseMessage> result = httpClient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
                 {
                     Task<string> serilizedResult = result.Result.Content.ReadAsStringAsync();
-                    products = Newtonsoft.Json.JsonConvert.DeserializeObject<Products>(serilizedResult.Result);
+                    var products = Newtonsoft.Json.JsonConvert.DeserializeObject<ProductsModel>(serilizedResult.Result);
                     return products;
                 }
                 return null;
@@ -61,7 +61,7 @@ namespace UILayer.Datas.Apiservices
 
 
 
-        public static bool Edit(Products product)
+        public  bool Edit(ProductsModel product)
         {
             using (HttpClient httpclient = new HttpClient())
             {
@@ -78,7 +78,7 @@ namespace UILayer.Datas.Apiservices
                 return false;
             }
         }
-        public static bool Create(Products product)
+        public  bool Create(ProductsModel product)
         {
 
             using (HttpClient httpclient = new HttpClient())
@@ -97,10 +97,8 @@ namespace UILayer.Datas.Apiservices
             }
         }
 
-        public static bool Delete(int id)
+        public  bool Delete(int id)
         {
-
-
             using (HttpClient httpclient = new HttpClient())
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(id);

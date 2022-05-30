@@ -3,12 +3,13 @@
 @{
     ViewData["Title"] = "Userdata";
 }
+<h3 style="text-align:center">UserData </h3>
+<div class="container-fluid mt-3 align-middle"  style="">
+    <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+            <div class="">
 
-<h1>Userdata</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -16,9 +17,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.firstName)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.lastName)
-            </th>
+          
             <th>
                 @Html.DisplayNameFor(model => model.email)
             </th>
@@ -37,9 +36,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.firstName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.lastName)
-            </td>
+          
             <td>
                 @Html.DisplayFor(modelItem => item.email)
             </td>
@@ -49,12 +46,14 @@
                 @Html.DisplayFor(modelItem => item.createdOn)
             </td>
            
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
+           
         </tr>
 }
     </tbody>
 </table>
+</div>
+</div>
+</div>
+
+</div>
+

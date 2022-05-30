@@ -1,7 +1,7 @@
 ﻿using APILayer.Models;
 using BusinesLogic;
 using BusinesLogic.Interface;
-using DomainLayer;
+using DomainLayer.Product;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,28 +24,24 @@ namespace APILayer.Controllers
     {
         
             private readonly ILogger<ProductCatagoryController> _logger;
-            ProductDbContext _context;
             IProductCatagory _catalog;
-            ISpecOperation _spec;
 
-        public ProductCatagoryController(ProductDbContext context, ILogger<ProductCatagoryController> logger, ISpecOperation specification)
+        public ProductCatagoryController(ILogger<ProductCatagoryController> logger, IProductCatagory catalog)
             {
                 _logger = logger;
-                _context = context;
-                _catalog = new ProductCatagory(_context);
-                _spec = specification;
+                _catalog = catalog;
         }
-            [HttpGet("Index")]
-            public IEnumerable<Products> Index()
+            [HttpGet]
+            public Task<IEnumerable<ProductsModel>> Get()
             {
                 try
                 {
-                    var products = _catalog.index().Result;
+                    var products = _catalog.GetProducts();
                     return products;
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError("Error message");
+                    _logger.LogError("Error message", ex);
                     return null;
                 }
             }
@@ -69,12 +65,12 @@ namespace APILayer.Controllers
 
 
             [HttpPost("ProductPost")]
-            public async Task<IActionResult> ProductPost([FromBody] Products product)
+            public async Task<IActionResult> ProductPost(ProductsModel products)
             {
                 try
                 {
-                    _catalog.Create(product);
-                    return Ok("success");
+                    _catalog.Create(products);
+                    return Ok();
                 }
                 catch (Exception ex)
                 {
@@ -83,7 +79,7 @@ namespace APILayer.Controllers
                 }
             }
             [HttpPut("ProductPut")]
-            public  IActionResult ProductPut([FromBody] Products product)
+            public  IActionResult ProductPut([FromBody] ProductsModel product)
             {
                 try
                 {
@@ -103,8 +99,7 @@ namespace APILayer.Controllers
             {
                 try
                 {
-                    Products product = new Products();
-                    product = _catalog.Details(id);
+                    var product = _catalog.Details(id);
                     _catalog.Delete(product);
                     return StatusCode(StatusCodes.Status200OK);
                 }
@@ -114,87 +109,5 @@ namespace APILayer.Controllers
                     return StatusCode(StatusCodes.Status400BadRequest);
                 }
             }
-
-
-        [HttpGet("Get")]
-        public IEnumerable<Specification> Get()
-        {
-            try
-            {
-                var specific = _spec.Index();
-                return specific;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Error message",ex);
-                return null;
-            }
-        }
-
-
-        [HttpGet]
-        [Route("SpecOperation/Details/{id}")]
-        public IActionResult SpecDetails(int id)
-        {
-            try
-            {
-                var data = _spec.Details(id);
-                return Ok(data);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Error In Post", ex);
-                return StatusCode(StatusCodes.Status400BadRequest);
-            }
-        }
-
-
-        [HttpPost("SpecPost")]
-        public async Task<IActionResult> SpecPost([FromBody] Specification specification)
-        {
-            try
-            {
-                _spec.Create(specification);
-                return Ok("success");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Error In Post", ex);
-                return StatusCode(StatusCodes.Status400BadRequest);
-            }
-        }
-
-        [HttpPut("SpectPut")]
-        public IActionResult SpecPut([FromBody] Specification specification)
-        {
-            try
-            {
-                _spec.Update(specification);
-                return StatusCode(StatusCodes.Status200OK);
-
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Error In Put", ex);
-                return StatusCode(StatusCodes.Status400BadRequest);
-            }
-        }
-
-        [HttpDelete("SpecDelete/{id}")]
-        public IActionResult SpecDelete(int id)
-        {
-            try
-            {
-                Specification specification = new Specification();
-                specification = _spec.Details(id);
-                _spec.Delete(specification);
-                return StatusCode(StatusCodes.Status200OK);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Error In Put", ex);
-                return StatusCode(StatusCodes.Status400BadRequest);
-            }
-        }
     }
 }

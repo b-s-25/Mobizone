@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Orders;
+using DomainLayer.Product;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,9 +21,9 @@ namespace DomainLayer
         public Registration user { get; set; }
         public int quantity { get; set; }
 
-        [ForeignKey("Products")]
+        [ForeignKey("ProductsModel")]
         public int productId { get; set; }
-        public Products product { get; set; }
+        public ProductsModel product { get; set; }
         public int price { get; set; }
         public int paymentModeId { get; set; }
 

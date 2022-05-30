@@ -20,18 +20,20 @@ namespace UILayer.Controllers
     public class UserController : Controller
     {
         private UserApi _userApi;
+        private readonly ProductApi _productApi;
         private IConfiguration _configuration;
         private Registration _registration;
         private readonly INotyfService _notyf;
         public UserController(IConfiguration configuration, INotyfService notyf)
         {
-            _userApi = new UserApi(_configuration);
             _configuration = configuration;
+            _userApi = new UserApi(_configuration);
+            _productApi = new ProductApi(_configuration);           
             _notyf = notyf;
         }
         public IActionResult Index()
         {
-            return View();
+            return View(_productApi.GetProduct());
         }
 
         [HttpGet]

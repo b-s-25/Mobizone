@@ -22,11 +22,13 @@ namespace MobizoneApi.Controllers
     {
         private readonly IMasterDataOperations _masterdataoperation;
         private readonly ILogger<MasterDataController> _logger;
+        IProductCatagory _productCatagory;
         private readonly ProductDbContext _Context;
-        public MasterDataController(IMasterDataOperations masterdataoperation, ProductDbContext Context)
+        public MasterDataController(IMasterDataOperations masterdataoperation, ProductDbContext Context, IProductCatagory productCatagory)
         {
             _Context = Context;
             _masterdataoperation = masterdataoperation;
+            _productCatagory = productCatagory;
         }
         [HttpGet("GetMasterData")]
         public IEnumerable<MasterData> GetMasterData()

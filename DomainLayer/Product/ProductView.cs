@@ -11,10 +11,8 @@ namespace DomainLayer
 {
     public class ProductView
     {
-        public int id { get; set; }/*
-        [Display(Name = "Type")]
-        [Required(ErrorMessage = "*This field is Required")]
-        public string productType { get; set; }*/
+        public int id { get; set; }
+
         [Display(Name = "Name ")]
         [Required(ErrorMessage = "*This field is Required")]
         public string productName { get; set; }
@@ -36,5 +34,7 @@ namespace DomainLayer
         [Display(Name = "Quantity")]
         [Required(ErrorMessage = "*This field is Required")]
         public int quantity { get; set; }
+        public int specificationId { get; set; }
+        public Specification specification { get; set; }
     }
 }

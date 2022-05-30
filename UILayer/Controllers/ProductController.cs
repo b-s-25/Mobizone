@@ -12,36 +12,44 @@ using System.Linq;
 using System.Threading.Tasks;
 using UILayer.Datas.Apiservices;
 using UILayer.Controllers;
+using DomainLayer.Product;
+using Microsoft.Extensions.Configuration;
 
 namespace UILayer.Controllers
 {
     public class ProductController : Controller
     {
-        Products Data = null;
+        IConfiguration _configuration;
         ProductView Storage = null;
-        /*Specification Spec = null;*/
+        private readonly ProductApi _productApi;
         private IWebHostEnvironment _webHostEnvironment;
 
-        public ProductController(IWebHostEnvironment hostEnvironment)
+        public ProductController(IConfiguration configuration, IWebHostEnvironment hostEnvironment)
         {
-            Data = new Products();
-
+            _configuration = configuration;
+            _productApi = new ProductApi(_configuration);
             _webHostEnvironment = hostEnvironment;
         }
 
-
+        [HttpGet]
         public IActionResult Index()
         
         {
-            IEnumerable<Products> products = ProductApi.index();
+            var products = _productApi.GetProduct();
             return View(products);
         }
 
+        [HttpGet]
+        public IActionResult GetList()
 
+        {
+            var products = _productApi.GetProduct();
+            return new JsonResult(products);
+        }
 
         public IActionResult Details(int id)
         {
-            Products products = ProductApi.GetById(id);
+            var products = _productApi.GetById(id);
             return View(products);
         }
 
@@ -50,7 +58,7 @@ namespace UILayer.Controllers
         public IActionResult Edit(int id)
         {
             Storage = new ProductView();
-            Products product = ProductApi.GetById(id);
+            ProductsModel product = _productApi.GetById(id);
             Storage.productName = product.productName;
             Storage.productPrice = product.productPrice;
             Storage.productModel = product.productModel;
@@ -61,7 +69,7 @@ namespace UILayer.Controllers
 
         public ActionResult Delete(int id)
         {
-            bool result = ProductApi.Delete(id);
+            bool result = _productApi.Delete(id);
             if (result)
             {
                 return RedirectToAction("Index");
@@ -81,27 +89,28 @@ namespace UILayer.Controllers
             if (product.id == 0)
             {
                 string stringFileName = UploadFile(product);
-                var Product = new Products
+                var productsModel = new ProductsModel
                 {
                     productName = product.productName,
                     productPrice = product.productPrice,
                     productModel = product.productModel,
                     image = stringFileName,
                     quantity = product.quantity,
-                    description = product.description
+                    description = product.description,
+                    specification = product.specification                   
                 };
 
-                bool result = ProductApi.Create(Product);
+                bool result = _productApi.Create(productsModel);
                 if (result)
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index");                 
                 }
-                return Content("Failed");
+              return Content("Failed");
             }
             else
             {
                 string stringFileName = UploadFile(product);
-                var Product = new Products
+                var productsModel = new ProductsModel
                 {
                     id = product.id,
                     productName = product.productName,
@@ -111,7 +120,7 @@ namespace UILayer.Controllers
                     quantity = product.quantity,
                     description = product.description
                 };
-                bool result = ProductApi.Edit(Product);
+                bool result = _productApi.Edit(productsModel);
                 if (result)
                 {
                     return RedirectToAction("Index");
@@ -135,11 +144,6 @@ namespace UILayer.Controllers
             }
 
             return fileName;
-        }
-        public IEnumerable<Products> GetList()
-        {
-            IEnumerable<Products> products = ProductApi.index();
-            return products;
         }
     } 
 }

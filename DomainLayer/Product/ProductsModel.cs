@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
-namespace DomainLayer
+namespace DomainLayer.Product
 {
-    public class Products
+    [Table("ProductsModel")]
+    public class ProductsModel
     {
         [Key]
         public int id { get; set; }
 
-        [ForeignKey("specificationId")]
         public int specificationId { get; set; }
         public Specification specification { get; set; }
 
@@ -47,6 +46,5 @@ namespace DomainLayer
         public string createdBy { get; set; }
         [Display(Name = "Deleted By")]
         public string deletedBy { get; set; }
-
     }
 }

@@ -27,6 +27,7 @@ using DomainLayer.EmailService;
 using MobizoneApi.Models;
 using BussinessLogic.Orders;
 using Repository;
+using BussinessLogic.Orders.Admin;
 
 namespace MobizoneApi
 {
@@ -55,8 +56,8 @@ namespace MobizoneApi
             services.AddScoped(typeof(IUserDataoperation), typeof(UserDataoperation));
             services.AddScoped(typeof(IPasswordEncryptDecrypt), typeof(PasswordEncryptDecrypt));
             services.AddScoped(typeof(IAddressOperations), typeof(AddressOperations));
-            services.AddScoped(typeof(ISpecOperation), typeof(SpecOperation));
             services.AddScoped(typeof(ICheckOutOperations), typeof(CheckOutOperations));
+            services.AddScoped(typeof(IOrderdetailsoperations), typeof(Orderdetailsoperations));
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddTransient<IMailService, MailService>();
 

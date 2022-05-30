@@ -1,44 +1,4 @@
-﻿@*
-<link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
-<link rel="stylesheet" href="/css/adminsidebar.css" />
-
-<div class="btn">
-    <span class="fas fa-bars"></span>
-</div>
-<nav class="sidebar">
-    <div class="text">
-        Admin
-    </div>
-    <ul class="main_side">
-        <li class="active"><a href="#">Dashboard</a></li>
-        <li>
-            <a href="#" id="1">
-                Product
-                <span class="fas fa-caret-down"></span>
-            </a>
-            <ul class="item-show-1">
-                <li><a href="#">Add Product</a></li>
-                <li><a href="#">Product List </a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#" id="2">
-                Settings
-                <span class="fas fa-caret-down"></span>
-            </a>
-            <ul class="item-show-2">
-                <li><a href="#">Contact us</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Privacy And Policy</a></li>
-
-            </ul>
-        </li>
-        <li><a href="#">Users</a></li>
-        <li><a href="#">Orders</a></li>
-    </ul>
-</nav>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="~/js/site.js"></script>*@
+﻿
  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
       <body>
@@ -49,14 +9,14 @@
          <div class="text">
             Admin
          </div>
-         <ul>
+         <ul class="unorder">
             <li class="actives"><a href="#">Dashboard</a></li>
             <li>
                <a href="#" class="feat-btns">Product
                <span class="fas fa-caret-down first"></span>
                </a>
                <ul class="feat-show">
-                  <li><a href="#">Add Product</a></li>
+                  <li><a asp-action="Create" asp-controller="Product">Add Product</a></li>
                   <li><a href="#">Product List</a></li>
                </ul>
             </li>
@@ -68,7 +28,7 @@
                   <li><a href="#">Contact us</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Privacy And Policy</a></li>
-                <li><a href="#">MasterData</a></li>
+                <li><a asp-area="" asp-controller="MasterData" asp-action="MasterData">MasterData</a></li>
                </ul>
             </li>
             <li><a asp-area="" asp-controller="Admin" asp-action="Userdata">Users</a></li>
@@ -148,12 +108,12 @@
   background: #1e1e1e;
   letter-spacing: 1px;
 }
-nav ul{
-  background: #1b1b1b;
-  height: 100%;
-  width: 100%;
-  list-style: none;
-}
+    .sidebar .unorder {
+        background: #1b1b1b;
+        height: 100%;
+        width: 100%;
+        list-style: none;
+    }
 nav ul li{
   line-height: 60px;
   border-top: 1px solid rgba(255,255,255,0.1);

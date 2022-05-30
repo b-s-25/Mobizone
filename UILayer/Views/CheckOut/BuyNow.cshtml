@@ -1,30 +1,91 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model DomainLayer.UserCheckOut
+
 @{
     ViewData["Title"] = "Checkout";
+    var user = ViewData["User"] as DomainLayer.Registration;
     var userAddress = ViewData["UserAddress"] as IEnumerable<DomainLayer.Address>;
+    var products = ViewData["Products"] as DomainLayer.Product.ProductsModel;
+    var paymentMode = Enum.GetValues(typeof(DomainLayer.Orders.PaymentStatus));
 }
-<div class="card">
-    <div class="address"><p class="card-title">Delivery Address</p></div>
-    @if (userAddress == null)
-    {
-        <p> Please add address</p>
-    }
-    else
-    {
-        @foreach (var address in userAddress)
+<form class="order" method="post" asp-action="BuyNow">
+    <input asp-for="productId" type="hidden" value="@products.id" />
+    <input asp-for="userId" type="hidden" value="@user.registrationId" />
+    <div class="card">
+        <div class="address"><p class="card-title">Delivery Address</p></div>
+        @if (userAddress == null)
         {
-            <div id="address">
-                <div class="address">
-                    <input class="form-check-input" type="checkbox" value="@address" />
-                    <label class="form-check-label" style="margin-left: 27px;">@address.name <br />@address.address<br />@address.district</label>
+            <p> Please add address</p>
+        }
+        else
+        {
+            @foreach (var address in userAddress)
+            {
+                <div id="address">
+                    <div class="address">
+                        <input class="form-check-input" type="checkbox" name="addressId" value="@address.id" style="margin-left:6px" />
+                        <label class="form-check-label" style="margin-left: 30px;">@address.name <br />@address.address<br />@address.district</label>
+                    </div>
+                    <div class="row" style="padding: 2px; margin-left: -37px;">
+                        <div class="col"><a href="/checkout/address" class="btn btn-primary" style="margin-left: 50px;">Add New Address</a></div>
+                    </div>
                 </div>
-                <div class="row" style="padding: 2px; margin-left: -37px;">
-                    <div class="col"><a href="/checkout/address" class="btn btn-primary" style="margin-left: 25px;">Add New Address</a></div>
+            }
+        }
+    </div>
+    <div class="card">
+        <div class="summary"><p class="card-title">Order Summary</p></div>
+        <div class="orderDetails">
+            <div class="form-check">
+                <div class="">
+                    <div class="col-12">
+                        <img class="img-fluid" src="~/images/@products.image" style="width: 10%;" />
+                        <label class="form-check-label" for="flexCheckDefault" style="font-weight: bold;">
+                            @products.productName (@products.specification.productRam GB RAM, @products.specification.productStorage GB)<br>&#8377 @products.productPrice
+                            <div class=>Quantity:<input name="quantity" asp-for="@products.quantity" type="number" style="width:50px; height:20px;" value="1" id="pricetag" /></div>
+                        </label>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="card payment mt-3">
+        <h5 class="card-title address">Payment Mode</h5>
+        @foreach (var items in paymentMode)
+        {
+
+            <div class="form-check">
+                <input class="form-check-input " name="paymentModeId" type="checkbox" value='@Convert.ToInt32(items)'>
+                <label class="form-check-label" for="flexCheckDefault" style=" margin-left: 26px;">
+                    @items
+                </label>
+            </div>
         }
-    }
-</div>
+        <p class="card-text"></p>
+        <div class="row">
+            <div class="col"><a asp-action="Index" class="btn btn-primary" style="position: relative; left: 38px;">Cancel</a></div>
+            <div class="col"></div>
+            <div class="col col d-flex justify-content-end "><input type="submit" value="Place Order" class="btn btn-primary" style=" position: relative; right: 880px;" /></div>
+        </div>
+    </div>
+</form>
+
+
+    <div class="card">
+
+        <div class="Price">
+            <h5 class="card-title" style="">Price Details</h5>
+            <hr />
+        </div>
+        <div>
+            <p class="card-text" id="priceField">Price: @products.productPrice</p>
+            <div class="card-text"> <div class="row"><p class="col-6">Shipping Charge <p class="col-6" style="color: green; color: green; position: relative; right: 170px;">Free</p>  </div></div>
+            <div id="price"></div>
+        </div>
+
+        <div class="">
+            <p class="card-text" id="totalPrice">Total Payable: @products.productPrice</p>
+            <div id="price"></div>
+        </div>
+    </div>
 

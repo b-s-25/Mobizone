@@ -194,199 +194,10 @@ namespace Repository.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("masterDatas");
+                    b.ToTable("MasterDatas");
                 });
 
-            modelBuilder.Entity("DomainLayer.ProductBrand", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("brandName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("createdBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("createdOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("modifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("modifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("id");
-
-                    b.ToTable("ProductBrand");
-                });
-
-            modelBuilder.Entity("DomainLayer.ProductColor", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("createdBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("createdOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("modifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("modifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("productColor")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("ProductColor");
-                });
-
-            modelBuilder.Entity("DomainLayer.ProductImage", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("createdBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("createdOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("modifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("modifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("productImage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("ProductImage");
-                });
-
-            modelBuilder.Entity("DomainLayer.ProductModel", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("createdBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("createdOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("modifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("modifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("productModel")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("ProductModel");
-                });
-
-            modelBuilder.Entity("DomainLayer.ProductRam", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("createdBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("createdOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("modifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("modifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("productRam")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("ProductRam");
-                });
-
-            modelBuilder.Entity("DomainLayer.ProductSim", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("createdBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("createdOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("modifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("modifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("productSim")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("ProductSim");
-                });
-
-            modelBuilder.Entity("DomainLayer.ProductStorage", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("createdBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("createdOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("modifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("modifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("storageCapacity")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.ToTable("ProductStorage");
-                });
-
-            modelBuilder.Entity("DomainLayer.Products", b =>
+            modelBuilder.Entity("DomainLayer.Product.ProductsModel", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -442,7 +253,7 @@ namespace Repository.Migrations
 
                     b.HasIndex("specificationId");
 
-                    b.ToTable("Products");
+                    b.ToTable("ProductsModel");
                 });
 
             modelBuilder.Entity("DomainLayer.Registration", b =>
@@ -516,42 +327,22 @@ namespace Repository.Migrations
                     b.Property<DateTime>("modified_on")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("productBrandId")
-                        .HasColumnType("int");
+                    b.Property<string>("productBrand")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("productColorId")
-                        .HasColumnType("int");
+                    b.Property<string>("productColor")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("productImageId")
-                        .HasColumnType("int");
+                    b.Property<string>("productRam")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("productModelId")
-                        .HasColumnType("int");
+                    b.Property<string>("productSim")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("productRamId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("productSimId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("productStorageId")
-                        .HasColumnType("int");
+                    b.Property<string>("productStorage")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
-
-                    b.HasIndex("productBrandId");
-
-                    b.HasIndex("productColorId");
-
-                    b.HasIndex("productImageId");
-
-                    b.HasIndex("productModelId");
-
-                    b.HasIndex("productRamId");
-
-                    b.HasIndex("productSimId");
-
-                    b.HasIndex("productStorageId");
 
                     b.ToTable("Specification");
                 });
@@ -598,7 +389,7 @@ namespace Repository.Migrations
 
                     b.HasIndex("userId");
 
-                    b.ToTable("userCheckOut");
+                    b.ToTable("UserCheckOut");
                 });
 
             modelBuilder.Entity("DomainLayer.UserOrders", b =>
@@ -607,6 +398,9 @@ namespace Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
+
+                    b.Property<int>("addressid")
+                        .HasColumnType("int");
 
                     b.Property<int>("orderId")
                         .HasColumnType("int");
@@ -630,6 +424,8 @@ namespace Repository.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("id");
+
+                    b.HasIndex("addressid");
 
                     b.HasIndex("productId");
 
@@ -776,7 +572,7 @@ namespace Repository.Migrations
                         .HasForeignKey("registrationId");
                 });
 
-            modelBuilder.Entity("DomainLayer.Products", b =>
+            modelBuilder.Entity("DomainLayer.Product.ProductsModel", b =>
                 {
                     b.HasOne("DomainLayer.Specification", "specification")
                         .WithMany()
@@ -787,65 +583,6 @@ namespace Repository.Migrations
                     b.Navigation("specification");
                 });
 
-            modelBuilder.Entity("DomainLayer.Specification", b =>
-                {
-                    b.HasOne("DomainLayer.ProductBrand", "productBrand")
-                        .WithMany()
-                        .HasForeignKey("productBrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DomainLayer.ProductColor", "productColor")
-                        .WithMany()
-                        .HasForeignKey("productColorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DomainLayer.ProductImage", "productImage")
-                        .WithMany()
-                        .HasForeignKey("productImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DomainLayer.ProductModel", "productModel")
-                        .WithMany()
-                        .HasForeignKey("productModelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DomainLayer.ProductRam", "productRam")
-                        .WithMany()
-                        .HasForeignKey("productRamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DomainLayer.ProductSim", "productSim")
-                        .WithMany()
-                        .HasForeignKey("productSimId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DomainLayer.ProductStorage", "productStorage")
-                        .WithMany()
-                        .HasForeignKey("productStorageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("productBrand");
-
-                    b.Navigation("productColor");
-
-                    b.Navigation("productImage");
-
-                    b.Navigation("productModel");
-
-                    b.Navigation("productRam");
-
-                    b.Navigation("productSim");
-
-                    b.Navigation("productStorage");
-                });
-
             modelBuilder.Entity("DomainLayer.UserCheckOut", b =>
                 {
                     b.HasOne("DomainLayer.Address", "address")
@@ -854,7 +591,7 @@ namespace Repository.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Products", "product")
+                    b.HasOne("DomainLayer.Product.ProductsModel", "product")
                         .WithMany()
                         .HasForeignKey("productId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -875,7 +612,13 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("DomainLayer.UserOrders", b =>
                 {
-                    b.HasOne("DomainLayer.Products", "product")
+                    b.HasOne("DomainLayer.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("addressid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DomainLayer.Product.ProductsModel", "product")
                         .WithMany()
                         .HasForeignKey("productId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -886,6 +629,8 @@ namespace Repository.Migrations
                         .HasForeignKey("registrationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Address");
 
                     b.Navigation("product");
 

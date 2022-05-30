@@ -51,6 +51,7 @@ namespace BusinesLogic
                 register.modifiedOn = DateTime.UtcNow;
                 register.modifiedBy = register.firstName + " " + register.lastName;
                 _repositoryOperation.Add(register);
+                _repositoryOperation.Save();
                 return true;
             }
             catch (Exception ex)

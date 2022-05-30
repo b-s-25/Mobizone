@@ -29,11 +29,30 @@ namespace RepositoryLayer
         {
             return _dbset.ToList();
         }
+        public async Task<IQueryable<T>> GetAll(params Expression<Func<T, object>>[] includes)
+        {
+            try
+            {
+                IQueryable<T> result = _dbset;
+                query = includes.Aggregate(result, (current, includeProperty) => current.Include(includeProperty));
+            }
+            catch (SqlException ex)
+            {
 
+            }
+            return query;
+        }
         public void Add(T entity)
         {
-            _dbset.Add(entity);
-            _Context.SaveChanges();
+            try
+            {
+                _dbset.Add(entity);
+                _Context.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                
+            }
         }
 
         public void Update(T entity)
@@ -55,22 +74,18 @@ namespace RepositoryLayer
 
         public void Save()
         {
-            _Context.SaveChanges();
-        }
-
-        public async Task<IQueryable<T>> GetAll(params Expression<Func<T, object>>[] includes)
-        {
             try
             {
-                IQueryable<T> result = _dbset;
-                query = includes.Aggregate(result, (current, includeProperty) => current.Include(includeProperty));
+                _Context.SaveChanges();
             }
-            catch (SqlException)
+            catch(Exception ex)
             {
-                return null;
+
             }
-            return query;
+            
         }
+
+       
 
         public async Task<T> GetById(int id, params Expression<Func<T, object>>[] includes)
         {
