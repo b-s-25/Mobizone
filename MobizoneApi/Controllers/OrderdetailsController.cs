@@ -21,28 +21,31 @@ namespace MobizoneApi.Controllers
     [ApiController]
     public class OrderdetailsController : ControllerBase
     {
-        private readonly IOrderdetailsoperations _orderdetailsoperations;
+        private readonly IOrderDetailsOperations _orderdetailsoperations;
         private readonly IProductCatagory _productCatagory;
         private readonly IUserOperations _userOperations;
         private readonly ILogger<OrderdetailsController> _logger;
         private readonly IAddressOperations _addressOperations;
         private readonly ProductDbContext _Context;
-        IEnumerable<UserOrders> _order;
-        public OrderdetailsController(ProductDbContext Context, IOrderdetailsoperations orderdetailsoperations)
+        IEnumerable<UserCheckOut> _order;
+        public OrderdetailsController(ProductDbContext Context, IOrderDetailsOperations orderdetailsoperations)
         {
             _Context = Context;
             _orderdetailsoperations = orderdetailsoperations;
 
         }
         [HttpPost("Orderdetails")]
-        public IActionResult Orderdetails([FromBody] UserOrders userOrders)
+        public IActionResult Orderdetails([FromBody] UserCheckOut userOrders)
         {
             Response<string> _response = new Response<string>();
             try
             {
-                userOrders.Address = _addressOperations.GetAddress().Result.Where(x => x.id.Equals(userOrders.addressid)).FirstOrDefault();
-                //userOrders.product = _productCatagory.GetProducts().Result.Where(x => x.id.Equals(userOrders.productId)).FirstOrDefault();
-                userOrders.users = _userOperations.GetUser().Result.Where(x => x.registrationId.Equals(userOrders.registrationId)).FirstOrDefault();
+                userOrders.address = _addressOperations.GetAddress().Result.Where(x => x.id.Equals(userOrders.addressId)).FirstOrDefault();
+
+                //userOrders.Address = _addressOperations.GetAddress().Result.Where(x => x.id.Equals(userOrders.addressid)).FirstOrDefault();
+                
+                userOrders.user = _userOperations.GetUser().Result.Where(x => x.registrationId.Equals(userOrders.user)).FirstOrDefault();
+                userOrders.product = _productCatagory.GetProducts().Result.Where(x => x.id.Equals(userOrders.product)).FirstOrDefault();
                 _orderdetailsoperations.Add(userOrders);
                 string message = "added" + ", Response Message : " + new HttpResponseMessage(System.Net.HttpStatusCode.OK);
                 _response.AddResponse(true, 0, "", message);
@@ -61,9 +64,9 @@ namespace MobizoneApi.Controllers
 
         }
         [HttpGet("Orderdetails")]
-        public Response<IEnumerable<UserOrders>> Orderdetails(int id)
+        public Response<IEnumerable<UserCheckOut>> Orderdetails(int id)
         {
-            Response<IEnumerable<UserOrders>> _response = new Response<IEnumerable<UserOrders>>();
+            Response<IEnumerable<UserCheckOut>> _response = new Response<IEnumerable<UserCheckOut>>();
             try
             {
                 _order = _orderdetailsoperations.GetAll().Result;
@@ -93,7 +96,7 @@ namespace MobizoneApi.Controllers
 
         }
         [HttpPut("OrderPut")]
-        public IActionResult OrderPut([FromBody]UserOrders orderPut)
+        public IActionResult OrderPut([FromBody] UserCheckOut orderPut)
         {
             Response<string> _response = new Response<string>();
             try

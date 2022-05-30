@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace BussinessLogic.Orders.Admin
 {
-   public  interface IOrderdetailsoperations: IGenericRepositoryOperation<UserOrders>
+   public  interface IOrderDetailsOperations : IGenericRepositoryOperation<UserCheckOut>
     {
-        Task<IEnumerable<UserOrders>> GetAll();
-        Task Add(UserOrders data);
-        Task Edit(UserOrders entity);
-        Task Delete(UserOrders entity);
+        Task<IEnumerable<UserCheckOut>> GetAll();
+        Task Add(UserCheckOut data);
+        Task Edit(UserCheckOut entity);
+        Task Delete(UserCheckOut entity);
     }
 }
