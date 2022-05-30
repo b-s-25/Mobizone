@@ -10,11 +10,10 @@ using System.Threading.Tasks;
 
 namespace BussinessLogic.Orders.Admin
 {
-<<<<<<< HEAD
-    public class OrderDetailsOperations : GenericRepositoryOperation<UserCheckOut>, IOrderDetailsOperations
-=======
+
+
     public class OrderDetailsOperations: GenericRepositoryOperation<UserCheckOut>,IOrderDetailsOperations
->>>>>>> 938c0845949b63e1807a8981a73c7aa8449f15f7
+
     {
         private readonly IGenericRepositoryOperation<UserCheckOut> _repo;
         private readonly ProductDbContext _dbContext;

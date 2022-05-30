@@ -10,10 +10,11 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<form class="order" method="post" asp-action="BuyNow">
+<form class="order" method="post" asp-action="BuyNow" style="margin-left: 120px; margin-right: 120px;">
     <input asp-for="productId" type="hidden" value="@products.id" />
     <input asp-for="userId" type="hidden" value="@user.registrationId" />
-    <div class="card" style="padding: 25px; margin-bottom: 26px;">
+
+    <div class="card" style="padding: 15px; margin-bottom: 25px;">
         <div class="address"><p class="card-title" style="text-align: center; font-size: large;">Delivery Address</p></div>
         @if (userAddress == null)
         {
@@ -23,18 +24,18 @@
         {
             @foreach (var address in userAddress)
             {
-    <div id="address">
-        <div class="address">
-            <input class="form-check-input" type="checkbox" name="addressId" value="@address.id" style="margin-left:6px" />
-            <label class="form-check-label" style="margin-left: 30px;">@address.name <br />@address.address<br />@address.district</label>
-        </div>
-        <div class="row" style="padding: 2px; margin-left: -37px;">
-            <div class="col"><a href="/checkout/address" class="btn btn-primary" style="margin-left: 50px;">Add New Address</a></div>
-        </div>
-        <div class="row" style="padding: 2px; margin-left: -37px;">
-            <div class="col"><a class="btn btn-primary" id="addressContinue" style="margin-left: 50px; color:white">Continue</a></div>
-        </div>
-    </div>
+                <div id="address">
+                    <div class="address">
+                        <input class="form-check-input" type="checkbox" name="addressId" value="@address.id" style="margin-left:6px" />
+                        <label class="form-check-label" style="margin-left: 30px;">@address.name <br />@address.address<br />@address.district</label>
+                    </div>
+                    <div class="row" style="padding: 2px; margin-left: -37px;">
+                        <div class="col"><a href="/checkout/address" class="btn btn-primary" style="margin-left: 50px;">Add New Address</a></div>
+                    </div>
+                    <div class="row" style="padding: 2px; margin-left: -37px;">
+                        <div class="col"><a class="btn btn-primary" id="addressContinue" style="margin-left: 50px; color:white">Continue</a></div>
+                    </div>
+                </div>
             }
         }
     </div>
@@ -44,7 +45,7 @@
             <div class="form-check">
                 <div class="">
                     <div class="col-12">
-                        <img class="img-fluid" src="~/images/@products.image" style="padding: 15px; width: 10%;" />
+                        <img class="img-fluid" src="~/images/ProductImages/@products.image" style="padding: 15px; width: 10%;" />
                         <label class="form-check-label" for="flexCheckDefault" style="font-weight: bold;">
                             @products.productName (@products.specification.productRam GB RAM, @products.specification.productStorage GB)<br>&#8377 @products.productPrice
                             <div class=>Quantity:<input name="quantity" asp-for="@products.quantity" type="number" style="width:50px; height:20px;" value="1" id="priceTag" onchange="myFunction(@products.productPrice)" /></div>
@@ -78,7 +79,7 @@
 </form>
 
 
-<div class="card" id="priceId" style="display: none;">
+<div class="card" id="priceId" style="display: none; margin-left: 118px; margin-right: 119px;">
 
     <div class="Price">
         <h5 class="card-title" style="text-align: center; font-size: large">Price Details</h5>
@@ -90,7 +91,7 @@
     </div>
 
     <div class="">
-        <p class="card-text" id="totalPrice" style="margin-left: 37px;">Total Payable : @products.productPrice</p>
+        <p class="card-text" id="totalPrice" style="margin-left: 37px;">Total Payable : Rs. @products.productPrice</p>
         <div id="price"></div>
     </div>
     <div class="row">
@@ -118,6 +119,6 @@
         var x = document.getElementById("priceTag").value;
         var y = document.getElementById("priceField").value;
         document.getElementById("totalPrice").innerHTML = "<p> Total Payable: Rs. " + x * data + "</p>";
-        }
+    }
 </script>
 
