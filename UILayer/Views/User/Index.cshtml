@@ -39,13 +39,14 @@
 
 <h2 style="text-align:center">Products</h2>
 
+
     <div class="container">
         <div class="row">
             @foreach (var items in Model)
             {
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="~/images/ProductImages/@items.image" alt="Mobile" style="width: 45%; height: 80%; position: relative; left: 65px;">
+                        <a asp-action=""><img src="~/images/ProductImages/@items.image" alt="Mobile" style="width: 45%; height: 80%; position: relative; left: 65px;"></a>
                         <h1 style="font-size: 145%;">@items.productName</h1>
                         <p class="price" style="color: black;">&#8377 @items.productPrice</p>
                         <p><a asp-route-id="@items.id" asp-controller="checkout" asp-action="BuyNow"><button class="btn btn-primary">Buy Now</button></a></p>
@@ -55,6 +56,8 @@
             }
         </div>
     </div>
+
+
 
 
 

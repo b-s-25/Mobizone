@@ -5,12 +5,20 @@ using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BussinessLogic.Orders.Admin
 {
+<<<<<<< HEAD
     public class OrderDetailsOperations: GenericRepositoryOperation<UserCheckOut>,IOrderDetailsOperations
+=======
+
+
+    public class OrderDetailsOperations: GenericRepositoryOperation<UserCheckOut>,IOrderDetailsOperations
+
+>>>>>>> cadfa2b97c6047b14e6a49b564b8a593c5472d9a
     {
         private readonly IGenericRepositoryOperation<UserCheckOut> _repo;
         private readonly ProductDbContext _dbContext;
@@ -22,7 +30,12 @@ namespace BussinessLogic.Orders.Admin
         }
         public async Task<IEnumerable<UserCheckOut>> GetAll()
         {
+<<<<<<< HEAD
+         
+            return await _repo.GetAll(x => x.user, x => x.product, x => x.address);
+=======
             return await _repo.GetAll(x => x.user, x => x.product);
+>>>>>>> cadfa2b97c6047b14e6a49b564b8a593c5472d9a
         }
         public async Task Add(UserCheckOut data)
         {
@@ -46,5 +59,7 @@ namespace BussinessLogic.Orders.Admin
             _repo.Delete(entity);
             _repo.Save();
         }
+
+       
     }
 }
