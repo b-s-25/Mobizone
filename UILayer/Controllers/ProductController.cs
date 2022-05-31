@@ -152,5 +152,11 @@ namespace UILayer.Controllers
 
             return fileName;
         }
+        public IActionResult SearchProduct(string name)
+        {
+            var data = _productApi.ProductSearch(name);
+            return View("Index", data);
+
+        }
     } 
 }
