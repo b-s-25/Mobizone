@@ -1,0 +1,214 @@
+﻿@model IEnumerable<DomainLayer.UserCheckOut>
+
+@{
+    ViewData["Title"] = "OrderList";
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js">
+</script>
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js">
+</script>
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://www.solodev.com/assets/pagination/jquery.twbsPagination.js"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js" defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script src="paging.js"></script>
+
+<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>SL</th>
+            <th>OrderId</th>
+            <th>Cancel Requset</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+</table>
+<script>
+    $(document).ready(function () {
+        var status;
+        var dataStatus;
+        var obj;
+        const dataList = [];
+        const Roles = [];
+        const statusList = [1, 2, 3, 4];
+      
+                $('#example').DataTable(
+                    {
+                        "paging": true,
+                        "autoWidth": true,
+                        "ajax": {
+                            "url": "https://localhost:44388/api/Orderdetails/Orderdetails",
+                            "type": "GET",
+                            "datatype": "json",
+                            "contentType": "application/json; charset=utf-8",
+
+                      
+                        },
+                        "columns":[ { 'render': function () { ++c; return c; } },
+                        /*   { 'data': 'id' },*/
+                     {
+                        'render': function (data, type, full, meta) {
+                             return '<a href="/OrderDetails/OrderDetails/' + full.id + '">' + full.id + '</a>';
+                      }
+                            }
+                     ]
+                 
+                    });
+        //$.ajax({
+        //    url: 'https://localhost:44388/api/Orderdetails/Orderdetails',
+        //    type: 'get',
+        //    datatype: 'json',
+        //    success: function (data) {
+        //        console.log(data);
+        //    }
+        //});
+       
+    });
+</script>
+
+
+
+
+<script type="text/javascript">
+
+    //$(document).ready(function () {
+    //    var result;
+    //    var status;
+    //    var dataStatus;
+    //    var obj;
+    //    const dataList = [];
+    //    const Roles = [];
+    //    const statusList = [1, 2, 3, 4];
+    //    $.ajax({
+    //        url: 'https://https://localhost:44388/api/Orderdetails/',
+    //        type: 'get',
+    //        datatype: 'json',
+    //        success: function (data) {
+
+    //            console.log(data);
+    //            result = data;
+    //            $('#example').dataTable({
+
+    //                data: result,
+    //                columns: [
+    //                    { 'render': function () { ++c; return c; } },
+
+    //                    {
+    //                        'render': function (data, type, full, meta) {
+    //                            return '<a href="/order/orderDetails/' + full.id + '">' + full.id + '</a>';
+    //                        }
+
+
+    //                    }
+    //      });
+
+
+
+
+
+           
+    
+
+
+
+    //$(document).ready(function () {
+    //    var result;
+    //    var status;
+    //    var dataStatus;
+    //    var obj;
+    //    const dataList = [];
+    //    const Roles = [];
+    //    const statusList = [1, 2, 3, 4];
+    //    $.ajax({
+    //        url: 'OrderStatus',
+    //        type: 'get',
+    //        datatype: 'json',
+    //        success: function (data) {
+    //            status = data;
+    //            console.log(status);
+    //            obj = JSON.parse(status);
+    //            for (name in obj) {
+    //                dataList.push(name)
+    //            }
+    //            console.log(dataList);
+    //            var slice1 = dataList.slice(1);
+    //            console.log(slice1);
+    //            var slice2 = dataList.slice(2);
+    //            console.log(slice2);
+    //            var slice3 = dataList.slice(3);
+    //            console.log(slice3);
+    //            var slice4 = dataList.slice(4);
+    //            console.log(slice4);
+
+    //        }
+    //    });
+    //    $.ajax({
+    //        url: 'https://localhost:44388/api/Orderdetails',
+    //        type: 'get',
+    //        datatype: 'json',
+    //        success: function (data) {
+    //            var c = 0;
+    //            console.log(data);
+    //            result = data;
+    //            $('#example').dataTable({
+    //                data: result,
+    //                columns: [
+    //                    { 'render': function () { ++c; return c; } },
+    //                    //{ 'data': 'id' },
+    //                    {
+    //                        'render': function (data, type, full, meta) {
+    //                            return '<a href="/OrderDetails/OrderDetails/' + full.id + '">' + full.id + '</a>';
+    //                        }
+    //                    },
+
+    //                    //{
+    //                    //    "render": function (data, type, full, meta) {
+
+    //                    //        var statusIndex = full.id
+    //                    //        console.log(statusIndex)
+    //                    //        var sliceData = dataList.slice(statusIndex);
+    //                    //        console.log(sliceData);
+    //                    //        var formdata = '<form id="orderstatus" action="order/OrderUpdate" method=post><input name=orderId type="hidden" value="' + full.id + '"/><select id="enumDropdown" name="status"><option value="' + dataList[statusIndex - 1] + '">' + dataList[statusIndex - 1] + '</option>';
+    //                    //        var endData = '</select><input style="padding: 2px;margin-left: 23px;font-variant: all-small-caps;" type="submit" value="update" class="btn btn-orange"/></form>';
+    //                    //        sliceData.forEach(function (element) {
+    //                    //            console.log("-----------")
+    //                    //            console.log(element)
+    //                    //            var option = '<option value="' + element + '">' + element + '</option>';
+    //                    //            formdata = formdata + option;
+    //                    //        });
+    //                    //        formdata = formdata + endData;
+    //                    //        return formdata;
+
+
+
+
+
+    //                    //    }
+    //                    //},
+
+
+    ////                ]
+
+
+
+    ////            })
+    ////        }
+    ////    })
+    ////});
+
+
+</script>

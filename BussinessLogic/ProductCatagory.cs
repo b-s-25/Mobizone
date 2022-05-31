@@ -43,6 +43,11 @@ namespace BusinesLogic
         {
             return await _repo.GetAll(n1=> n1.specification);
         }
+        public async Task<IEnumerable<ProductsModel>> Search(string name)
+        {
+            var data = _repo.GetAll().Where(x => x.productName.StartsWith(name));
+            return data;
+        }
 
         public void Save()
         {
