@@ -46,12 +46,14 @@ namespace UILayer.Controllers
             var products = _productApi.GetProduct();
             return new JsonResult(products);
         }
+
         [HttpGet]
-        public IActionResult GetSpecification()
+        public IActionResult ProductDetails(int id)
 
         {
-            var products = _productApi.GetProduct();
-            return View(products);
+            var products = _productApi.GetProduct().Where(x => x.id.Equals(id)).FirstOrDefault();
+            ViewData["Products"] = products;
+            return View();
         }
 
         public IActionResult Details(int id)
