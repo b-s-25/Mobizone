@@ -41,25 +41,7 @@ namespace UILayer.ApiServices
            
             
         }
-        //public static IEnumerable<MasterData> GetAll()
-        //{
-        //    IEnumerable<MasterData> masterDatas = new List<MasterData>();
 
-        //    using (HttpClient httpClient = new HttpClient())
-        //    {
-        //        string url = "https://localhost:44364/api/Masterdata/GetMasterData";
-        //        Uri uri = new Uri(url);
-        //        Task<HttpResponseMessage> result = httpClient.GetAsync(uri);
-        //        if (result.Result.IsSuccessStatusCode)
-        //        {
-        //            Task<string> serilizedResult = result.Result.Content.ReadAsStringAsync();
-        //            masterDatas = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<MasterData>>(serilizedResult.Result);
-        //        }
-
-        //    }
-        //    return masterDatas;
-
-        //}
         public bool EditMasterData(MasterData MasterData)
         {
             using (HttpClient httpclient = new HttpClient())

@@ -1,4 +1,5 @@
 ﻿using DomainLayer;
+using DomainLayer.AdminSettings;
 using DomainLayer.Product;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,8 @@ namespace Repository
         public DbSet<Registration> Register { get; set; }
         public DbSet<ApplicationUser> applicationUsers { get; set; }
         public DbSet<Login> Login { get; set; }
+        public DbSet<About> About { get; set; }
+        public DbSet<Contact> Contact { get; set; }
         public DbSet<MasterData> MasterDatas { get; set; }
         public DbSet<ProductsModel> ProductsModel { get; set; }
         public DbSet<UserCheckOut> UserCheckOut { get; set; }

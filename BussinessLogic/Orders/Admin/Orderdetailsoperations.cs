@@ -11,7 +11,13 @@ using System.Threading.Tasks;
 
 namespace BussinessLogic.Orders.Admin
 {
+<<<<<<< HEAD
     public class OrderDetailsOperations: GenericRepositoryOperation<UserCheckOut>,IOrderDetailsOperations
+=======
+
+    public class OrderDetailsOperations: GenericRepositoryOperation<UserCheckOut>,IOrderDetailsOperations
+
+>>>>>>> ae3e2d92446c463247c65daf230ae3d0c294e19b
     {
         private readonly IGenericRepositoryOperation<UserCheckOut> _repo;
         private readonly ProductDbContext _dbContext;
@@ -23,7 +29,14 @@ namespace BussinessLogic.Orders.Admin
         }
         public async Task<IEnumerable<UserCheckOut>> GetAll()
         {
+<<<<<<< HEAD
             return await _repo.GetAll(x => x.user, x => x.product);
+=======
+
+         
+            return await _repo.GetAll(x => x.user, x => x.product, x => x.address);
+
+>>>>>>> ae3e2d92446c463247c65daf230ae3d0c294e19b
         }
         public async Task Add(UserCheckOut data)
         {

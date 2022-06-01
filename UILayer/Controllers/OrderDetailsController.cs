@@ -12,6 +12,7 @@ namespace UILayer.Controllers
     public class OrderDetailsController : Controller
     {
         private readonly OrderDetailsApi _orderDetailsApi;
+        [HttpGet]
         public IActionResult OrderList()
         {
             return View();
