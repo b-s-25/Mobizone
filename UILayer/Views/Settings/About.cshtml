@@ -1,0 +1,39 @@
+﻿@model DomainLayer.AdminSettings.About
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<div class="row container-fluid pr-6">
+    <div class="container-fluid mt-3 align-middle">
+        <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="card-body">
+                <div class="">
+                    <section class=" flex-fill">
+                        <div class=" text-center">
+
+                            <h2>About</h2>
+                        </div>
+                        <div class="text-center">
+                            <p> @Model.content</p>
+
+                        </div>
+
+                        <div class=" text-center">
+                            <div class="form-group">
+                                <a asp-action="EditAbout"><button class="btn btn-primary">Edit</button></a>
+                            </div>
+                        </div>
+
+
+                        <style>
+                            .About {
+                                margin-left: 300px;
+                            }
+                        </style>
+
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

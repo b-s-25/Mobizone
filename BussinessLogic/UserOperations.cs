@@ -64,8 +64,7 @@ namespace BusinesLogic
         {
             Registration registration = new Registration();
             var list = _repositoryOperation.GetAll();
-            var user = list.FirstOrDefault(users => users.email == username && users.password == password);
-
+            var user = list.Where(users => users.email == username && users.password == password).FirstOrDefault();
             return user;
         }
 

@@ -15,6 +15,7 @@ namespace DomainLayer
         public string productSim { get; set; }
         public string productColor { get; set; }
         public string productRam { get; set; }
+        public string productProcessor { get; set; }
         public DateTime modified_on { get; set; }
         public DateTime created_on { get; set; }
         public string modified_by { get; set; }

@@ -24,12 +24,13 @@ namespace UILayer.Controllers
             _masterdataapi = new Masterdataapi(_configuration);
             _notyf = notyf;
         }
-        [HttpGet]
+        /*[HttpGet]
         [Authorize]
         public IActionResult MasterData()
         {
             return View();
-        }
+        }*/
+
         [HttpPost]
         public IActionResult Masterdata(MasterData master)
         {
@@ -59,7 +60,7 @@ namespace UILayer.Controllers
 
         [HttpGet]
         [Authorize]
-        public IActionResult MasterDatalist(int id)
+        public IActionResult MasterData(int id)
         {
             ViewBag.MasterTitle = (Master)id;
             var parentData = (Master)id;

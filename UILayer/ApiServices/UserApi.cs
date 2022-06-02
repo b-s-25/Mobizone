@@ -34,7 +34,7 @@ namespace UILayer.Datas.Apiservices
             }
         }
 
-        public bool UserLogin(Login userLogin)
+        /*public bool UserLogin(Login userLogin)
         {
             using (HttpClient httpclient = new HttpClient())
             {
@@ -49,7 +49,7 @@ namespace UILayer.Datas.Apiservices
                 }
                 return false;
             }
-        }
+        }*/
 
         public IEnumerable<Registration> GetUserInfo()
         {
@@ -68,7 +68,22 @@ namespace UILayer.Datas.Apiservices
                 return _responseModel.result;
             }
         }
-
+        public bool UserLogin(Login userLogin)
+        {
+            using (HttpClient httpclient = new HttpClient())
+            {
+                string data = Newtonsoft.Json.JsonConvert.SerializeObject(userLogin);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                string url = "https://localhost:44388/api/User/UserLogin";
+                Uri uri = new Uri(url);
+                System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PostAsync(uri, content);
+                if (result.Result.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
         public bool EditUserInfo(Registration userInfo)
         {
             using (HttpClient httpclient = new HttpClient())

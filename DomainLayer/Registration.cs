@@ -14,11 +14,11 @@ namespace DomainLayer
         [Key]
         public int registrationId { get; set; }
         [Required(ErrorMessage = "*First Name is required")]
-        [RegularExpression("^[a-zA-Z]+$", ErrorMessage = "Please enter your name without space")]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$", ErrorMessage = "*Firstletter must be Uppercase")]
         [Display(Name = "First Name")]
         public string firstName { get; set; }
         [Required(ErrorMessage = "*Last Name is required")]
-        [RegularExpression("^[a-zA-Z]+$", ErrorMessage = "Please enter your name without space")]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$", ErrorMessage = "*Firstletter must be Uppercase")]
         [Display(Name = "Last Name")]
         public string lastName { get; set; }
         [Required(ErrorMessage = "*Email Id is required")]

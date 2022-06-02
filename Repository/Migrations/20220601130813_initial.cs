@@ -8,6 +8,19 @@ namespace Repository.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "About",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    content = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_About", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -46,6 +59,26 @@ namespace Repository.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Contact",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Shopname = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    District = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    State = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Country = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Pincode = table.Column<int>(type: "int", maxLength: 20, nullable: false),
+                    PhoneNumber = table.Column<int>(type: "int", maxLength: 20, nullable: false),
+                    email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contact", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -114,6 +147,7 @@ namespace Repository.Migrations
                     productSim = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     productColor = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     productRam = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    productProcessor = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     modified_on = table.Column<DateTime>(type: "datetime2", nullable: false),
                     created_on = table.Column<DateTime>(type: "datetime2", nullable: false),
                     modified_by = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -328,44 +362,6 @@ namespace Repository.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "UserOrders",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    orderId = table.Column<int>(type: "int", nullable: false),
-                    productId = table.Column<int>(type: "int", nullable: false),
-                    registrationId = table.Column<int>(type: "int", nullable: false),
-                    addressid = table.Column<int>(type: "int", nullable: false),
-                    status = table.Column<int>(type: "int", nullable: false),
-                    paymentId = table.Column<int>(type: "int", nullable: false),
-                    price = table.Column<int>(type: "int", nullable: false),
-                    quantity = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserOrders", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_UserOrders_Address_addressid",
-                        column: x => x.addressid,
-                        principalTable: "Address",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserOrders_ProductsModel_productId",
-                        column: x => x.productId,
-                        principalTable: "ProductsModel",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserOrders_Register_registrationId",
-                        column: x => x.registrationId,
-                        principalTable: "Register",
-                        principalColumn: "registrationId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Address_registrationId",
                 table: "Address",
@@ -429,25 +425,13 @@ namespace Repository.Migrations
                 name: "IX_UserCheckOut_userId",
                 table: "UserCheckOut",
                 column: "userId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserOrders_addressid",
-                table: "UserOrders",
-                column: "addressid");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserOrders_productId",
-                table: "UserOrders",
-                column: "productId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserOrders_registrationId",
-                table: "UserOrders",
-                column: "registrationId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "About");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -464,6 +448,9 @@ namespace Repository.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Contact");
+
+            migrationBuilder.DropTable(
                 name: "Login");
 
             migrationBuilder.DropTable(
@@ -471,9 +458,6 @@ namespace Repository.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserCheckOut");
-
-            migrationBuilder.DropTable(
-                name: "UserOrders");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
