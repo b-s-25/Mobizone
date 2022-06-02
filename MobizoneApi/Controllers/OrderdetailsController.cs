@@ -21,9 +21,7 @@ namespace MobizoneApi.Controllers
     [ApiController]
     public class OrderdetailsController : ControllerBase
     {
-
         private readonly IOrderDetailsOperations _orderdetailsoperations;
-
         private readonly IProductCatagory _productCatagory;
         private readonly IUserOperations _userOperations;
         private readonly ILogger<OrderdetailsController> _logger;
@@ -43,18 +41,21 @@ namespace MobizoneApi.Controllers
             try
             {
                 userOrders.address = _addressOperations.GetAddress().Result.Where(x => x.id.Equals(userOrders.addressId)).FirstOrDefault();
-
-
                 //userOrders.Address = _addressOperations.GetAddress().Result.Where(x => x.id.Equals(userOrders.addressid)).FirstOrDefault();
                 
                 userOrders.user = _userOperations.GetUser().Result.Where(x => x.registrationId.Equals(userOrders.user)).FirstOrDefault();
                 userOrders.product = _productCatagory.GetProducts().Result.Where(x => x.id.Equals(userOrders.product)).FirstOrDefault();
+
+                /*_orderDetailsOperations.Add(userOrders);
+                //userOrders.product = _productCatagory.GetProducts().Result.Where(x => x.id.Equals(userOrders.productId)).FirstOrDefault();
+                userOrders.user = _userOperations.GetUser().Result.Where(x => x.registrationId.Equals(userOrders.userId)).FirstOrDefault();
+                _orderDetailsOperations.Add(userOrders);
+=======*/
                 _orderdetailsoperations.Add(userOrders);
 
                 //userOrders.product = _productCatagory.GetProducts().Result.Where(x => x.id.Equals(userOrders.productId)).FirstOrDefault();
                 userOrders.user = _userOperations.GetUser().Result.Where(x => x.registrationId.Equals(userOrders.userId)).FirstOrDefault();
                 _orderdetailsoperations.Add(userOrders);
-
                 string message = "added" + ", Response Message : " + new HttpResponseMessage(System.Net.HttpStatusCode.OK);
                 _response.AddResponse(true, 0, "", message);
                 var data = Newtonsoft.Json.JsonConvert.SerializeObject(_response);

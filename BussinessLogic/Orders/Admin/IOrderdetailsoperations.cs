@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 
 namespace BussinessLogic.Orders.Admin
 {
-
    public  interface IOrderDetailsOperations : IGenericRepositoryOperation<UserCheckOut>
-
     {
         Task<IEnumerable<UserCheckOut>> GetAll();
         Task Add(UserCheckOut data);
