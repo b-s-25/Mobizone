@@ -14,6 +14,7 @@ using UILayer.Datas.Apiservices;
 using UILayer.Controllers;
 using DomainLayer.Product;
 using Microsoft.Extensions.Configuration;
+using UILayer.ApiServices;
 
 namespace UILayer.Controllers
 {
@@ -23,6 +24,7 @@ namespace UILayer.Controllers
         ProductView Storage = null;
         private readonly ProductApi _productApi;
         private IWebHostEnvironment _webHostEnvironment;
+        Masterdataapi _masterdataapi;
 
         public ProductController(IConfiguration configuration, IWebHostEnvironment hostEnvironment)
         {
@@ -160,5 +162,38 @@ namespace UILayer.Controllers
             return View("Index", data);
 
         }
-    } 
+        public IActionResult filter(string brandName)
+        {
+
+            ViewBag.Title = " Mobizone - Filter ";
+
+            ViewBag.BrandList = _masterdataapi.MasterDatas((int)Master.Brand);
+            IEnumerable<ProductView> filteredData = (IEnumerable<ProductView>)_productApi.GetProduct().Where(c => c.productStatus.Equals(Status.enable));
+            if (filteredData != null)
+            {
+                if (brandName != null)
+                {
+                    filteredData = (IEnumerable<ProductView>)_productApi.Filter(brandName).Result;
+                }
+                int count = 0;
+                var productCount = filteredData.Count();
+                int cout = 0;
+                for (int i = 0; i <= 0; i++)
+                {
+                    if (productCount > 10)
+                    {
+                        cout += 1;
+                    }
+                    productCount = productCount - 10;
+                }
+                var result = filteredData.Skip((int)count * 10).Take(10);
+                ViewBag.count = cout;
+                return View("Index", result);
+            }
+
+            return View("Index");
+
+        }
+
+    }
 }
