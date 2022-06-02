@@ -162,38 +162,39 @@ namespace UILayer.Controllers
             return View("Index", data);
 
         }
-        public IActionResult filter(string brandName)
-        {
+        //[HttpPost("filter")]
+        //public IActionResult filter(string brandName)
+        //{
 
-            ViewBag.Title = " Mobizone - Filter ";
+        //    var data = _productApi.GetProduct().Where(x => x.specification.productBrand.Equals(brandName));
 
-            ViewBag.BrandList = _masterdataapi.MasterDatas((int)Master.Brand);
-            IEnumerable<ProductView> filteredData = (IEnumerable<ProductView>)_productApi.GetProduct().Where(c => c.productStatus.Equals(Status.enable));
-            if (filteredData != null)
-            {
-                if (brandName != null)
-                {
-                    filteredData = (IEnumerable<ProductView>)_productApi.Filter(brandName).Result;
-                }
-                int count = 0;
-                var productCount = filteredData.Count();
-                int cout = 0;
-                for (int i = 0; i <= 0; i++)
-                {
-                    if (productCount > 10)
-                    {
-                        cout += 1;
-                    }
-                    productCount = productCount - 10;
-                }
-                var result = filteredData.Skip((int)count * 10).Take(10);
-                ViewBag.count = cout;
-                return View("Index", result);
-            }
+           
+        //    //IEnumerable<ProductView> filteredData = (IEnumerable<ProductView>)_productApi.GetProduct().Where(c => c.productStatus.Equals(Status.enable));
+        //    //if (filteredData != null)
+        //    //{
+        //    //    if (brandName != null)
+        //    //    {
+        //    //        filteredData = (IEnumerable<ProductView>)_productApi.Filter(brandName).Result;
+        //    //    }
+        //    //    int count = 0;
+        //    //    var productCount = filteredData.Count();
+        //    //    int cout = 0;
+        //    //    for (int i = 0; i <= 0; i++)
+        //    //    {
+        //    //        if (productCount > 10)
+        //    //        {
+        //    //            cout += 1;
+        //    //        }
+        //    //        productCount = productCount - 10;
+        //    //    }
+        //    //    var result = filteredData.Skip((int)count * 10).Take(10);
+        //    //    ViewBag.count = cout;
+        //    //    return View("Index", result);
+        //    //}
 
-            return View("Index");
+        //    return View("Index");
 
         }
 
     }
-}
+

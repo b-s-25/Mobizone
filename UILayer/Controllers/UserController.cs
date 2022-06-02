@@ -29,7 +29,7 @@ namespace UILayer.Controllers
         {
             _configuration = configuration;
             _userApi = new UserApi(_configuration);
-            _productApi = new ProductApi(_configuration);           
+            _productApi = new ProductApi(_configuration);
             _notyf = notyf;
         }
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
@@ -40,7 +40,7 @@ namespace UILayer.Controllers
 
         [HttpGet]
         public IActionResult UserRegister()
-        
+
         {
             return View();
         }
@@ -68,7 +68,7 @@ namespace UILayer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(Login loginView , string ReturnUrl)
+        public async Task<IActionResult> Login(Login loginView, string ReturnUrl)
         {
             AdminApi admin = new AdminApi();
             if (ReturnUrl == "/admin")
@@ -93,7 +93,7 @@ namespace UILayer.Controllers
              userLogin.password = register.password;*/
             bool check = _userApi.UserLogin(loginView);
             //_registration = _userApi.GetUserInfo().Where(register => register.email == loginView.username && register.password.Equals(loginView.password)).FirstOrDefault();
-    
+
             if (check)
             {
                 _registration = _userApi.GetUserInfo().Where(register => register.email == loginView.username && loginView.password.Equals(loginView.password)).FirstOrDefault();
@@ -102,7 +102,7 @@ namespace UILayer.Controllers
                 claims.Add(new Claim("password", loginView.password));
                 claims.Add(new Claim(ClaimTypes.NameIdentifier, loginView.username));
                 claims.Add(new Claim("email", loginView.username));
-                claims.Add(new Claim(ClaimTypes.Name, _registration.firstName +" " + _registration.lastName));
+                claims.Add(new Claim(ClaimTypes.Name, _registration.firstName + " " + _registration.lastName));
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                 await HttpContext.SignInAsync(claimsPrincipal);
@@ -139,11 +139,11 @@ namespace UILayer.Controllers
                     var userDetails = _userApi.GetUserInfo().Where(check => check.email.Equals(forgotPassword.email)).FirstOrDefault();
                     if (userDetails != null)
                     {
-                        forgotPassword.emailSent = true;                       
+                        forgotPassword.emailSent = true;
                         Email email = new Email();
                         email.body = "<a href='https://localhost:44328/user/ResetPassword/" + forgotPassword.email + "/" + data + "'>Click here to reset your password</a>";
                         email.toEmail = forgotPassword.email;
-                        email.subject = "reset password";                      
+                        email.subject = "reset password";
                         _userApi.Email(email);
                         return View("ForgotPassword", forgotPassword);
                     }
@@ -185,5 +185,38 @@ namespace UILayer.Controllers
                 return BadRequest(ex);
             }
         }
+        [HttpPost("filter")]
+        public IActionResult filter(string brandName)
+        {
+
+            var data = _productApi.GetProduct().Where(x => x.specification.productBrand.Equals(brandName));
+
+
+            //IEnumerable<ProductView> filteredData = (IEnumerable<ProductView>)_productApi.GetProduct().Where(c => c.productStatus.Equals(Status.enable));
+            //if (filteredData != null)
+            //{
+            //    if (brandName != null)
+            //    {
+            //        filteredData = (IEnumerable<ProductView>)_productApi.Filter(brandName).Result;
+            //    }
+            //    int count = 0;
+            //    var productCount = filteredData.Count();
+            //    int cout = 0;
+            //    for (int i = 0; i <= 0; i++)
+            //    {
+            //        if (productCount > 10)
+            //        {
+            //            cout += 1;
+            //        }
+            //        productCount = productCount - 10;
+            //    }
+            //    var result = filteredData.Skip((int)count * 10).Take(10);
+            //    ViewBag.count = cout;
+            //    return View("Index", result);
+            //}
+
+            return View("Index",data);
+        }
+
     }
 }
