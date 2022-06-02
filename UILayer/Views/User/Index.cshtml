@@ -47,11 +47,8 @@
             {
                 <div class="col-md-4">
                     <div class="card">
-<<<<<<< HEAD
-                        <a asp-action=""><img src="~/images/ProductImages/@items.image" alt="Mobile" style="width: 45%; height: 90%; position: relative; left: 0px;"></a>
-=======
                         <a asp-route-id="@items.id" asp-controller="Product" asp-action="ProductDetails"><img src="~/images/ProductImages/@items.image" alt="Mobile" style="width: 45%; height: 90%; position: relative; left: 0px;"></a>
->>>>>>> ae3e2d92446c463247c65daf230ae3d0c294e19b
+
                         <h1 style="font-size: 145%;">@items.productName</h1>
                         <p class="price" style="color: black;">&#8377 @items.productPrice</p>
                         <p><a asp-route-id="@items.id" asp-controller="checkout" asp-action="BuyNow"><button class="btn btn-primary">Buy Now</button></a></p>

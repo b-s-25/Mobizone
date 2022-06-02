@@ -21,13 +21,7 @@ namespace MobizoneApi.Controllers
     [ApiController]
     public class OrderdetailsController : ControllerBase
     {
-<<<<<<< HEAD
-        private readonly IOrderDetailsOperations _orderDetailsOperations;
-=======
-
         private readonly IOrderDetailsOperations _orderdetailsoperations;
-
->>>>>>> ae3e2d92446c463247c65daf230ae3d0c294e19b
         private readonly IProductCatagory _productCatagory;
         private readonly IUserOperations _userOperations;
         private readonly ILogger<OrderdetailsController> _logger;
@@ -47,28 +41,21 @@ namespace MobizoneApi.Controllers
             try
             {
                 userOrders.address = _addressOperations.GetAddress().Result.Where(x => x.id.Equals(userOrders.addressId)).FirstOrDefault();
-<<<<<<< HEAD
-=======
-
->>>>>>> ae3e2d92446c463247c65daf230ae3d0c294e19b
-
                 //userOrders.Address = _addressOperations.GetAddress().Result.Where(x => x.id.Equals(userOrders.addressid)).FirstOrDefault();
                 
                 userOrders.user = _userOperations.GetUser().Result.Where(x => x.registrationId.Equals(userOrders.user)).FirstOrDefault();
                 userOrders.product = _productCatagory.GetProducts().Result.Where(x => x.id.Equals(userOrders.product)).FirstOrDefault();
-<<<<<<< HEAD
-                _orderDetailsOperations.Add(userOrders);
+
+                /*_orderDetailsOperations.Add(userOrders);
                 //userOrders.product = _productCatagory.GetProducts().Result.Where(x => x.id.Equals(userOrders.productId)).FirstOrDefault();
                 userOrders.user = _userOperations.GetUser().Result.Where(x => x.registrationId.Equals(userOrders.userId)).FirstOrDefault();
                 _orderDetailsOperations.Add(userOrders);
-=======
+=======*/
                 _orderdetailsoperations.Add(userOrders);
 
                 //userOrders.product = _productCatagory.GetProducts().Result.Where(x => x.id.Equals(userOrders.productId)).FirstOrDefault();
                 userOrders.user = _userOperations.GetUser().Result.Where(x => x.registrationId.Equals(userOrders.userId)).FirstOrDefault();
                 _orderdetailsoperations.Add(userOrders);
-
->>>>>>> ae3e2d92446c463247c65daf230ae3d0c294e19b
                 string message = "added" + ", Response Message : " + new HttpResponseMessage(System.Net.HttpStatusCode.OK);
                 _response.AddResponse(true, 0, "", message);
                 var data = Newtonsoft.Json.JsonConvert.SerializeObject(_response);

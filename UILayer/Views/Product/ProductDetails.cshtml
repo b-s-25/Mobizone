@@ -32,7 +32,7 @@
                     <img src="~/images/ProductImages/@products.image" />
                 </div>
                 <div>
-                    <p><button class="btn btn-primary" style="">Buy Now</button></p>
+                    <p><button class="btn btn-primary" style=" margin-top: 12px;">Buy Now</button></p>
                     <p><button class="btn btn-primary" style="">Add to Cart</button></p>
                 </div>
             </div>
@@ -40,20 +40,26 @@
 
         <div class="col-4">
             <div class="products">
-                <p class="text" style="font-size:45px"> @products.productName</p>
+                <p class="text" style="font-size: 45px; width: 220%;"> @products.productName</p>
                 <div class="row">
                     <div class="col-6">
                         <p class="text">Price</p>
                         <p class="text">Ram</p>
                         <p class="text">Storage</p>
                         <p class="text">Sim Type</p>
+                        <p class="text">Color</p>
+                        <p class="text">Processor</p>
+                        <p class="text">Description</p>
                     </div>
-                    <div class="col-4">                     
-                                <p class="text">@products.productPrice</p>
-                                <p class="text">@products.specification.productRam</p>
-                                <p class="text">@products.specification.productStorage</p>
-                                <p class="text">@products.specification.productSim</p>
-                            </div>
+                    <div class="col-4">
+                        <p class="text">&#8377 @products.productPrice</p>
+                        <p class="text">@products.specification.productRam</p>
+                        <p class="text">@products.specification.productStorage</p>
+                        <p class="text">@products.specification.productSim</p>
+                        <p class="text">@products.specification.productColor</p>
+                        <p class="text">@products.specification.productProcessor</p>
+                        <p class="text">@products.description</p>
+                    </div>
                        
                     </div>
                 </div>
