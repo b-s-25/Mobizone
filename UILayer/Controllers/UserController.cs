@@ -14,6 +14,7 @@ using UILayer.ApiServices;
 using Microsoft.AspNetCore.Http;
 using DomainLayer.EmailService;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.Win32;
 
 namespace UILayer.Controllers
 {
@@ -31,6 +32,7 @@ namespace UILayer.Controllers
             _productApi = new ProductApi(_configuration);           
             _notyf = notyf;
         }
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Index()
         {
             return View(_productApi.GetProduct());
@@ -86,12 +88,15 @@ namespace UILayer.Controllers
                 }
             }
             Login userLogin = new Login();
-            //Login userLogin = new Login();
-            _registration = _userApi.GetUserInfo().Where(register => register.email == loginView.username).FirstOrDefault();
-            userLogin = loginView;
+
+            /* userLogin.username = register.
+             userLogin.password = register.password;*/
             bool check = _userApi.UserLogin(loginView);
-            if (_registration !=null)
+            //_registration = _userApi.GetUserInfo().Where(register => register.email == loginView.username && register.password.Equals(loginView.password)).FirstOrDefault();
+    
+            if (check)
             {
+                _registration = _userApi.GetUserInfo().Where(register => register.email == loginView.username && loginView.password.Equals(loginView.password)).FirstOrDefault();
                 var claims = new List<Claim>();
 
                 claims.Add(new Claim("password", loginView.password));

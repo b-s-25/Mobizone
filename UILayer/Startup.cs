@@ -45,7 +45,7 @@ namespace UILayer
             });
             services.AddMvc();
 
-            services.AddNotyf(config => { config.DurationInSeconds = 1; config.IsDismissable = true; config.Position = NotyfPosition.TopRight; });
+            services.AddNotyf(config => { config.DurationInSeconds = 2; config.IsDismissable = true; config.Position = NotyfPosition.TopRight; });
 
         }
 

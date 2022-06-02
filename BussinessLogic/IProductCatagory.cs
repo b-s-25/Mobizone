@@ -14,6 +14,7 @@ namespace BusinesLogic.Interface
         void Update(ProductsModel entity);
         void Delete(ProductsModel entity);
         ProductsModel Details(int id);
+        Task<IEnumerable<ProductsModel>> Search(string name);
         void Save();
     }
 }

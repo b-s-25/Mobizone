@@ -5,7 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - UILayer</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
- @*   <link rel="stylesheet" href="~/css/site.css" />*@
+</head>
+<head>
+    <style>
+        .sea:hover {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -18,11 +26,16 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1 col-12 row">
-                        
+                        <li class="nav-item">
+                            <a class="nav-link text-dark " asp-area="" asp-controller="Home" asp-action="Index"></a>
+                        </li>
+                        <li class="nav-item col">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy"></a>
+                        </li>
                         <li class="nav-item col">
                             <form class="form-inline">
                                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                <button class="btn btn-outline-success my-2 my-sm-0 sea" type="submit" style="width: 75px; height: 37px; display: grid; align-content: center; color: #28a745; border-color: #28a745;">Search</button>
                             </form>
                         </li>
 
@@ -49,9 +62,8 @@
                 </div>
             </div>
         </nav>
-    </header>
+    </header>>
 
-    <partial name="Users\_UserSideBar" />
     <div>
         @RenderBody()
     </div>

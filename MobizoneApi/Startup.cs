@@ -28,6 +28,8 @@ using MobizoneApi.Models;
 using BussinessLogic.Orders;
 using Repository;
 using BussinessLogic.Orders.Admin;
+using BussinessLogic.Settings;
+using BussinessLogic.AdminSettings;
 
 namespace MobizoneApi
 {
@@ -58,6 +60,8 @@ namespace MobizoneApi
             services.AddScoped(typeof(IAddressOperations), typeof(AddressOperations));
             services.AddScoped(typeof(ICheckOutOperations), typeof(CheckOutOperations));
             services.AddScoped(typeof(IOrderDetailsOperations), typeof(OrderDetailsOperations));
+            services.AddScoped(typeof(IAboutOperations), typeof(AboutOperations));
+            services.AddScoped(typeof(IContactOperations), typeof(ContactOperations));
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddTransient<IMailService, MailService>();
 
