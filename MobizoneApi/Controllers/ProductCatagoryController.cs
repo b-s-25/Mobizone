@@ -141,5 +141,35 @@ namespace APILayer.Controllers
             }
 
         }
+        [HttpGet("FilterByBrand/{name}")]
+        public Response<IEnumerable<ProductsModel>> FilterByBrand(string name)
+        {
+            Response<IEnumerable<ProductsModel>> _response = new Response<IEnumerable<ProductsModel>>();
+            try
+            {
+                _productDataList = _catalog.FilterByBrand(name).Result;
+                if (_productDataList == null)
+                {
+                    string message = ""+ new HttpResponseMessage(System.Net.HttpStatusCode.NoContent);
+                    _response.AddResponse(true, 0, null, message);
+                    return _response;
+                }
+                else
+                {
+                    string message = "" + new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+                    _response.AddResponse(true, 0, _productDataList, message);
+                    return _response;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                string message ="" + new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
+                _response.AddResponse(false, 0, null, message);
+                _logger.LogError(" error ", ex);
+                return _response;
+            }
+
+        }
     }
 }

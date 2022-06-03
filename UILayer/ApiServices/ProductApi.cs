@@ -132,5 +132,24 @@ namespace UILayer.Datas.Apiservices
             }
 
         }
+        public async Task<IEnumerable<ProductsModel>> Filter(string name)
+        {
+            using (HttpClient httpclient = new HttpClient())
+            {
+
+                string url = "https://localhost:44388/api/ProductCatagory/FilterByBrand";
+                Uri uri = new Uri(url);
+                System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
+                if (result.Result.IsSuccessStatusCode)
+                {
+                    System.Threading.Tasks.Task<string> response = result.Result.Content.ReadAsStringAsync();
+                    var results = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<ProductsModel>>(response.Result);
+                    return results;
+                }
+                return null;
+            }
+
+
+        }
     }
 }

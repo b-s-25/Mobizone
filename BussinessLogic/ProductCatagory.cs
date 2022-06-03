@@ -59,6 +59,11 @@ namespace BusinesLogic
             _repo.Update(entity);
             _repo.Save();
         }
+        public async Task<IEnumerable<ProductsModel>> FilterByBrand(string name)
+        {
+            var data = _repo.GetAll(n1 => n1.specification).Result.Where(c => c.productModel.Equals(name));
+            return data.OrderBy(c => c.productModel);
+        }
     }
 }
 
