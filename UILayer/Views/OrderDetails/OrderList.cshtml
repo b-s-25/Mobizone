@@ -74,6 +74,15 @@
             datatype: 'json',
             success: function (data) {
                 console.log(data);
+                $('#example').DataTable({
+                    columns: [
+                        { 'render': function () { ++c; return c; } },
+                        { 'render': function (data, type, full, meta) { return '<a href="/OrderDetails/OrderList/' + full.orderId + '">' + full.orderId + '</a>'; } }
+
+                ]
+                })
+            
+          
             }
         });
        

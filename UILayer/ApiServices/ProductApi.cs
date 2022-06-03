@@ -21,7 +21,7 @@ namespace UILayer.Datas.Apiservices
             _configuration = configuration;
             _url = _configuration.GetSection("Development")["BaseApi"].ToString();
         }
-        public IEnumerable<ProductsModel> GetProduct()
+        public IEnumerable<ProductsModel> GetProduct(int brand)
         {
             using (HttpClient httpclient = new HttpClient())
             {
@@ -138,6 +138,44 @@ namespace UILayer.Datas.Apiservices
             {
 
                 string url = "https://localhost:44388/api/ProductCatagory/FilterByBrand";
+                Uri uri = new Uri(url);
+                System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
+                if (result.Result.IsSuccessStatusCode)
+                {
+                    System.Threading.Tasks.Task<string> response = result.Result.Content.ReadAsStringAsync();
+                    var results = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<ProductsModel>>(response.Result);
+                    return results;
+                }
+                return null;
+            }
+
+
+        }
+        public async Task<IEnumerable<ProductsModel>> SortbyAscending(string price)
+        {
+            using (HttpClient httpclient = new HttpClient())
+            {
+
+                string url = "https://localhost:44388/api/ProductCatagory/SortByPriceAscending";
+                Uri uri = new Uri(url);
+                System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
+                if (result.Result.IsSuccessStatusCode)
+                {
+                    System.Threading.Tasks.Task<string> response = result.Result.Content.ReadAsStringAsync();
+                    var results = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<ProductsModel>>(response.Result);
+                    return results;
+                }
+                return null;
+            }
+
+
+        }
+        public async Task<IEnumerable<ProductsModel>> SortbyDescending(string price)
+        {
+            using (HttpClient httpclient = new HttpClient())
+            {
+
+                string url = "https://localhost:44388/api/ProductCatagory/SortByPriceDescending";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)

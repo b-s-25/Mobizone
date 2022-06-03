@@ -9,6 +9,8 @@ namespace BusinesLogic.Interface
 {
     public interface IProductCatagory
     {
+        Task<IEnumerable<ProductsModel>> SortByPriceDescending();
+        Task<IEnumerable<ProductsModel>> SortByPriceAscending();
         Task<IEnumerable<ProductsModel>> FilterByBrand(string name);
         Task<IEnumerable<ProductsModel>> GetProducts();
         void Create(ProductsModel entity);

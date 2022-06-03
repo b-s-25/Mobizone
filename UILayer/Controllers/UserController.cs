@@ -24,6 +24,7 @@ namespace UILayer.Controllers
         private readonly ProductApi _productApi;
         private IConfiguration _configuration;
         private Registration _registration;
+        Masterdataapi _Masterdataapi;
         private readonly INotyfService _notyf;
         public UserController(IConfiguration configuration, INotyfService notyf)
         {
@@ -211,6 +212,30 @@ namespace UILayer.Controllers
             //}
 
             return View("Index",data);
+        }
+        public IActionResult SearchProduct(string name)
+        {
+            var data = _productApi.ProductSearch(name);
+            return View("Index", data);
+
+        }
+        public IActionResult Sort(string price)
+        {
+          
+            ViewBag.count = 0;
+            ViewBag.BrandList = _Masterdataapi.MasterDatas();
+            var SortedData = _productApi.SortbyAscending(price).Result;
+
+            return View("Index", SortedData);
+        }
+
+        public IActionResult Sortby(string price)
+        {
+            ViewBag.Title = "Mobizone - Price(High to Low )";
+            ViewBag.count = 0;
+            ViewBag.BrandList = _Masterdataapi.MasterDatas();
+            var SortedData = _productApi.SortbyDescending(price).Result;
+            return View("Index", SortedData);
         }
 
     }
