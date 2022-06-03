@@ -89,11 +89,6 @@ namespace UILayer.Controllers
             }
             Login userLogin = new Login();
             bool check = _userApi.UserLogin(loginView);
-<<<<<<< HEAD
-=======
-            //_registration = _userApi.GetUserInfo().Where(register => register.email == loginView.username && register.password.Equals(loginView.password)).FirstOrDefault();
-
->>>>>>> 318fad8dccc6ac168fd132dea98a6483f07d6e7e
             if (check)
             {
                 _registration = _userApi.GetUserInfo().Where(register => register.email == loginView.username && loginView.password.Equals(loginView.password)).FirstOrDefault();
