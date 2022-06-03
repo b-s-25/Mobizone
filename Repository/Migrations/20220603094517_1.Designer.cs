@@ -10,8 +10,8 @@ using Repository;
 namespace Repository.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20220601130813_initial")]
-    partial class initial
+    [Migration("20220603094517_1")]
+    partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -122,8 +122,7 @@ namespace Repository.Migrations
 
                     b.Property<int>("phoneNumber")
                         .HasMaxLength(20)
-                        .HasColumnType("int")
-                        .HasColumnName("PhoneNumber");
+                        .HasColumnType("int");
 
                     b.Property<int>("pincode")
                         .HasMaxLength(20)

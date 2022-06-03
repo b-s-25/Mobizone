@@ -9,7 +9,7 @@
     <div class="card shadow-lg p-3 mb-5 bg-white rounded">
         <div class="col-md-12 mb-4">
             <div class="card-body">
-                <form asp-action="ContactEdit" method="post">
+                <form asp-action="EditContact" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <input asp-for="id" value="@Model.id" type="hidden" />
@@ -46,7 +46,7 @@
                             </div>
 
                             <div class="col-md-4">
-                                 <label asp-for="state" class="control-label">State</label>
+                                <label asp-for="state" class="control-label">State</label>
                                 <input asp-for="state" placeholder="State" class="form-control" />
                                 <span asp-validation-for="state" class="text-danger"></span>
                             </div>
@@ -54,53 +54,43 @@
                         <br />
                         <div class="row">
                             <div class="col-md-4">
-                            </div>  
-                            <label asp-for="country" class="control-label">Country</label>
-                            <input asp-for="country" class="form-control" />
-                            <span asp-validation-for="country" class="text-danger"></span>
-                            <label asp-for="email" class="control-label">Email</label>
-                            <input asp-for="email" placeholder="Email" class="form-control" />
+                                <label asp-for="country" class="control-label">Country</label>
+                                <input asp-for="country" class="form-control" />
+                                <span asp-validation-for="country" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="email" class="control-label">Email</label>
+                                <input asp-for="email" placeholder="Email" class="form-control" />
                                 <span asp-validation-for="email" class="text-danger"></span>
                             </div>
-                            <div class="col-md-4">
-                                <label asp-for="pincode" class="control-label">Pincode</label>
-                                <input asp-for="pincode" class="form-control" type="number" />
-                                <span asp-validation-for="pincode" class="text-danger"></span>
-                            </div>
+
                             <div class="col-md-4">
                                 <label asp-for="phoneNumber" class="control-label">PhoneNumber</label>
-                                <input asp-for="phoneNumber" class="form-control" type="number" />
+                                <input asp-for="phoneNumber" class="form-control" />
                                 <span asp-validation-for="phoneNumber" class="text-danger"></span>
-                            </div>
-                            <div class="col-md-12">
-                                <label asp-for="email" class="control-label">Email</label>
-                                <input asp-for="email" class="form-control" />
                             </div>
                         </div>
 
-
+                    </div>
                         <div class="text-center" style="margin-top: 4%;margin-left: 68%;">
                             <div class="form-group">
                                 <input type="submit" value="Save" class="btn btn-primary" />
                             </div>
                         </div>
-
                 </form>
+
                 <div class="text-center">
                     <div class="form-group">
-                        <button class="btn btn-light" style="margin-left: 90%;margin-top: -14%;"><a asp-controller="Admin" asp-action="Contact" style="text-decoration:none;"><b>Cancel</b></a></button>
+                        <button class="btn btn-light" style="margin-left: 90%;margin-top: -14%;"><a asp-controller="Settings" asp-action="Contact" style="text-decoration:none;"><b style=" position: relative; top: 7px;">Cancel</b></a></button>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
+    </div>
+        </div>
 </div>
 
-@*<div>
-        <a asp-action="Index">Back to List</a>
-    </div>
-*@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

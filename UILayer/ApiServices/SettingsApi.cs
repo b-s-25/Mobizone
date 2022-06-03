@@ -27,7 +27,7 @@ namespace UILayer.ApiServices
                 {
                     string data = Newtonsoft.Json.JsonConvert.SerializeObject(about);
                     StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                    string url = _url + "/api/AdminSettings/AboutPost";
+                    string url = _url + "api/AdminSettings/AboutPost";
                     Uri uri = new Uri(url);
                     System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PostAsync(uri, content);
                     if (result.Result.StatusCode == System.Net.HttpStatusCode.OK)
@@ -44,7 +44,7 @@ namespace UILayer.ApiServices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(contact);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = _url + "/api/AdminSettings/ContactPost";
+                string url = _url + "api/AdminSettings/ContactPost";
 
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PostAsync(uri, content);
@@ -80,7 +80,7 @@ namespace UILayer.ApiServices
             using (HttpClient httpclient = new HttpClient())
             {
 
-                string url = _url + "/api/AdminSettings/ContactGet";
+                string url = _url + "api/AdminSettings/ContactGet";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
@@ -116,7 +116,7 @@ namespace UILayer.ApiServices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(contact);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = _url + "/api/AdminSettings/ContactPut";
+                string url = _url + "api/AdminSettings/ContactPut";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PutAsync(uri, content);
                 if (result.Result.IsSuccessStatusCode)

@@ -41,7 +41,7 @@ namespace DomainLayer.AdminSettings
         [Required]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered phone format is not valid.")]
         [MaxLength(20)]
-        public long phoneNumber { get; set; }
+        public int phoneNumber { get; set; }
 
         [Required]
         [Column("email", TypeName = "nvarchar", Order = 8)]
