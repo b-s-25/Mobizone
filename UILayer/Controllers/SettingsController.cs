@@ -81,8 +81,8 @@ namespace UILayer.Controllers
             return View(contactData);
         }
 
-        [HttpPut("EditContact")]
-        private IActionResult EditContact(Contact contact)
+        [HttpPost]
+        public IActionResult EditContact(Contact contact)
         {
             var editContact = _settingsApi.EditContact(contact);
             if (editContact)
