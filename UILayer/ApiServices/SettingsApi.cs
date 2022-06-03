@@ -28,7 +28,6 @@ namespace UILayer.ApiServices
                     string data = Newtonsoft.Json.JsonConvert.SerializeObject(about);
                     StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                     string url = _url + "/api/AdminSettings/AboutPost";
-
                     Uri uri = new Uri(url);
                     System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PostAsync(uri, content);
                     if (result.Result.StatusCode == System.Net.HttpStatusCode.OK)
@@ -63,7 +62,7 @@ namespace UILayer.ApiServices
             using (HttpClient httpclient = new HttpClient())
             {
 
-                string url = _url + "/api/AdminSettings/AboutGet";
+                string url = _url + "api/AdminSettings/AboutGet";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
@@ -99,7 +98,7 @@ namespace UILayer.ApiServices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(about);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = _url + "/api/AdminSettings/AboutPut";
+                string url = _url + "api/AdminSettings/AboutPut";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PutAsync(uri, content);
                 if (result.Result.IsSuccessStatusCode)
