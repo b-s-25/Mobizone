@@ -37,12 +37,12 @@ namespace DomainLayer.AdminSettings
         [Column("Pincode", TypeName = "int", Order = 6)]
         [MaxLength(20)]
         public int pincode { get; set; }
+
         [Required]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered phone format is not valid.")]
-        [Column("PhoneNumber", TypeName = "int", Order = 7)]
+        [Column("PhoneNumber", TypeName = "bigInt", Order = 7)]
         [MaxLength(20)]
-
-        public int phoneNumber { get; set; }
+        public long phoneNumber { get; set; }
         [Required]
         [Column("email", TypeName = "nvarchar", Order = 8)]
         [MaxLength(50)]

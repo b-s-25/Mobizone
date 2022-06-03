@@ -46,36 +46,36 @@
         const Roles = [];
         const statusList = [1, 2, 3, 4];
       
-                $('#example').DataTable(
-                    {
-                        "paging": true,
-                        "autoWidth": true,
-                        "ajax": {
-                            "url": "https://localhost:44388/api/Orderdetails/Orderdetails",
-                            "type": "GET",
-                            "datatype": "json",
-                            "contentType": "application/json; charset=utf-8",
+                //$('#example').DataTable(
+                //    {
+                //        "paging": true,
+                //        "autoWidth": true,
+                //        "ajax": {
+                //            "url": "https://localhost:44388/api/Orderdetails/Orderdetails",
+                //            "type": "GET",
+                //            "datatype": "json",
+                //            "contentType": "application/json; charset=utf-8",
 
                       
-                        },
-                        "columns":[ { 'render': function () { ++c; return c; } },
-                        /*   { 'data': 'id' },*/
-                     {
-                        'render': function (data, type, full, meta) {
-                             return '<a href="/OrderDetails/OrderDetails/' + full.id + '">' + full.id + '</a>';
-                      }
-                            }
-                     ]
+                //        },
+                //        "columns":[ { 'render': function () { ++c; return c; } },
+                //        /*   { 'data': 'id' },*/
+                //     {
+                //        'render': function (data, type, full, meta) {
+                //             return '<a href="/OrderDetails/OrderDetails/' + full.id + '">' + full.id + '</a>';
+                //      }
+                //            }
+                //     ]
                  
-                    });
-        //$.ajax({
-        //    url: 'https://localhost:44388/api/Orderdetails/Orderdetails',
-        //    type: 'get',
-        //    datatype: 'json',
-        //    success: function (data) {
-        //        console.log(data);
-        //    }
-        //});
+                //    });
+        $.ajax({
+            url: 'https://localhost:44388/api/Orderdetails/Orderdetails',
+            type: 'get',
+            datatype: 'json',
+            success: function (data) {
+                console.log(data);
+            }
+        });
        
     });
 </script>

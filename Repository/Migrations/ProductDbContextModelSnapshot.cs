@@ -118,9 +118,9 @@ namespace Repository.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("email");
 
-                    b.Property<int>("phoneNumber")
+                    b.Property<long>("phoneNumber")
                         .HasMaxLength(20)
-                        .HasColumnType("int")
+                        .HasColumnType("bigInt")
                         .HasColumnName("PhoneNumber");
 
                     b.Property<int>("pincode")
