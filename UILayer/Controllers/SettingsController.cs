@@ -19,20 +19,19 @@ namespace UILayer.Controllers
             _settingsApi = new SettingsApi(_configuration);
         }
 
-        [HttpGet("Contact")]
+        [HttpGet]
         public IActionResult Contact()
         {
             var contactData = _settingsApi.GetContact().FirstOrDefault();
-            return View();
-
+            return View(contactData);
         }
 
-        [HttpGet("About")]
+        [HttpGet]
         public IActionResult About()
         {
 
             var aboutData = _settingsApi.GetAbout().FirstOrDefault();
-            return View();
+            return View(aboutData);
         }
 
         [HttpPost("CreateAbout")]
@@ -46,19 +45,26 @@ namespace UILayer.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPut("EditAbout")]
-        private IActionResult EditAbout(About about)
+        [HttpGet]
+        public IActionResult EditAbout()
+        {
+             var aboutData = _settingsApi.GetAbout().FirstOrDefault();
+            return View(aboutData);
+        }
+
+        [HttpPost]
+        public IActionResult EditAbout(About about)
         {
             var createAbout = _settingsApi.EditAbout(about);
             if (createAbout)
             {
-                return View();
+                return View("About", _settingsApi.GetAbout().FirstOrDefault());
             }
             return RedirectToAction("Index");
         }
 
         [HttpPost("CreateContact")]
-        private IActionResult CreateContact(Contact contact)
+        public  IActionResult CreateContact(Contact contact)
         {
             var createContact = _settingsApi.CreateContact(contact);
             if (createContact)
@@ -68,13 +74,20 @@ namespace UILayer.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public IActionResult EditContact()
+        {
+            var contactData = _settingsApi.GetContact().FirstOrDefault();
+            return View(contactData);
+        }
+
         [HttpPut("EditContact")]
         private IActionResult EditContact(Contact contact)
         {
             var editContact = _settingsApi.EditContact(contact);
             if (editContact)
             {
-                return View("ContactEdit");
+                return View("Contact");
             }
             return RedirectToAction("Index");
         }

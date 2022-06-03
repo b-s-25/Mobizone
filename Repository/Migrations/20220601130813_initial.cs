@@ -73,7 +73,7 @@ namespace Repository.Migrations
                     State = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Country = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Pincode = table.Column<int>(type: "int", maxLength: 20, nullable: false),
-                    PhoneNumber = table.Column<int>(type: "int", maxLength: 20, nullable: false),
+                    PhoneNumber = table.Column<int>(type: "long", maxLength: 20, nullable: false),
                     email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>

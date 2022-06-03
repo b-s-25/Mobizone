@@ -87,20 +87,6 @@ namespace APILayer.Controllers
             return _userOperations.GetUser().Result;
         }
 
-        /*[HttpGet]
-        [AllowAnonymous]
-        public IActionResult ForgetPassword()
-        {
-            try
-            {
-                return StatusCode(StatusCodes.Status200OK);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Error to reset password", ex);
-                return StatusCode(StatusCodes.Status400BadRequest);
-            }
-        }*/
 
         [HttpPost("AdminLogin")]
         public async Task<IActionResult> AdminLogin([FromBody] Login login)
