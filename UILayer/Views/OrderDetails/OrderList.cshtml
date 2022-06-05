@@ -45,6 +45,7 @@
         const dataList = [];
         const Roles = [];
         const statusList = [1, 2, 3, 4];
+<<<<<<< HEAD
         
         function getStatus() {
             $.ajax({
@@ -69,6 +70,31 @@
         getStatus();
 
         var c=0;
+=======
+      
+                //$('#example').DataTable(
+                //    {
+                //        "paging": true,
+                //        "autoWidth": true,
+                //        "ajax": {
+                //            "url": "https://localhost:44388/api/Orderdetails/Orderdetails",
+                //            "type": "GET",
+                //            "datatype": "json",
+                //            "contentType": "application/json; charset=utf-8",
+
+                      
+                //        },
+                //        "columns":[ { 'render': function () { ++c; return c; } },
+                //        /*   { 'data': 'id' },*/
+                //     {
+                //        'render': function (data, type, full, meta) {
+                //             return '<a href="/OrderDetails/OrderDetails/' + full.id + '">' + full.id + '</a>';
+                //      }
+                //            }
+                //     ]
+                 
+                //    });
+>>>>>>> d5e3a5c82540b37e29483e9b5b5e1074b060ecf8
         $.ajax({
             url: 'https://localhost:44388/api/Orderdetails/Orderdetails',
             type: 'get',
@@ -76,6 +102,7 @@
             success: function (data) {
                 console.log(data);
                 $('#example').DataTable({
+<<<<<<< HEAD
                     data:data.data,
                      columns: [ { 'render': function () { ++c; return c; } },
                         { 'render': function (data, type, full, meta) { return '<a href="/OrderDetails/OrderList/' + full.orderId + '">' + full.orderId + '</a>'; } }
@@ -96,6 +123,16 @@
                             }
                         ]
                 });
+=======
+                    columns: [
+                        { 'render': function () { ++c; return c; } },
+                        { 'render': function (data, type, full, meta) { return '<a href="/OrderDetails/OrderList/' + full.orderId + '">' + full.orderId + '</a>'; } }
+
+                ]
+                })
+            
+          
+>>>>>>> d5e3a5c82540b37e29483e9b5b5e1074b060ecf8
             }
         });
        

@@ -9,20 +9,16 @@
         <div class="card shadow-lg p-3 mb-5 bg-white rounded">
             <div class="card-body">
                 <div class="">
-
                     <div class="text-center">
-
-                        <form asp-action="AboutEdit" method="post">
+                        <form asp-action="EditAbout" method="post">
                             <h2>About</h2>
                             <input asp-for="id" value="@Model.id" type="hidden" maxlength="500" />
                             <textarea asp-for="content" rows="10" cols="50"></textarea>
                             <br />
                             <div>
-                                <input type="submit" value="Save" class="btn btn-primary" />
-
-                                <button class="btn btn-light"><a asp-controller="Admin" asp-action="About" style="text-decoration:none;"><b>Cancel</b></a></button>
+                                <input type="submit"  value="Save" class="btn btn-primary" />
+                                <button class="btn btn-light"><a asp-controller="Settings" asp-action="About" style="text-decoration:none;"><b>Cancel</b></a></button>
                             </div>
-
                         </form>
                     </div>
                 </div>

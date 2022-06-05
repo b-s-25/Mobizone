@@ -196,7 +196,11 @@ namespace APILayer.Controllers
             {
                 string message = "" + new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
                 _response.AddResponse(false, 0, null, message);
+<<<<<<< HEAD
                 _logger.LogError(" error ", ex);
+=======
+               _logger.LogError("error ", ex);
+>>>>>>> d5e3a5c82540b37e29483e9b5b5e1074b060ecf8
                 return _response;
             }
 
@@ -224,9 +228,15 @@ namespace APILayer.Controllers
             }
             catch (Exception ex)
             {
+<<<<<<< HEAD
                 string message = "" + new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
                 _response.AddResponse(false, 0, null, message);
                 _logger.LogError(" error ", ex);
+=======
+                string message = ""+ new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
+                _response.AddResponse(false, 0, null, message);
+                _logger.LogError("error ", ex);
+>>>>>>> d5e3a5c82540b37e29483e9b5b5e1074b060ecf8
                 return _response;
             }
 

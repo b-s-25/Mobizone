@@ -1,4 +1,5 @@
-﻿@model DomainLayer.AdminSettings.About
+﻿
+@model DomainLayer.AdminSettings.About
 @{
     ViewData["Title"] = "Contact";
 }
@@ -20,7 +21,7 @@
 
                         <div class=" text-center">
                             <div class="form-group">
-                                <a asp-action="EditAbout"><button class="btn btn-primary">Edit</button></a>
+                                <a  asp-controller="Settings" asp-action="EditAbout"><button class="btn btn-primary">Edit</button></a>
                             </div>
                         </div>
 
