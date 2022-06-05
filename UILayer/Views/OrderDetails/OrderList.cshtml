@@ -39,43 +39,65 @@
 </table>
 <script>
     $(document).ready(function () {
-        var status;
+          var status;
         var dataStatus;
         var obj;
         const dataList = [];
         const Roles = [];
         const statusList = [1, 2, 3, 4];
-      
-                $('#example').DataTable(
-                    {
-                        "paging": true,
-                        "autoWidth": true,
-                        "ajax": {
-                            "url": "https://localhost:44388/api/Orderdetails/Orderdetails",
-                            "type": "GET",
-                            "datatype": "json",
-                            "contentType": "application/json; charset=utf-8",
+        
+        function getStatus() {
+            $.ajax({
+                url: 'OrderStatus',
+                type: 'get',
+                datatype: 'json',
+                success: function (data) {
+                    status = data;
+                    console.log(status);
+                    //callback();
+                    //obj = JSON.parse(status);
+                    //for (name in obj) {
+                    //    dataList.push(name)
 
-                      
-                        },
-                        "columns":[ { 'render': function () { ++c; return c; } },
-                        /*   { 'data': 'id' },*/
-                     {
-                        'render': function (data, type, full, meta) {
-                             return '<a href="/OrderDetails/OrderDetails/' + full.id + '">' + full.id + '</a>';
-                      }
+                    //}
+
+                }
+                
+            })
+            
+        }
+        getStatus();
+
+        var c=0;
+        $.ajax({
+            url: 'https://localhost:44388/api/Orderdetails/Orderdetails',
+            type: 'get',
+            datatype: 'json',
+            success: function (data) {
+                console.log(data);
+                $('#example').DataTable({
+                    data:data.data,
+                     columns: [ { 'render': function () { ++c; return c; } },
+                        { 'render': function (data, type, full, meta) { return '<a href="/OrderDetails/OrderList/' + full.orderId + '">' + full.orderId + '</a>'; } }
+                        ,{
+                            "render": function (data, type, full, meta) {
+                                dataStatus = full.status;
+                                var sliceData = dataList.slice(dataStatus)
+                                var sliceStatus = statusList.slice(dataStatus)
+
+                                var formData = '<form id="orderStatus" action="user/checkout" method="post"><input name="orderId" type="hidden" value="' + full.orderId + '"/><select id="enumDropdown" name="status"><option value="' + dataList[full.status - 1] + '">' + dataList[full.status - 1] + '</option>';
+                                var endData = '</select><input style="padding: 2px;margin-left: 23px;font-variant: all-small-caps;" type="submit" value="update" class="btn btn-orange"/></form>'
+                                sliceData.forEach(function (element) {
+                                    var option = '<option value="' + element + '">' + element + '</option>';
+                                    formData = formData + option;
+                                });
+                                formData = formData + endData;
+                                return formData;
                             }
-                     ]
-                 
-                    });
-        //$.ajax({
-        //    url: 'https://localhost:44388/api/Orderdetails/Orderdetails',
-        //    type: 'get',
-        //    datatype: 'json',
-        //    success: function (data) {
-        //        console.log(data);
-        //    }
-        //});
+                        ]
+                });
+            }
+        });
        
     });
 </script>

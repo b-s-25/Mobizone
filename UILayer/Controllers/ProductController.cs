@@ -156,12 +156,12 @@ namespace UILayer.Controllers
 
             return fileName;
         }
-        public IActionResult SearchProduct(string name)
-        {
-            var data = _productApi.ProductSearch(name);
-            return View("Index", data);
+        //public IActionResult SearchProduct(string name)
+        //{
+        //    var data = _productApi.ProductSearch(name);
+        //    return View("Index", data);
 
-        }
+        //}
         //[HttpPost("filter")]
         //public IActionResult filter(string brandName)
         //{

@@ -218,5 +218,23 @@ namespace UILayer.Controllers
             return View("Index",data);
         }
 
+        public IActionResult SearchProduct(string name)
+        {
+            var data = _productApi.ProductSearch(name);
+            return View("Index", data);
+
+        }
+        public IActionResult SortByAsc(string price)
+        {
+            var data =_productApi.SortByAscending(price);
+                return View("Index", data.Result);
+
+        }
+        public IActionResult SortByDescending(string price)
+        {
+            var data=_productApi.SortByDescending(price);
+            return View("Index", data.Result);
+
+        }
     }
 }

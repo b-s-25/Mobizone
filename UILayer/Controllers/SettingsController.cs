@@ -23,7 +23,7 @@ namespace UILayer.Controllers
         public IActionResult Contact()
         {
             var contactData = _settingsApi.GetContact().FirstOrDefault();
-            return View();
+            return View(contactData);
 
         }
 
