@@ -1,0 +1,69 @@
+﻿@model IEnumerable<DomainLayer.Product.ProductsModel>
+
+@{
+
+    var products = ViewData["Products"] as DomainLayer.Product.ProductsModel;
+    ViewData["Title"] = "Products";
+}
+
+<style>
+    .container button {
+        border: none;
+        outline: 0;
+        padding: 12px;
+        color: white;
+        background-color: #000;
+        text-align: center;
+        cursor: pointer;
+        width: 160%;
+        font-size: 18px;
+    }
+
+        .container button:hover {
+            opacity: 0.7;
+        }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <div class="row">
+                <div class="col-12">
+                    <img src="~/images/ProductImages/@products.image" />
+                </div>
+                <div>
+
+                    <p><a asp-route-id="@products.id" asp-controller="checkout" asp-action="BuyNow"><button class="btn btn-primary">Buy Now</button></a></p>
+                    <p><button class="btn btn-primary" style="">Add to Cart</button></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="products">
+                <p class="text" style="font-size: 45px; width: 220%;"> @products.productName</p>
+
+                <div class="row">
+                    <div class="col-6">
+                        <p class="text">Price</p>
+                        <p class="text">Ram</p>
+                        <p class="text">Storage</p>
+                        <p class="text">Sim Type</p>
+                        <p class="text">Color</p>
+                        <p class="text">Processor</p>
+                        <p class="text">Description</p>
+                    </div>
+                    <div class="col-6">
+                        <p class="text">&#8377 @products.productPrice</p>
+                        <p class="text">@products.specification.productRam</p>
+                        <p class="text">@products.specification.productStorage</p>
+                        <p class="text">@products.specification.productSim</p>
+                        <p class="text">@products.specification.productColor</p>
+                        <p class="text">@products.specification.productProcessor</p>
+                        <p class="text">@products.description</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
