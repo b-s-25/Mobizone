@@ -213,30 +213,7 @@ namespace UILayer.Controllers
 
             return View("Index",data);
         }
-        public IActionResult SearchProduct(string name)
-        {
-            var data = _productApi.ProductSearch(name);
-            return View("Index", data);
-
-        }
-        public IActionResult Sort(string price)
-        {
-          
-            ViewBag.count = 0;
-            ViewBag.BrandList = _Masterdataapi.MasterDatas();
-            var SortedData = _productApi.SortbyAscending(price).Result;
-
-            return View("Index", SortedData);
-        }
-
-        public IActionResult Sortby(string price)
-        {
-            ViewBag.Title = "Mobizone - Price(High to Low )";
-            ViewBag.count = 0;
-            ViewBag.BrandList = _Masterdataapi.MasterDatas();
-            var SortedData = _productApi.SortbyDescending(price).Result;
-            return View("Index", SortedData);
-        }
+       
 
         public IActionResult SearchProduct(string name)
         {
@@ -252,7 +229,7 @@ namespace UILayer.Controllers
         }
         public IActionResult SortByDescending(string price)
         {
-            var data=_productApi.SortByDescending(price);
+            var data=_productApi.SortbyDescending(price);
             return View("Index", data.Result);
 
         }
