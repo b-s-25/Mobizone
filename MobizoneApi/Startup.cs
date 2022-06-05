@@ -55,11 +55,9 @@ namespace MobizoneApi
                 options.AddDefaultPolicy(
                     builder =>
                     {
-<<<<<<< HEAD
+
                         builder.WithOrigins("https://localhost:44388/", "http://localhost:44388")
-=======
-                        builder.WithOrigins("https://localhost:44328", "https://localhost:44388")
->>>>>>> d5e3a5c82540b37e29483e9b5b5e1074b060ecf8
+
                                             .AllowAnyHeader()
                                             .AllowAnyMethod();
                     });
@@ -125,10 +123,7 @@ namespace MobizoneApi
                 .AllowAnyMethod()
                 .AllowAnyHeader();
             });
-<<<<<<< HEAD
-=======
 
->>>>>>> d5e3a5c82540b37e29483e9b5b5e1074b060ecf8
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

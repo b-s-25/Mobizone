@@ -22,7 +22,7 @@ namespace UILayer.Datas.Apiservices
             _configuration = configuration;
             _url = _configuration.GetSection("Development")["BaseApi"].ToString();
         }
-        public IEnumerable<ProductsModel> GetProduct(int brand)
+        public IEnumerable<ProductsModel> GetProduct()
         {
             using (HttpClient httpclient = new HttpClient())
             {
@@ -152,11 +152,9 @@ namespace UILayer.Datas.Apiservices
 
 
         }
-<<<<<<< HEAD
+
         public async Task<IEnumerable<ProductsModel>> SortByAscending(string price)
-=======
-        public async Task<IEnumerable<ProductsModel>> SortbyAscending(string price)
->>>>>>> d5e3a5c82540b37e29483e9b5b5e1074b060ecf8
+
         {
             using (HttpClient httpclient = new HttpClient())
             {
@@ -167,24 +165,19 @@ namespace UILayer.Datas.Apiservices
                 if (result.Result.IsSuccessStatusCode)
                 {
                     System.Threading.Tasks.Task<string> response = result.Result.Content.ReadAsStringAsync();
-<<<<<<< HEAD
-                    var results = Newtonsoft.Json.JsonConvert.DeserializeObject<Response<IEnumerable<ProductsModel>>>(response.Result);
-                    return results.Data;
-=======
+
                     var results = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<ProductsModel>>(response.Result);
                     return results;
->>>>>>> d5e3a5c82540b37e29483e9b5b5e1074b060ecf8
+
                 }
                 return null;
             }
 
 
         }
-<<<<<<< HEAD
-        public async Task<IEnumerable<ProductsModel>> SortByDescending(string price)
-=======
+
         public async Task<IEnumerable<ProductsModel>> SortbyDescending(string price)
->>>>>>> d5e3a5c82540b37e29483e9b5b5e1074b060ecf8
+
         {
             using (HttpClient httpclient = new HttpClient())
             {
@@ -195,22 +188,16 @@ namespace UILayer.Datas.Apiservices
                 if (result.Result.IsSuccessStatusCode)
                 {
                     System.Threading.Tasks.Task<string> response = result.Result.Content.ReadAsStringAsync();
-<<<<<<< HEAD
-                    var results = Newtonsoft.Json.JsonConvert.DeserializeObject<Response<IEnumerable<ProductsModel>>>(response.Result);
-                    return results.Data;
-=======
+
                     var results = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<ProductsModel>>(response.Result);
                     return results;
->>>>>>> d5e3a5c82540b37e29483e9b5b5e1074b060ecf8
+
                 }
                 return null;
             }
 
 
         }
-<<<<<<< HEAD
 
-=======
->>>>>>> d5e3a5c82540b37e29483e9b5b5e1074b060ecf8
     }
 }

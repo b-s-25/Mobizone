@@ -18,8 +18,7 @@ namespace BusinesLogic.Interface
         void Delete(ProductsModel entity);
         ProductsModel Details(int id);
         Task<IEnumerable<ProductsModel>> Search(string name);
-        Task<IEnumerable<ProductsModel>> SortByPriceAscending();
-        Task<IEnumerable<ProductsModel>> SortByPriceDescending();
+
         void Save();
     }
 }

@@ -24,10 +24,7 @@ namespace UILayer.Controllers
         {
             var contactData = _settingsApi.GetContact().FirstOrDefault();
             return View(contactData);
-<<<<<<< HEAD
 
-=======
->>>>>>> d5e3a5c82540b37e29483e9b5b5e1074b060ecf8
         }
 
         [HttpGet]
