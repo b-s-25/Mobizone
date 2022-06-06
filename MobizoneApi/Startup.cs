@@ -28,6 +28,8 @@ using MobizoneApi.Models;
 using BussinessLogic.Orders;
 using Repository;
 using BussinessLogic.Orders.Admin;
+using BussinessLogic.Settings;
+using BussinessLogic.AdminSettings;
 
 namespace MobizoneApi
 {
@@ -48,6 +50,18 @@ namespace MobizoneApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MobizoneApi", Version = "v1" });
             });
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+
+                        builder.WithOrigins("https://localhost:44388/", "http://localhost:44388")
+
+                                            .AllowAnyHeader()
+                                            .AllowAnyMethod();
+                    });
+            });
             services.AddDbContext<ProductDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped(typeof(IProductCatagory), typeof(ProductCatagory));
             services.AddScoped(typeof(IGenericRepositoryOperation<>), typeof(GenericRepositoryOperation<>));
@@ -58,6 +72,8 @@ namespace MobizoneApi
             services.AddScoped(typeof(IAddressOperations), typeof(AddressOperations));
             services.AddScoped(typeof(ICheckOutOperations), typeof(CheckOutOperations));
             services.AddScoped(typeof(IOrderDetailsOperations), typeof(OrderDetailsOperations));
+            services.AddScoped(typeof(IAboutOperations), typeof(AboutOperations));
+            services.AddScoped(typeof(IContactOperations), typeof(ContactOperations));
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddTransient<IMailService, MailService>();
 
@@ -100,6 +116,13 @@ namespace MobizoneApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(builder =>
+            {
+                builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            });
 
             app.UseAuthorization();
 

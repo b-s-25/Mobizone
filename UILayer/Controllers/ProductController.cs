@@ -14,6 +14,7 @@ using UILayer.Datas.Apiservices;
 using UILayer.Controllers;
 using DomainLayer.Product;
 using Microsoft.Extensions.Configuration;
+using UILayer.ApiServices;
 
 namespace UILayer.Controllers
 {
@@ -23,6 +24,7 @@ namespace UILayer.Controllers
         ProductView Storage = null;
         private readonly ProductApi _productApi;
         private IWebHostEnvironment _webHostEnvironment;
+        Masterdataapi _masterdataapi;
 
         public ProductController(IConfiguration configuration, IWebHostEnvironment hostEnvironment)
         {
@@ -40,19 +42,21 @@ namespace UILayer.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetList()
+        //public IActionResult GetList()
 
-        {
-            var products = _productApi.GetProduct();
-            return new JsonResult(products);
-        }
+        //{
+        //    var products = _productApi.GetProduct();
+        //    return new JsonResult(products);
+        //}
+
         [HttpGet]
-        public IActionResult GetSpecification()
+        //public IActionResult ProductDetails(int id)
 
-        {
-            var products = _productApi.GetProduct();
-            return View(products);
-        }
+        //{
+        //    var products = _productApi.GetProduct().Where(x => x.id.Equals(id)).FirstOrDefault();
+        //    ViewData["Products"] = products;
+        //    return View();
+        //}
 
         public IActionResult Details(int id)
         {
@@ -152,5 +156,45 @@ namespace UILayer.Controllers
 
             return fileName;
         }
-    } 
-}
+        //public IActionResult SearchProduct(string name)
+        //{
+        //    var data = _productApi.ProductSearch(name);
+        //    return View("Index", data);
+
+        //}
+        //[HttpPost("filter")]
+        //public IActionResult filter(string brandName)
+        //{
+
+        //    var data = _productApi.GetProduct().Where(x => x.specification.productBrand.Equals(brandName));
+
+           
+        //    //IEnumerable<ProductView> filteredData = (IEnumerable<ProductView>)_productApi.GetProduct().Where(c => c.productStatus.Equals(Status.enable));
+        //    //if (filteredData != null)
+        //    //{
+        //    //    if (brandName != null)
+        //    //    {
+        //    //        filteredData = (IEnumerable<ProductView>)_productApi.Filter(brandName).Result;
+        //    //    }
+        //    //    int count = 0;
+        //    //    var productCount = filteredData.Count();
+        //    //    int cout = 0;
+        //    //    for (int i = 0; i <= 0; i++)
+        //    //    {
+        //    //        if (productCount > 10)
+        //    //        {
+        //    //            cout += 1;
+        //    //        }
+        //    //        productCount = productCount - 10;
+        //    //    }
+        //    //    var result = filteredData.Skip((int)count * 10).Take(10);
+        //    //    ViewBag.count = cout;
+        //    //    return View("Index", result);
+        //    //}
+
+        //    return View("Index");
+
+        }
+
+    }
+

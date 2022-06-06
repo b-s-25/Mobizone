@@ -43,6 +43,11 @@ namespace BusinesLogic
         {
             return await _repo.GetAll(n1=> n1.specification);
         }
+        public async Task<IEnumerable<ProductsModel>> Search(string name)
+        {
+            var data = _repo.GetAll().Where(x => x.productName.StartsWith(name));
+            return data;
+        }
 
         public void Save()
         {
@@ -53,6 +58,19 @@ namespace BusinesLogic
         {
             _repo.Update(entity);
             _repo.Save();
+        }
+        public async Task<IEnumerable<ProductsModel>> FilterByBrand(string name)
+        {
+            var data = _repo.GetAll(n1 => n1.specification).Result.Where(c => c.productModel.Equals(name));
+            return data.OrderBy(c => c.productModel);
+        }
+        public async Task<IEnumerable<ProductsModel>> SortByPriceAscending()
+        {
+            return _repo.GetAll(n1 => n1.specification).Result.OrderBy(c => c.productPrice);
+        }
+        public async Task<IEnumerable<ProductsModel>> SortByPriceDescending()
+        {
+            return _repo.GetAll(n1 => n1.specification).Result.OrderByDescending(c => c.productPrice);
         }
     }
 }

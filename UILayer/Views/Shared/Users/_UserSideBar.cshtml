@@ -15,9 +15,19 @@
                     <span class="fas fa-caret-down first"></span>
                 </a>
                 <ul class="feat-show">
-                    <li class="list"><a href="#">Oppo</a></li>
-                    <li class="list"><a href="#">Samsung</a></li>
-                    <li class="list"><a href="#">One Plus</a></li>
+                    <li class="list">
+  <form action="filter" method="post">
+  <label for="Filter">Filter:</label>
+  <select name="brandName" id="cars">
+    <option value="Redmi">Redmi</option>
+    <option value="Vivo">Vivo</option>
+    <option value="Apple">Apple</option>
+    
+  </select>
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
+</li>
                 </ul>
             </li>
             <li class="list">
@@ -26,8 +36,13 @@
                     <span class="fas fa-caret-down second"></span>
                 </a>
                 <ul class="serv-show">
-                    <li class="list"><a href="#">High to Low</a></li>
-                    <li class="list"><a href="#">Low to High</a></li>
+<<<<<<< HEAD
+                    <li class="list"><a asp-action="SortByAsc">High to Low</a></li>
+                    <li class="list"><a asp-action="SortByDescending">Low to High</a></li>
+=======
+                    <li class="list"><a asp-controller="User" asp-action="Sort">High to Low</a></li>
+                    <li class="list"><a  asp-controller="User" asp-action="Sortby">Low to High</a></li>
+>>>>>>> d5e3a5c82540b37e29483e9b5b5e1074b060ecf8
                 </ul>
             </li>
         </ul>
@@ -71,7 +86,8 @@
         border-radius: 3px;
         cursor: pointer;
         transition: left 0.4s ease;
-        margin-top: 55px;
+        margin-top: -10px;
+        margin-left: -33px;
     }
 
         .btns.click {

@@ -9,12 +9,17 @@ namespace BusinesLogic.Interface
 {
     public interface IProductCatagory
     {
+        Task<IEnumerable<ProductsModel>> SortByPriceDescending();
+        Task<IEnumerable<ProductsModel>> SortByPriceAscending();
+        Task<IEnumerable<ProductsModel>> FilterByBrand(string name);
         Task<IEnumerable<ProductsModel>> GetProducts();
         Task<IEnumerable<ProductsModel>> FilterByBrand(string name);
         void Create(ProductsModel entity);
         void Update(ProductsModel entity);
         void Delete(ProductsModel entity);
         ProductsModel Details(int id);
+        Task<IEnumerable<ProductsModel>> Search(string name);
+
         void Save();
     }
 }

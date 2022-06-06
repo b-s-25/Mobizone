@@ -18,24 +18,24 @@
         <div class="address"><p class="card-title" style="text-align: center; font-size: large;">Delivery Address</p></div>
         @if (userAddress == null)
         {
-            <p> Please add address</p>
+        <p> Please add address</p>
         }
         else
         {
-            @foreach (var address in userAddress)
+        @foreach (var address in userAddress)
             {
-                <div id="address">
-                    <div class="address">
-                        <input class="form-check-input" type="checkbox" name="addressId" value="@address.id" style="margin-left:6px" />
-                        <label class="form-check-label" style="margin-left: 30px;">@address.name <br />@address.address<br />@address.district</label>
-                    </div>
-                    <div class="row" style="padding: 2px; margin-left: -37px;">
-                        <div class="col"><a href="/checkout/address" class="btn btn-primary" style="margin-left: 50px;">Add New Address</a></div>
-                    </div>
-                    <div class="row" style="padding: 2px; margin-left: -37px;">
-                        <div class="col"><a class="btn btn-primary" id="addressContinue" style="margin-left: 50px; color:white">Continue</a></div>
-                    </div>
-                </div>
+        <div id="address">
+            <div class="address">
+                <input class="form-check-input" id="checkboxId" onchange="checkbox()" type="checkbox" name="addressId" value="@address.id" style="margin-left:6px" />
+                <label class="form-check-label" style="margin-left: 30px;">@address.name <br />@address.address<br />@address.district</label>
+            </div>
+            <div class="row" style="padding: 2px; margin-left: -37px;">
+                <div class="col"><a href="/checkout/address" class="btn btn-primary" style="margin-left: 50px;">Add New Address</a></div>
+            </div>
+            <div class="row" style="padding: 2px; margin-left: -37px;">
+                <div class="col"><a class="btn btn-primary" id="addressContinue" style="margin-left: 50px; color:white; display:none" >Continue</a></div>
+            </div>
+            </div>
             }
         }
     </div>
@@ -48,7 +48,7 @@
                         <img class="img-fluid" src="~/images/ProductImages/@products.image" style="padding: 15px; width: 10%;" />
                         <label class="form-check-label" for="flexCheckDefault" style="font-weight: bold;">
                             @products.productName (@products.specification.productRam GB RAM, @products.specification.productStorage GB)<br>&#8377 @products.productPrice
-                            <div class=>Quantity:<input name="quantity" asp-for="@products.quantity" type="number" style="width:50px; height:20px;" value="1" id="priceTag" onchange="myFunction(@products.productPrice)" /></div>
+                            <div class=>Quantity:<input name="quantity" asp-for="@products.quantity" type="number" style="width:50px; height:20px;" value="1" id="QuantityId" onchange="myFunction(@products.productPrice)" /></div>
                         </label>
                     </div>
                 </div>
@@ -64,43 +64,43 @@
         @foreach (var items in paymentMode)
         {
 
-            <div class="form-check">
-                <input class="form-check-input " name="paymentModeId" type="checkbox" value='@Convert.ToInt32(items)'>
-                <label class="form-check-label" for="flexCheckDefault" style=" margin-left: 26px;">
-                    @items
-                </label>
-            </div>
-            <div class="row" style="padding: 2px; margin-left: -37px;">
-                <div class="col"><a class="btn btn-primary" id="paymentContinue" style="margin-left: 50px; color:white">Continue</a></div>
-            </div>
+        <div class="form-check">
+            <input class="form-check-input" onchange="paymentMode()" name="paymentModeId" type="checkbox" value='@Convert.ToInt32(items)'>
+            <label class="form-check-label" for="flexCheckDefault" style=" margin-left: 26px;">
+                @items
+            </label>
+        </div>
+        <div class="row" style="padding: 2px; margin-left: -37px;">
+            <div class="col"><a class="btn btn-primary" id="paymentContinue" style="margin-left: 50px; color:white; display:none;">Continue</a></div>
+        </div>
         }
         <p class="card-text"></p>
     </div>
+
+
+
+    <div class="card" id="priceId" style="display: none; margin-left: 118px; margin-right: 119px;">
+
+        <div class="Price">
+            <h5 class="card-title" style="text-align: center; font-size: large">Price Details</h5>
+        </div>
+        <div>
+            <p class="card-text" id="priceField" style="margin-left: 37px;">Price for each product: Rs. @products.productPrice</p>
+            <div class="card-text" style="margin-left: 37px;"> <div class="row"><p class="col-6">Shipping Charge : <p class="col-6" style="color: green; color: green; position: relative; right: 436px;">Free</p>  </div></div>
+            <div id="price"></div>
+        </div>
+
+        <div class="">
+            <p class="card-text" id="totalPrice" style="margin-left: 37px;">Total Payable : Rs. @products.productPrice</p>
+            <div id="price"></div>
+        </div>
+        <div class="row">
+            <div class="col"><a asp-controller="user" asp-action="Index" class="btn btn-primary" style="position: relative; left: 38px;">Cancel</a></div>
+            <div class="col"></div>
+            <div class="col col d-flex justify-content-end "><input type="submit" value="Place Order" class="btn btn-primary" style=" position: relative; right: 880px;" /></div>
+        </div>
+    </div>
 </form>
-
-
-<div class="card" id="priceId" style="display: none; margin-left: 118px; margin-right: 119px;">
-
-    <div class="Price">
-        <h5 class="card-title" style="text-align: center; font-size: large">Price Details</h5>
-    </div>
-    <div>
-        <p class="card-text" id="priceField" style="margin-left: 37px;">Price for each product: Rs. @products.productPrice</p>
-        <div class="card-text" style="margin-left: 37px;"> <div class="row"><p class="col-6">Shipping Charge : <p class="col-6" style="color: green; color: green; position: relative; right: 436px;">Free</p>  </div></div>
-        <div id="price"></div>
-    </div>
-
-    <div class="">
-        <p class="card-text" id="totalPrice" style="margin-left: 37px;">Total Payable : Rs. @products.productPrice</p>
-        <div id="price"></div>
-    </div>
-    <div class="row">
-        <div class="col"><a asp-controller="user" asp-action="Index" class="btn btn-primary" style="position: relative; left: 38px;">Cancel</a></div>
-        <div class="col"></div>
-        <div class="col col d-flex justify-content-end "><input type="submit" value="Place Order" class="btn btn-primary" style=" position: relative; right: 880px;" /></div>
-    </div>
-</div>
-
 <script>
     $(document).ready(function () {
         $("#addressContinue").click(function () {
@@ -116,9 +116,18 @@
     });
     function myFunction(data) {
         console.log("a");
-        var x = document.getElementById("priceTag").value;
+        var x = document.getElementById("QuantityId").value;
         var y = document.getElementById("priceField").value;
         document.getElementById("totalPrice").innerHTML = "<p> Total Payable: Rs. " + x * data + "</p>";
+    }
+
+    function checkbox() {
+        console.log("b");
+        $("#addressContinue").toggle();
+    }
+    function paymentMode() {
+        console.log("c");
+        $("#paymentContinue").toggle();
     }
 </script>
 

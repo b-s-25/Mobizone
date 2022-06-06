@@ -1,4 +1,5 @@
 ﻿using DomainLayer;
+using DomainLayer.Orders;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace UILayer.Controllers
     public class OrderDetailsController : Controller
     {
         private readonly OrderDetailsApi _orderDetailsApi;
+        [HttpGet]
         public IActionResult OrderList()
         {
             return View();
@@ -27,7 +29,7 @@ namespace UILayer.Controllers
         [HttpGet]
         public IActionResult OrderStatus()
         {
-            return new JsonResult(EnumConvertion.EnumToString<Status>());
+            return new JsonResult(EnumConvertion.EnumToString<OrderStatus>());
         }
         public IActionResult OrderDetails(int id)
         {

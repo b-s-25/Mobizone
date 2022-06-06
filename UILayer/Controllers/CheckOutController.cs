@@ -153,16 +153,16 @@ namespace UILayer.Controllers
 
         [HttpGet]
         [Authorize]
-        public IActionResult BuyNow(int id)
-        {
-            var addresses = _addressApi.GetAddress();
-            string email = User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value;
-            var user = _userApi.GetUserInfo().Where(x => x.email.Equals(User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value)).FirstOrDefault();
-            ViewData["UserAddress"] = user.address;
-            ViewData["Products"] = _productApi.GetProduct().Where(x=>x.id.Equals(id)).FirstOrDefault();
-            ViewData["User"] = user;
-            return View();
-        }
+        //public IActionResult BuyNow(int id)
+        //{
+        //    var addresses = _addressApi.GetAddress();
+        //    string email = User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value;
+        //    var user = _userApi.GetUserInfo().Where(x => x.email.Equals(User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value)).FirstOrDefault();
+        //    ViewData["UserAddress"] = user.address;
+        //    ViewData["Products"] = _productApi.GetProduct().Where(x => x.id.Equals(id)).FirstOrDefault();
+        //    ViewData["User"] = user;
+        //    return View();
+        //}
 
         [HttpPost]
         public IActionResult BuyNow(UserCheckOut checkOut)

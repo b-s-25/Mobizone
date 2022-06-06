@@ -4,7 +4,7 @@
     ViewData["Title"] = "UserAddress";
 }
 <div>
-    <h3 style="position: relative; right: -414px; margin-bottom: 30px; color: #157fdb;">Add New Address</h3>
+    <h3 style="position: relative; right: -460px; margin-bottom: 30px; color: #157fdb;">Add New Address</h3>
 </div>
 <div class="row align-item-center">
     <div class="col-md-8 mb-4">
@@ -12,7 +12,7 @@
             <form asp-action="AddAddress" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input asp-for="id" class="form-control" type="hidden" />
-                <div class="form-group row mb-4">
+                <div class="row">
                     <div class="col-md-6">
                         <label asp-for="name" class="control-label">Name</label>
                         <input asp-for="name" class="form-control" />
@@ -63,10 +63,12 @@
                 </div>
                 <br />
                 <br />
-                <div class="text-center">
-                    <div class="form-group">
-                        <input type="submit"  value="Save" class="btn btn-primary" style="position: relative; left: -199px;"/>  
-                        <a asp-controller="user" asp-action="Index" value="Cancel" class="btn btn-primary" style="margin-top: -55px; position: relative; left: -98px;">Cancel</a>
+                <div style=" margin-top: -20px;">
+                    <div class="text-center">
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-primary" style="position: relative; left: -220px;" />
+                            <a asp-controller="user" asp-action="Index" value="Cancel" class="btn btn-primary" style=" margin-top: -67px; position: relative; left: -130px;">Cancel</a>
+                        </div>
                     </div>
                 </div>
             </form>

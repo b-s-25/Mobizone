@@ -87,20 +87,6 @@ namespace APILayer.Controllers
             return _userOperations.GetUser().Result;
         }
 
-        /*[HttpGet]
-        [AllowAnonymous]
-        public IActionResult ForgetPassword()
-        {
-            try
-            {
-                return StatusCode(StatusCodes.Status200OK);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Error to reset password", ex);
-                return StatusCode(StatusCodes.Status400BadRequest);
-            }
-        }*/
 
         [HttpPost("AdminLogin")]
         public async Task<IActionResult> AdminLogin([FromBody] Login login)
@@ -117,17 +103,42 @@ namespace APILayer.Controllers
                 }
                 else
                 {
-                    return StatusCode(StatusCodes.Status401Unauthorized, new UserResponse<string> { status = "Error", message = "Login failed, please try again. If not registered, please Register to order your product" });
+                    return BadRequest();
                 }
             }
             catch (Exception ex)
             {
                 _logger.LogInformation("error");
                 _logger.LogError("error");
-                return StatusCode(StatusCodes.Status400BadRequest, ex);
+                return BadRequest();
             }
         }
-
+        [HttpPost("UserLogin")]
+        public async Task<IActionResult> UserLogin([FromBody] Login login)
+        {
+            try
+            {
+                Login loginData = new Login();
+                loginData.username = login.username;
+                loginData.password = login.password;
+                string password = _passwordEncryptDecrypt.Encrypt("encrypt", loginData.password);
+                var result = await _userOperations.Authenticate(loginData.username, password);
+                if (result != null && result.roleId == 1)
+                {
+                    return Ok(new UserResponse<string> { status = "Success", message = "Login Successfull" });
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("error");
+                _logger.LogError("error");
+                return BadRequest();
+            }
+        }
         [HttpPut("UpdateUser")]
         public IActionResult UpdateUser(Registration user)
         {
